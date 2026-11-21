@@ -74,6 +74,9 @@ CROPS = {  # key: (te, fertiliser/irrigation, post-harvest)
  "Papaya": ("బొప్పాయి", "ఎరువులు: మొక్కకు 2 నెలలకు ఒకసారి NPK. నీరు: కాండం దగ్గర నీరు నిలవనీయవద్దు.", "కోత తర్వాత: కాయలను పేపర్‌లో చుట్టి క్రేట్లలో రవాణా చేయండి."),
  "Sugarcane": ("చెరకు", "ఎరువులు: సిఫార్సు మేరకు NPK విడతలుగా; మట్టి ఎగదోయడం. నీరు: పిలకల, పెరుగుదల దశలో క్రమంగా; డ్రిప్ ఉత్తమం.", "కోత తర్వాత: నరికిన 24 గంటల్లోపు ఫ్యాక్టరీకి తరలించండి (చక్కెర శాతం తగ్గకుండా)."),
  "Turmeric": ("పసుపు", "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK; మల్చింగ్. నీరు: నీరు నిలవనీయవద్దు.", "కోత తర్వాత: దుంపలను ఉడకబెట్టి, ఎండబెట్టి, పాలిష్ చేసి నిల్వ చేయండి."),
+ "Cauliflower": ("కాలీఫ్లవర్ (గోబి పువ్వు)", "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా; బోరాన్ లోపం ఉంటే బోరాక్స్. నీరు: 7-10 రోజులకు ఒక తడి; పువ్వు దశలో నీటి ఎద్దడి వద్దు.", "కోత తర్వాత: గట్టిగా, తెల్లగా ఉన్నప్పుడు ఆకులతో సహా కోసి, నీడలో ఉంచి త్వరగా అమ్మండి."),
+ "Cabbage": ("క్యాబేజీ", "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా. నీరు: 7-10 రోజులకు ఒక తడి; గడ్డ కట్టే దశలో క్రమంగా.", "కోత తర్వాత: గడ్డ గట్టిపడిన వెంటనే కోసి, బయటి ఆకులు ఉంచి రవాణా చేయండి."),
+ "Amaranthus": ("తోటకూర", "ఎరువులు: పశువుల ఎరువు + కోత తర్వాత తేలికగా యూరియా. నీరు: 3-4 రోజులకు ఒక తేలిక తడి.", "కోత తర్వాత: ఉదయం కోసి, కట్టలుగా కట్టి నీడలో తడి గోనెపై ఉంచండి; అదే రోజు అమ్మండి."),
  "Pest": ("పురుగు", "సమగ్ర సస్యరక్షణ (IPM): పొలాన్ని తరచు పరిశీలించండి; సహజ శత్రువులను కాపాడండి; అవసరమైనప్పుడే మందు.", "కోత తర్వాత: నిల్వ చేసే ముందు గింజలు బాగా ఆరబెట్టండి; నిల్వ పురుగులకు గోదాం శుభ్రత పాటించండి."),
 }
 
@@ -98,6 +101,13 @@ D = {
  "Brinjal___Powdery_mildew": ("బూడిద తెగులు", "powdery"), "Brinjal___Mosaic_virus": ("మొజాయిక్ వైరస్", "virus_aphid"),
  "Okra___Alternaria_leaf_spot": ("ఆల్టర్నేరియా ఆకు మచ్చ", "fungal_spot"), "Okra___Cercospora_leaf_spot": ("సెర్కోస్పోరా ఆకు మచ్చ", "fungal_spot"),
  "Okra___Downy_mildew": ("డౌనీ బూజు తెగులు", "downy"), "Okra___Leaf_curl_virus": ("ఆకు ముడత / పల్లాకు వైరస్", "virus_whitefly"), "Okra___Phyllosticta_leaf_spot": ("ఫిల్లోస్టిక్టా ఆకు మచ్చ", "fungal_spot"),
+ "Gourd___Anthracnose": ("ఆంత్రాక్నోస్", "anthracnose"), "Gourd___Nutrient_deficiency": ("పోషక లోపం", "nutrient"),
+ "Gourd___Leaf_eating_beetle": ("ఆకు తినే పురుగు (గుమ్మడి పెంకు పురుగు)", "beetle"), "Gourd___Alternaria_leaf_blight": ("ఆల్టర్నేరియా ఆకు ఎండు తెగులు", "fungal_spot"),
+ "Gourd___Angular_leaf_spot": ("కోణాకార ఆకు మచ్చ (బ్యాక్టీరియా)", "bacterial"), "Gourd___Mosaic_virus": ("మొజాయిక్ వైరస్", "virus_aphid"),
+ "Cauliflower___Black_rot": ("నల్ల కుళ్ళు తెగులు (బ్యాక్టీరియా)", "bacterial"), "Cauliflower___Bacterial_soft_rot": ("మెత్తని కుళ్ళు తెగులు", "bacterial"),
+ "Cauliflower___Downy_mildew": ("డౌనీ బూజు తెగులు", "downy"), "Cauliflower___Alternaria_leaf_spot": ("ఆల్టర్నేరియా ఆకు మచ్చ", "fungal_spot"),
+ "Cauliflower___Mosaic_virus": ("పసుపు మొజాయిక్ వైరస్", "virus_aphid"), "Cauliflower___Caterpillar_damage": ("ఆకు తినే గొంగళి పురుగు (డైమండ్ బ్యాక్ మాత్)", "chewing"),
+ "Cabbage___Alternaria_leaf_spot": ("ఆల్టర్నేరియా ఆకు మచ్చ", "fungal_spot"), "Cabbage___Caterpillar_damage": ("ఆకు తినే గొంగళి పురుగు", "chewing"),
  "Gourd___Aphids": ("పేనుబంక", "sucking"), "Gourd___Downy_mildew": ("డౌనీ బూజు తెగులు", "downy"), "Gourd___Leaf_curl_virus": ("ఆకు ముడత వైరస్", "virus_whitefly"), "Gourd___Leaf_miner": ("ఆకు సొరంగ పురుగు", "leafminer"),
  "Cucumber___Anthracnose": ("ఆంత్రాక్నోస్", "anthracnose"), "Cucumber___Bacterial_wilt": ("బ్యాక్టీరియా వడలు", "wilt_bacterial"),
  "Cucumber___Downy_mildew": ("డౌనీ బూజు తెగులు", "downy"), "Cucumber___Gummy_stem_blight": ("జిగురు కాండం ఎండు తెగులు", "fungal_spot"),

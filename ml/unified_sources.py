@@ -78,6 +78,29 @@ HF = {
  "Project-AgML/turmeric_leaf_disease_classification": {
   "Aphids_Disease": "Turmeric___Aphids", "Blotch": "Turmeric___Leaf_blotch", "Healthy_Leaf": "Turmeric___healthy",
   "Leaf_Spot": "Turmeric___Leaf_spot"},
+ # Cauliflower / cabbage (Bangladesh field photos)
+ "Project-AgML/cauliflower_leaf_disease_classification": {
+  "Black Rot": "Cauliflower___Black_rot", "Healthy": "Cauliflower___healthy", "Insect Hole": "Cauliflower___Caterpillar_damage"},
+ "Project-AgML/VegNet_cauliflower_disease_classification": {
+  "Bacterial spot rot": "Cauliflower___Bacterial_soft_rot", "Black Rot": "Cauliflower___Black_rot",
+  "Downy Mildew": "Cauliflower___Downy_mildew", "No disease": "Cauliflower___healthy"},
+ "InriaXagriscienceFM/comprehensive_vegetable_leaf_disease_men_classification": {
+  "Cauliflower Alternaria leaf spot": "Cauliflower___Alternaria_leaf_spot", "Cauliflower Bacterial soft rot": "Cauliflower___Bacterial_soft_rot",
+  "Cauliflower Healthy leaf": "Cauliflower___healthy", "Cauliflower Yellow virus": "Cauliflower___Mosaic_virus",
+  "Broccoli Black rot": "Cauliflower___Black_rot", "Turnip Black rot": "Cauliflower___Black_rot",
+  "Cabbage Alternaria leaf spot": "Cabbage___Alternaria_leaf_spot", "Cabbage Damaged by white butterfly": "Cabbage___Caterpillar_damage",
+  "Cabbage Healthy leaf": "Cabbage___healthy"},
+ # Bottle gourd (merged into the Gourd group with ash gourd: same advice)
+ "InriaXagriscienceFM/bottle_gourd_cair_bgd_2025_annotated_for_bott_classification": {
+  "Anthracnose": "Gourd___Anthracnose", "Downy Mildew": "Gourd___Downy_mildew", "Healthy Leaf": "Gourd___healthy",
+  "Nutrition Deficiency": "Gourd___Nutrient_deficiency", "Pest Infestation": "Gourd___Leaf_eating_beetle"},
+ "InriaXagriscienceFM/bottle_gourd_a_for_of_bottle_g_classification": {
+  "Alternaria_Leaf_Blight": "Gourd___Alternaria_leaf_blight", "Early_Alternaria_Leaf_Blight": "Gourd___Alternaria_leaf_blight",
+  "Angular_Leaf_spot": "Gourd___Angular_leaf_spot", "Anthracnose": "Gourd___Anthracnose", "Downy_Mildew": "Gourd___Downy_mildew",
+  "Healthy": "Gourd___healthy", "Mosaic_Virus": "Gourd___Mosaic_virus"},
+ # Amaranthus (red amaranth, "red spinach" in Bangladesh); no public disease set, crop recognition only
+ "InriaXagriscienceFM/local_spinach_leaf_classification": {
+  "Red Spinach Fresh": "Amaranthus___healthy", "Red Spinach Non Fresh": "Amaranthus___healthy"},
  # Field-condition healthy maize (East African MLN/MSV classes dropped)
  "Project-AgML/maize_disease_classification": {"Healthy": "Corn_(maize)___healthy", "MLN": None, "MSV": None},
 }
