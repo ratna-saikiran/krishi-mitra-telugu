@@ -55,8 +55,10 @@ for split_dir, out in (("train", "train"), ("test", "test_plantdoc")):
 
 # 3. Hugging Face AgML sources (Indian-subcontinent crops)
 from datasets import load_dataset
+import gc, shutil
+HF_KW = {"Project-AgML/VegNet_cauliflower_disease_classification": {"data_dir": "raw"}}
 for repo, mp in HF.items():
-    ds = load_dataset(repo, split="train")
+    ds = load_dataset(repo, split="train", **HF_KW.get(repo, {}))
     names = ds.features["label"].names
     items = [(i, mp.get(names[l])) for i, l in enumerate(ds["label"]) if mp.get(names[l])]
     tr, va, te = split3(items)
@@ -67,7 +69,11 @@ for repo, mp in HF.items():
                 if cnt[lab] >= CAP_TRAIN: continue
                 cnt[lab] += 1
             save(ds[i]["image"], split, lab, f"{repo.split('/')[1][:12]}{i}")
-    print(repo, len(items), flush=True)
+    print(repo, len(items), shutil.disk_usage("/").free // 2**30, "GB free", flush=True)
+    del ds; gc.collect()
+    # The runner has ~14 GB of disk: drop each source's download once its
+    # thumbnails are written (a full cache of all sources crashed the runner).
+    shutil.rmtree(os.path.expanduser("~/.cache/huggingface"), ignore_errors=True)
 
 # 4. IP102 pests (official splits)
 names = [l.strip() for l in open(os.path.join(os.path.dirname(__file__), "ip102_classes.txt")) if l.strip()]
