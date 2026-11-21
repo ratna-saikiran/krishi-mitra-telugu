@@ -1,0 +1,662 @@
+{
+ "model": "classifier_dyn8.tflite",
+ "size_mb": 3.538016,
+ "n": 8419,
+ "accuracy": 0.8984439957239577,
+ "accuracy_95ci": [
+  0.8916735954388882,
+  0.9043829433424397
+ ],
+ "top5_accuracy": 0.9926357049530823,
+ "macro_precision": 0.9031014286023904,
+ "macro_recall": 0.8986324560054862,
+ "macro_f1": 0.8979056854159392,
+ "weighted_f1": 0.8996349614505567,
+ "ece": 0.1592622377524425,
+ "accuracy_vs_confidence_threshold": {
+  "0.0": {
+   "coverage": 1.0,
+   "accuracy": 0.8984439957239577
+  },
+  "0.4": {
+   "coverage": 0.9012946905808291,
+   "accuracy": 0.9367422245651028
+  },
+  "0.5": {
+   "coverage": 0.8313338876351111,
+   "accuracy": 0.9594227746820975
+  },
+  "0.6": {
+   "coverage": 0.7549590212614324,
+   "accuracy": 0.974826935179358
+  },
+  "0.7": {
+   "coverage": 0.6633804489844399,
+   "accuracy": 0.9865711727842436
+  },
+  "0.8": {
+   "coverage": 0.5240527378548521,
+   "accuracy": 0.9936536718041704
+  },
+  "0.9": {
+   "coverage": 0.2701033376885616,
+   "accuracy": 0.9973614775725593
+  }
+ },
+ "host_x86_ms_median": 5.446943001516047,
+ "per_class": {
+  "Banana___Sigatoka": {
+   "precision": 0.925,
+   "recall": 0.771,
+   "f1": 0.841,
+   "n": 48
+  },
+  "Banana___Xanthomonas_wilt": {
+   "precision": 0.866,
+   "recall": 0.951,
+   "f1": 0.906,
+   "n": 122
+  },
+  "Banana___healthy": {
+   "precision": 0.842,
+   "recall": 0.696,
+   "f1": 0.762,
+   "n": 23
+  },
+  "Blackgram___Anthracnose": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 34
+  },
+  "Blackgram___Leaf_crinkle": {
+   "precision": 1.0,
+   "recall": 0.909,
+   "f1": 0.952,
+   "n": 22
+  },
+  "Blackgram___Powdery_mildew": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 27
+  },
+  "Blackgram___Yellow_mosaic": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 33
+  },
+  "Blackgram___healthy": {
+   "precision": 0.971,
+   "recall": 1.0,
+   "f1": 0.985,
+   "n": 33
+  },
+  "Brinjal___Aphids": {
+   "precision": 0.677,
+   "recall": 0.636,
+   "f1": 0.656,
+   "n": 33
+  },
+  "Brinjal___Cercospora_leaf_spot": {
+   "precision": 0.632,
+   "recall": 0.632,
+   "f1": 0.632,
+   "n": 19
+  },
+  "Brinjal___Flea_beetles": {
+   "precision": 0.768,
+   "recall": 0.827,
+   "f1": 0.796,
+   "n": 52
+  },
+  "Brinjal___Mosaic_virus": {
+   "precision": 0.946,
+   "recall": 0.883,
+   "f1": 0.914,
+   "n": 60
+  },
+  "Brinjal___Phytophthora_blight": {
+   "precision": 1.0,
+   "recall": 0.952,
+   "f1": 0.976,
+   "n": 63
+  },
+  "Brinjal___Powdery_mildew": {
+   "precision": 0.844,
+   "recall": 0.871,
+   "f1": 0.857,
+   "n": 31
+  },
+  "Brinjal___Wilt": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 12
+  },
+  "Brinjal___healthy": {
+   "precision": 0.927,
+   "recall": 1.0,
+   "f1": 0.962,
+   "n": 38
+  },
+  "Chilli___Cercospora_leaf_spot": {
+   "precision": 0.947,
+   "recall": 0.818,
+   "f1": 0.878,
+   "n": 22
+  },
+  "Chilli___Mites_and_thrips": {
+   "precision": 0.778,
+   "recall": 0.875,
+   "f1": 0.824,
+   "n": 16
+  },
+  "Chilli___Nutrient_deficiency": {
+   "precision": 0.722,
+   "recall": 0.867,
+   "f1": 0.788,
+   "n": 15
+  },
+  "Chilli___Powdery_mildew": {
+   "precision": 1.0,
+   "recall": 0.933,
+   "f1": 0.966,
+   "n": 15
+  },
+  "Chilli___healthy": {
+   "precision": 0.7,
+   "recall": 0.7,
+   "f1": 0.7,
+   "n": 10
+  },
+  "Corn_(maize)___healthy": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 460
+  },
+  "Cotton___Alternaria_leaf_spot": {
+   "precision": 0.793,
+   "recall": 0.92,
+   "f1": 0.852,
+   "n": 25
+  },
+  "Cotton___Bacterial_blight": {
+   "precision": 0.882,
+   "recall": 0.87,
+   "f1": 0.876,
+   "n": 69
+  },
+  "Cotton___Fusarium_wilt": {
+   "precision": 0.926,
+   "recall": 1.0,
+   "f1": 0.962,
+   "n": 50
+  },
+  "Cotton___Jassids": {
+   "precision": 1.0,
+   "recall": 0.727,
+   "f1": 0.842,
+   "n": 33
+  },
+  "Cotton___Leaf_curl_virus": {
+   "precision": 0.968,
+   "recall": 0.953,
+   "f1": 0.961,
+   "n": 64
+  },
+  "Cotton___Leaf_reddening": {
+   "precision": 0.942,
+   "recall": 0.942,
+   "f1": 0.942,
+   "n": 86
+  },
+  "Cotton___Verticillium_wilt": {
+   "precision": 0.93,
+   "recall": 0.87,
+   "f1": 0.899,
+   "n": 46
+  },
+  "Cotton___healthy": {
+   "precision": 0.955,
+   "recall": 1.0,
+   "f1": 0.977,
+   "n": 84
+  },
+  "Cucumber___Anthracnose": {
+   "precision": 0.903,
+   "recall": 0.903,
+   "f1": 0.903,
+   "n": 144
+  },
+  "Cucumber___Bacterial_wilt": {
+   "precision": 1.0,
+   "recall": 0.979,
+   "f1": 0.989,
+   "n": 144
+  },
+  "Cucumber___Downy_mildew": {
+   "precision": 0.945,
+   "recall": 0.958,
+   "f1": 0.952,
+   "n": 144
+  },
+  "Cucumber___Gummy_stem_blight": {
+   "precision": 0.931,
+   "recall": 0.931,
+   "f1": 0.931,
+   "n": 144
+  },
+  "Cucumber___healthy": {
+   "precision": 1.0,
+   "recall": 0.986,
+   "f1": 0.993,
+   "n": 144
+  },
+  "Gourd___Aphids": {
+   "precision": 0.556,
+   "recall": 0.714,
+   "f1": 0.625,
+   "n": 21
+  },
+  "Gourd___Downy_mildew": {
+   "precision": 0.908,
+   "recall": 0.868,
+   "f1": 0.887,
+   "n": 159
+  },
+  "Gourd___Leaf_curl_virus": {
+   "precision": 0.774,
+   "recall": 0.911,
+   "f1": 0.837,
+   "n": 79
+  },
+  "Gourd___Leaf_miner": {
+   "precision": 0.25,
+   "recall": 0.1,
+   "f1": 0.143,
+   "n": 20
+  },
+  "Gourd___healthy": {
+   "precision": 1.0,
+   "recall": 0.992,
+   "f1": 0.996,
+   "n": 120
+  },
+  "Groundnut___Alternaria_leaf_spot": {
+   "precision": 0.97,
+   "recall": 0.97,
+   "f1": 0.97,
+   "n": 67
+  },
+  "Groundnut___Nutrient_deficiency": {
+   "precision": 0.844,
+   "recall": 0.776,
+   "f1": 0.809,
+   "n": 49
+  },
+  "Groundnut___Rosette": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 15
+  },
+  "Groundnut___Rust": {
+   "precision": 0.952,
+   "recall": 0.851,
+   "f1": 0.899,
+   "n": 47
+  },
+  "Groundnut___Tikka_leaf_spot": {
+   "precision": 0.901,
+   "recall": 0.817,
+   "f1": 0.857,
+   "n": 301
+  },
+  "Groundnut___healthy": {
+   "precision": 0.822,
+   "recall": 0.913,
+   "f1": 0.865,
+   "n": 218
+  },
+  "Mango___Anthracnose": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 75
+  },
+  "Mango___Bacterial_canker": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 75
+  },
+  "Mango___Cutting_weevil": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 75
+  },
+  "Mango___Die_back": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 75
+  },
+  "Mango___Gall_midge": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 75
+  },
+  "Mango___Powdery_mildew": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 75
+  },
+  "Mango___Sooty_mould": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 75
+  },
+  "Mango___healthy": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 75
+  },
+  "Okra___Alternaria_leaf_spot": {
+   "precision": 0.925,
+   "recall": 0.771,
+   "f1": 0.841,
+   "n": 48
+  },
+  "Okra___Cercospora_leaf_spot": {
+   "precision": 0.784,
+   "recall": 0.935,
+   "f1": 0.853,
+   "n": 31
+  },
+  "Okra___Downy_mildew": {
+   "precision": 0.938,
+   "recall": 0.938,
+   "f1": 0.938,
+   "n": 32
+  },
+  "Okra___Leaf_curl_virus": {
+   "precision": 0.969,
+   "recall": 1.0,
+   "f1": 0.984,
+   "n": 31
+  },
+  "Okra___Phyllosticta_leaf_spot": {
+   "precision": 0.806,
+   "recall": 0.879,
+   "f1": 0.841,
+   "n": 33
+  },
+  "Okra___healthy": {
+   "precision": 0.886,
+   "recall": 0.848,
+   "f1": 0.867,
+   "n": 46
+  },
+  "Orange___Citrus_canker": {
+   "precision": 0.989,
+   "recall": 0.989,
+   "f1": 0.989,
+   "n": 88
+  },
+  "Orange___Die_back": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 96
+  },
+  "Orange___Haunglongbing_(Citrus_greening)": {
+   "precision": 0.99,
+   "recall": 0.99,
+   "f1": 0.99,
+   "n": 99
+  },
+  "Orange___Mealybugs": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 90
+  },
+  "Orange___Powdery_mildew": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 89
+  },
+  "Orange___Spiny_whitefly": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 100
+  },
+  "Orange___healthy": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 82
+  },
+  "Papaya___Leaf_curl_virus": {
+   "precision": 1.0,
+   "recall": 0.929,
+   "f1": 0.963,
+   "n": 42
+  },
+  "Papaya___Mealybug": {
+   "precision": 0.971,
+   "recall": 1.0,
+   "f1": 0.986,
+   "n": 34
+  },
+  "Papaya___Mites": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 36
+  },
+  "Papaya___Mosaic_virus": {
+   "precision": 0.939,
+   "recall": 0.969,
+   "f1": 0.954,
+   "n": 32
+  },
+  "Papaya___Ring_spot_virus": {
+   "precision": 0.972,
+   "recall": 0.972,
+   "f1": 0.972,
+   "n": 36
+  },
+  "Papaya___healthy": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 27
+  },
+  "Rice___Bacterial_leaf_blight": {
+   "precision": 0.756,
+   "recall": 0.729,
+   "f1": 0.742,
+   "n": 166
+  },
+  "Rice___Bacterial_leaf_streak": {
+   "precision": 0.684,
+   "recall": 0.684,
+   "f1": 0.684,
+   "n": 57
+  },
+  "Rice___Bacterial_panicle_blight": {
+   "precision": 0.758,
+   "recall": 0.94,
+   "f1": 0.839,
+   "n": 50
+  },
+  "Rice___Blast": {
+   "precision": 0.813,
+   "recall": 0.749,
+   "f1": 0.78,
+   "n": 355
+  },
+  "Rice___Brown_spot": {
+   "precision": 0.728,
+   "recall": 0.858,
+   "f1": 0.788,
+   "n": 240
+  },
+  "Rice___Downy_mildew": {
+   "precision": 0.517,
+   "recall": 0.839,
+   "f1": 0.639,
+   "n": 93
+  },
+  "Rice___Hispa": {
+   "precision": 0.879,
+   "recall": 0.669,
+   "f1": 0.76,
+   "n": 239
+  },
+  "Rice___Leaf_scald": {
+   "precision": 0.938,
+   "recall": 0.798,
+   "f1": 0.862,
+   "n": 94
+  },
+  "Rice___Sheath_blight": {
+   "precision": 0.967,
+   "recall": 0.926,
+   "f1": 0.946,
+   "n": 94
+  },
+  "Rice___Stem_borer_dead_heart": {
+   "precision": 0.976,
+   "recall": 0.935,
+   "f1": 0.955,
+   "n": 216
+  },
+  "Rice___Tungro": {
+   "precision": 0.775,
+   "recall": 0.656,
+   "f1": 0.711,
+   "n": 163
+  },
+  "Rice___healthy": {
+   "precision": 0.865,
+   "recall": 0.92,
+   "f1": 0.891,
+   "n": 361
+  },
+  "Sugarcane___Banded_chlorosis": {
+   "precision": 0.721,
+   "recall": 0.886,
+   "f1": 0.795,
+   "n": 70
+  },
+  "Sugarcane___Brown_spot": {
+   "precision": 0.942,
+   "recall": 0.876,
+   "f1": 0.908,
+   "n": 258
+  },
+  "Sugarcane___Grassy_shoot": {
+   "precision": 1.0,
+   "recall": 0.961,
+   "f1": 0.98,
+   "n": 51
+  },
+  "Sugarcane___Mosaic_virus": {
+   "precision": 0.854,
+   "recall": 0.889,
+   "f1": 0.871,
+   "n": 99
+  },
+  "Sugarcane___Pokkah_boeng": {
+   "precision": 1.0,
+   "recall": 0.591,
+   "f1": 0.743,
+   "n": 44
+  },
+  "Sugarcane___Rust": {
+   "precision": 0.723,
+   "recall": 0.723,
+   "f1": 0.723,
+   "n": 47
+  },
+  "Sugarcane___Smut": {
+   "precision": 0.627,
+   "recall": 0.787,
+   "f1": 0.698,
+   "n": 47
+  },
+  "Sugarcane___Yellow_leaf": {
+   "precision": 0.852,
+   "recall": 0.899,
+   "f1": 0.875,
+   "n": 179
+  },
+  "Sugarcane___healthy": {
+   "precision": 1.0,
+   "recall": 0.969,
+   "f1": 0.984,
+   "n": 64
+  },
+  "Turmeric___Aphids": {
+   "precision": 0.971,
+   "recall": 1.0,
+   "f1": 0.985,
+   "n": 33
+  },
+  "Turmeric___Leaf_blotch": {
+   "precision": 1.0,
+   "recall": 0.886,
+   "f1": 0.939,
+   "n": 35
+  },
+  "Turmeric___Leaf_spot": {
+   "precision": 0.966,
+   "recall": 1.0,
+   "f1": 0.982,
+   "n": 28
+  },
+  "Turmeric___healthy": {
+   "precision": 0.939,
+   "recall": 1.0,
+   "f1": 0.969,
+   "n": 31
+  },
+  "Watermelon___Anthracnose": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 23
+  },
+  "Watermelon___Downy_mildew": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 57
+  },
+  "Watermelon___Mosaic_virus": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 62
+  },
+  "Watermelon___healthy": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 30
+  }
+ },
+ "group_accuracy": 0.9964366314289108
+}
