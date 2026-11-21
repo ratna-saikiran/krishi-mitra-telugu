@@ -1,0 +1,38 @@
+name: Build collector APK
+on:
+  push:
+    branches: [main]
+    paths: ["collector/**", ".github/workflows/build-collector.yml"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: collector
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.50.1"
+          channel: stable
+          cache: true
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos
+      - run: flutter test
+      - run: flutter build apk --release --target-platform android-arm64
+      - name: Publish to the "collector-apk" release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: collector-apk
+          name: Krishi Data (photo collector) APK
+          prerelease: true
+          make_latest: false
+          body: "Built from ${{ github.sha }}. Field photo collection app for retraining."
+          files: collector/build/app/outputs/flutter-apk/app-release.apk

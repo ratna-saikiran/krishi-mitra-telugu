@@ -151,9 +151,13 @@ class _HomePageState extends State<HomePage> {
     final crops = _pipeline.db.crops.where((c) => c.key != 'Pest' && c.labels.any(known.contains)).toList();
     final pick = await showModalBottomSheet<String>(
       context: context,
+      isScrollControlled: true, // long crop list: let the sheet grow and scroll
+      showDragHandle: true,
       builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: MediaQuery.of(ctx).size.height * 0.8),
+          child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(l.pickCrop, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
@@ -163,6 +167,7 @@ class _HomePageState extends State<HomePage> {
               ActionChip(label: Text(l.otherCrop), onPressed: () => Navigator.pop(ctx, 'other')),
             ]),
           ]),
+          ),
         ),
       ),
     );
