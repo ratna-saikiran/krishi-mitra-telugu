@@ -14,7 +14,8 @@ class VisionResult {
   final SeverityResult severity;
   final AdvisoryEntry entry;
   final int decodeMs, classifyMs, severityMs;
-  VisionResult(this.top, this.severity, this.entry, this.decodeMs, this.classifyMs, this.severityMs);
+  final double inferenceMs; // model invoke only, measured natively
+  VisionResult(this.top, this.severity, this.entry, this.decodeMs, this.classifyMs, this.severityMs, this.inferenceMs);
   Prediction get best => top.first;
   bool get confident => best.score >= 0.5;
 }
@@ -28,7 +29,7 @@ class Pipeline {
     await db.load();
   }
 
-  VisionResult runVision(Uint8List bytes) {
+  Future<VisionResult> runVision(Uint8List bytes) async {
     final sw = Stopwatch()..start();
     var image = img.decodeImage(bytes)!;
     image = img.bakeOrientation(image);
@@ -38,13 +39,13 @@ class Pipeline {
     }
     final tDecode = sw.elapsedMilliseconds;
     sw.reset();
-    final top = classifier.classify(image);
+    final top = await classifier.classify(image);
     final tCls = sw.elapsedMilliseconds;
     sw.reset();
     final entry = db.entry(top.first.label);
     final sev = estimateSeverity(img.copyResizeCropSquare(image, size: 512),
         healthyClass: entry.healthy, highRisk: entry.highRisk);
     final tSev = sw.elapsedMilliseconds;
-    return VisionResult(top, sev, entry, tDecode, tCls, tSev);
+    return VisionResult(top, sev, entry, tDecode, tCls, tSev, classifier.lastInferenceMs);
   }
 }

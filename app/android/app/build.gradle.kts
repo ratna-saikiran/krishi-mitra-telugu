@@ -30,8 +30,15 @@ android {
         }
     }
 
+    androidResources {
+        noCompress += listOf("tflite") // so the model can be memory-mapped from the APK
+    }
+
     packaging {
-        jniLibs { useLegacyPackaging = true }
+        jniLibs {
+            useLegacyPackaging = true
+            pickFirsts += listOf("**/libc++_shared.so", "**/libfbjni.so")
+        }
     }
 }
 
@@ -49,4 +56,6 @@ dependencies {
     // ExecuTorch Android runtime (XNNPACK + LLM runner, arm64-v8a). Keep in
     // step with the ExecuTorch version used to export the .pte (release/1.0).
     implementation("org.pytorch:executorch-android:1.0.0")
+    // TFLite runtime for the INT8 vision model (XNNPACK on the Arm CPU).
+    implementation("org.tensorflow:tensorflow-lite:2.17.0")
 }

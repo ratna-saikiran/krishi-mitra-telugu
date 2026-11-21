@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
       _llmInfo = '';
     });
     await Future<void>.delayed(const Duration(milliseconds: 50)); // let spinner paint
-    final vr = _pipeline.runVision(bytes); // stage 1+2 (vision), sequential
+    final vr = await _pipeline.runVision(bytes); // stage 1+2 (vision), sequential
     setState(() {
       _vr = vr;
       _busy = false;
@@ -301,7 +301,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Text('⚠ ${db.verifyNote}\nమూలం: ${e.source}', style: const TextStyle(fontSize: 12, color: Colors.black54)),
       ),
-      Text('సమయం: decode ${vr.decodeMs}ms · వ్యాధి గుర్తింపు ${vr.classifyMs}ms · తీవ్రత ${vr.severityMs}ms',
+      Text('సమయం: decode ${vr.decodeMs}ms · వ్యాధి గుర్తింపు ${vr.classifyMs}ms (model ${vr.inferenceMs.toStringAsFixed(1)}ms, INT8) · తీవ్రత ${vr.severityMs}ms',
           style: const TextStyle(fontSize: 12, color: Colors.black45)),
     ];
   }
