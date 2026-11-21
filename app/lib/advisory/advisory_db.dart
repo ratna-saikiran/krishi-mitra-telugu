@@ -60,6 +60,10 @@ class AdvisoryDb {
   List<String> genericSteps(String level) =>
       level == 'none' ? const [] : List<String>.from(_db['severity_generic'][level]);
   String get verifyNote => _db['verify_note_te'];
+  /// Every Telugu crop and problem name, for the LLM name guardrail.
+  Set<String> get allNamesTe => {
+        for (final c in (_db['classes'] as Map<String, dynamic>).values) ...[c['disease_te'] as String, c['crop_te'] as String],
+      };
   List<CropInfo> get crops => [
         for (final e in (_db['crops'] as Map<String, dynamic>).entries)
           CropInfo(e.key, e.value['te'], e.value['en'], List<String>.from(e.value['labels']))

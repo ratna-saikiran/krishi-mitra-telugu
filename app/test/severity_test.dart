@@ -22,6 +22,13 @@ void main() {
     const facts = 'మాంకోజెబ్ 75% WP 2.5 గ్రా/లీటరు';
     expect(validateAdvice('1) ఇది ఆకు ఎండు తెగులు. 2) మాంకోజెబ్ 2.5 గ్రా/లీటరు నీటికి కలిపి ఈ రోజే పిచికారీ చేయండి.', facts), isNotNull);
     expect(validateAdvice('ఇది ఆకు ఎండు తెగులు. మాంకోజెబ్ 10 గ్రా/లీటరు నీటికి కలిపి ఈ రోజే పిచికారీ చేయండి.', facts), isNull);
+    // Wrong disease name copied from elsewhere is rejected.
+    expect(
+        validateAdvice('వరి పంటకు ఆలస్య ఆకు ఎండు తెగులు సోకింది. ఈ రోజే మాంకోజెబ్ 2.5 గ్రా/లీటరు పిచికారీ చేయండి.', facts,
+            otherNames: ['ఆలస్య ఆకు ఎండు తెగులు', 'అగ్గి తెగులు']),
+        isNull);
+    // Repeated sentence loop is rejected.
+    expect(validateAdvice('1) పంట మార్పిడి మరియు పంట అవశేషాల నాశనం.\n2) పంట మార్పిడి మరియు పంట అవశేషాల నాశనం.\n3) మంచిది చేయండి.', facts), isNull);
     expect(validateAdvice('This is early blight. Spray mancozeb 2.5 g per litre of water today please.', facts), isNull);
   });
 }

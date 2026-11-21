@@ -34,9 +34,16 @@ String buildPrompt({
 }
 
 /// Guardrail: accept LLM output only if it is mostly Telugu, not degenerate,
-/// and every number it mentions appears in the verified facts.
-String? validateAdvice(String out, String facts) {
-  final text = out.replaceAll(RegExp(r'<\|.*?\|>'), '').trim();
+/// every number it mentions appears in the verified facts, and it does not
+/// name a crop/disease/pest that is not in the facts ([otherNames] = every
+/// Telugu problem/crop name in the advisory DB). Host tests of Llama 3.2 1B
+/// showed it can copy a wrong disease name from an example, which the number
+/// check alone would miss.
+String? validateAdvice(String out, String facts, {Iterable<String> otherNames = const []}) {
+  var text = out.replaceAll(RegExp(r'<\|.*?\|>'), '').replaceAll('\uFFFD', '').trim();
+  // Generation that hit the token limit ends mid-sentence: keep whole lines/sentences.
+  final cut = text.lastIndexOf(RegExp(r'[.।\n]'));
+  if (cut > 0 && cut < text.length - 1) text = text.substring(0, cut + 1).trim();
   if (text.length < 40) return null;
   final letters = text.runes.where((r) => String.fromCharCode(r).trim().isNotEmpty && !_isAsciiPunctOrDigit(r));
   final telugu = letters.where((r) => r >= 0x0C00 && r <= 0x0C7F).length;
@@ -45,9 +52,16 @@ String? validateAdvice(String out, String facts) {
   for (final m in RegExp(r'\d+(\.\d+)?').allMatches(body)) {
     if (!facts.contains(m.group(0)!)) return null; // hallucinated dose / number
   }
-  // Repetition loop check (common failure of small models).
-  final lines = text.split('\n').where((l) => l.trim().isNotEmpty).toList();
-  if (lines.length > 3 && lines.toSet().length < lines.length / 2) return null;
+  for (final n in otherNames) {
+    if (n.length >= 4 && text.contains(n) && !facts.contains(n)) return null; // wrong crop/disease name
+  }
+  // Repetition loops (common failure of small models): any sentence twice.
+  final seen = <String>{};
+  for (final raw in text.split(RegExp(r'[.।\n;]'))) {
+    final t = raw.replaceAll(RegExp(r'^[\s\-•*\d\).]+'), '').trim();
+    if (t.length < 10) continue;
+    if (!seen.add(t)) return null;
+  }
   return text;
 }
 

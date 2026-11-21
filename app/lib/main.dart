@@ -178,7 +178,7 @@ class _HomePageState extends State<HomePage> {
       int? firstTokMs;
       var n = 0;
       final buf = StringBuffer();
-      await for (final t in _llm.generate(prompt)) {
+      await for (final t in _llm.generate(prompt, seqLen: 1900)) {
         firstTokMs ??= sw.elapsedMilliseconds;
         n++;
         buf.write(t);
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> {
         });
       }
       final total = sw.elapsedMilliseconds;
-      final ok = validateAdvice(buf.toString(), prompt);
+      final ok = validateAdvice(buf.toString(), prompt, otherNames: db.allNamesTe);
       setState(() {
         _generating = false;
         final tps = n / ((total - (firstTokMs ?? 0)) / 1000).clamp(0.001, 1e9);
