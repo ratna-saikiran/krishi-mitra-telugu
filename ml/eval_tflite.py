@@ -43,8 +43,9 @@ def run(model, items):
                            for k, c in enumerate(present)})
 
 res = {}
-for m in ["classifier_fp32.tflite", "classifier_int8.tflite"]:
+MODELS = os.environ.get("MODELS", "classifier_fp32.tflite,classifier_int8.tflite").split(",")
+for m in MODELS:
     path = f"{OUT}/{m}"
     res[m] = dict(size_mb=os.path.getsize(path) / 1e6, plantvillage_test=run(path, pv), plantdoc_test=run(path, pd))
     print(m, {k: (v if not isinstance(v, dict) else {kk: vv for kk, vv in v.items() if kk != "per_class"}) for k, v in res[m].items()})
-json.dump(res, open(f"{OUT}/metrics.json", "w"), indent=1)
+json.dump(res, open(f"{OUT}/metrics_" + "_".join(x.split(".")[0].split("_")[-1] for x in MODELS) + ".json", "w"), indent=1)

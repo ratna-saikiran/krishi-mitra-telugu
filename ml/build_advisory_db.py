@@ -111,6 +111,31 @@ diseases = {
 HEALTHY = D("ఆరోగ్యకరమైన ఆకు", "healthy", "వ్యాధి లక్షణాలు కనిపించలేదు.", "-",
    ["పంటను వారానికి ఒకసారి పరిశీలిస్తూ ఉండండి."], [], [], ["సమతుల్య ఎరువులు, సకాలంలో నీటి తడులు కొనసాగించండి."])
 
+import re
+SPRAY_RE = re.compile(r"([^.;:]*?)\s(\d+(?:\.\d+)?)%?\s?(?:\+[^/]*?)?\s?(WP|EC|SL|SC)?\s(\d+(?:\.\d+)?)\s(గ్రా|మి\.లీ)/లీటరు")
+KIND = [("ఇమిడాక్లోప్రిడ్", "insecticide"), ("స్పైరోమెసిఫెన్", "acaricide"), ("గంధకం", "fungicide/acaricide"),
+        ("కాపర్", "bactericide/fungicide"), ("బోర్డో", "fungicide"), ("వేప", "botanical")]
+EN = {"మెటాలాక్సిల్": "Metalaxyl 8% + Mancozeb 64% WP", "మాంకోజెబ్": "Mancozeb 75% WP", "కాపర్": "Copper oxychloride 50% WP",
+      "క్లోరోథలోనిల్": "Chlorothalonil 75% WP", "హెక్సాకొనజోల్": "Hexaconazole 5% EC", "ప్రొపికొనజోల్": "Propiconazole 25% EC",
+      "కాప్టాన్": "Captan 50% WP", "గంధకం": "Wettable sulphur 80% WP", "ఇమిడాక్లోప్రిడ్": "Imidacloprid 17.8% SL",
+      "స్పైరోమెసిఫెన్": "Spiromesifen 22.9% SC", "వేప నూనె": "Neem oil 1500 ppm"}
+
+def sprays(steps):
+    out = []
+    for st in steps:
+        name_en = next((v for k, v in EN.items() if k in st), None)
+        m = re.search(r"(\d+(?:\.\d+)?)\s(గ్రా|మి\.లీ)/లీటరు", st)
+        if not (name_en and m):
+            continue
+        dose, unit = float(m.group(1)), ("g" if m.group(2) == "గ్రా" else "ml")
+        name_te = st[:m.start()].strip().split(" (")[0]
+        name_te = re.sub(r"^(తెల్లదోమ/రసం పీల్చే పురుగుల నివారణకు|సిల్లిడ్ నివారణకు|బోర్డో మిశ్రమం 1% లేదా)\s*", "", name_te)
+        kind = next((k for t, k in KIND if t in st), "fungicide")
+        form = "liquid" if any(f in name_en for f in (" EC", " SL", " SC", "oil")) else "powder"
+        if not any(x["name_en"] == name_en for x in out):
+            out.append(dict(name_te=name_te, name_en=name_en, dose_per_l=dose, unit=unit, kind=kind, form=form))
+    return out
+
 labels = [l.strip() for l in open(os.path.join(os.path.dirname(__file__), "labels.txt")) if l.strip()]
 out = {"version": 1, "verify_note_te": VERIFY,
        "severity_te": {"mild": "తక్కువ (ప్రారంభ దశ)", "moderate": "మధ్యస్థం", "urgent": "తీవ్రం – వెంటనే చర్య"},
@@ -121,7 +146,21 @@ for lab in labels:
     cte, fert, post = crops[crop]
     entry = dict(entry, crop_en=crop.replace("_", " "), disease_en=dis.replace("_", " ").strip(),
                  crop_te=cte, fertiliser_irrigation_te=fert, post_harvest_te=post)
+    entry["sprays"] = {lv: sprays(entry["steps"][lv]) for lv in ("mild", "moderate", "urgent")}
     out["classes"][lab] = entry
+    out.setdefault("crops", {}).setdefault(crop, {"te": cte, "en": crop.replace("_", " ").replace(",", ""), "labels": []})["labels"].append(lab)
+out["how_to_spray_te"] = [
+    ["masks", "చేతి తొడుగులు, ముక్కు-నోటికి మాస్క్, కళ్లద్దాలు, పొడవైన చొక్కా ధరించండి."],
+    ["science", "మందును కొలత కప్పుతో సరిగ్గా కొలవండి. ఎక్కువ వేస్తే పంటకు, మీకు హాని."],
+    ["water_drop", "ముందు చిన్న బకెట్‌లో కొద్దిగా నీటిలో కలిపి, తర్వాత ట్యాంకులో పోసి నీటితో నింపి బాగా కలపండి."],
+    ["wb_twilight", "ఉదయం లేదా సాయంత్రం, గాలి తక్కువగా ఉన్నప్పుడు పిచికారీ చేయండి. గాలికి ఎదురుగా చేయవద్దు."],
+    ["flip", "ఆకుల పై భాగం, అడుగు భాగం రెండూ తడిసేలా సన్నని తుంపరలుగా పిచికారీ చేయండి."],
+    ["umbrella", "వర్షం వచ్చే 4-6 గంటల ముందు పిచికారీ చేయవద్దు."],
+    ["no_food", "పిచికారీ చేసేటప్పుడు తినడం, తాగడం, పొగ త్రాగడం చేయవద్దు."],
+    ["wash", "తర్వాత సబ్బుతో స్నానం చేయండి. ఖాళీ డబ్బాలను పగలగొట్టి పాతిపెట్టండి; పిల్లలకు, పశువులకు దూరంగా ఉంచండి."],
+    ["timer", "కోతకు ముందు లేబుల్‌పై ఉన్న వేచి ఉండే రోజులు (PHI) తప్పక పాటించండి."],
+]
+out["tank_sizes"] = [["15 లీ. స్ప్రేయర్ ట్యాంకు", 15], ["1 ఎకరం (≈200 లీ. నీరు)", 200]]
 missing = set(diseases) - set(labels)
 assert not missing, missing
 dst = os.path.join(os.path.dirname(__file__), "..", "app", "assets", "advisory_te.json")

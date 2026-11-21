@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'advisory/advisory_db.dart';
 import 'advisory/llm_service.dart';
 import 'advisory/prompt.dart';
 import 'pipeline.dart';
+import 'vision/severity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,6 +50,7 @@ class _HomePageState extends State<HomePage> {
   String _advice = '';
   String? _adviceSource; // 'llm' | 'template'
   String _llmInfo = '';
+  String? _crop; // null = auto, 'other' = unsupported crop
 
   @override
   void initState() {
@@ -90,7 +93,7 @@ class _HomePageState extends State<HomePage> {
       _llmInfo = '';
     });
     await Future<void>.delayed(const Duration(milliseconds: 50)); // let spinner paint
-    final vr = await _pipeline.runVision(bytes); // stage 1+2 (vision), sequential
+    final vr = await _pipeline.runVision(bytes, cropKey: _crop); // stage 1+2 (vision), sequential
     setState(() {
       _vr = vr;
       _busy = false;
@@ -103,6 +106,17 @@ class _HomePageState extends State<HomePage> {
     final e = vr.entry;
     final level = vr.severity.level;
     final template = db.templateAdvice(e, level);
+    if (vr.unsupportedCrop) {
+      setState(() {
+        _advice = [
+          'ఈ పంటకు వ్యాధి గుర్తింపు మోడల్ ఇంకా లేదు. ఆకు దెబ్బతిన్న భాగం: ${(vr.severity.lesionRatio * 100).toStringAsFixed(0)}%.',
+          ...db.genericSteps(severityLevel(vr.severity.lesionRatio)),
+          'దగ్గరలోని రైతు భరోసా కేంద్రంలో ఈ ఫోటో చూపించండి.',
+        ].map((s) => '• $s').join('\n');
+        _adviceSource = 'template';
+      });
+      return;
+    }
     if (!_llmAvailable || e.healthy || !vr.confident) {
       setState(() {
         _advice = template.map((s) => '• $s').join('\n');
@@ -204,7 +218,23 @@ class _HomePageState extends State<HomePage> {
                 ),
               ]),
               const SizedBox(height: 8),
-              const Text('ఒక ఆకును దగ్గరగా, వెలుతురులో, స్పష్టంగా ఫోటో తీయండి.', style: TextStyle(color: Colors.black54)),
+              const Text('ఒక ఆకును మధ్యలో, దగ్గరగా, వెలుతురులో ఫోటో తీయండి.', style: TextStyle(color: Colors.black54)),
+              const SizedBox(height: 10),
+              const Text('మీ పంట ఏది?', style: TextStyle(fontWeight: FontWeight.bold)),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(children: [
+                  for (final c in [(null, 'ఆటో'), for (final ci in _pipeline.db.crops) (ci.key, ci.te), ('other', 'ఇతర పంట')])
+                    Padding(
+                      padding: const EdgeInsets.only(right: 6),
+                      child: ChoiceChip(
+                        label: Text(c.$2),
+                        selected: _crop == c.$1,
+                        onSelected: (_) => setState(() => _crop = c.$1),
+                      ),
+                    ),
+                ]),
+              ),
               if (_busy) const Padding(padding: EdgeInsets.all(32), child: Center(child: CircularProgressIndicator())),
               if (_vr != null) ..._result(_vr!),
             ]),
@@ -226,20 +256,28 @@ class _HomePageState extends State<HomePage> {
       const SizedBox(height: 4),
       const Text('కుడి: ఎరుపు = దెబ్బతిన్న భాగం', style: TextStyle(fontSize: 12, color: Colors.black54)),
       const SizedBox(height: 12),
-      if (!sev.leafFound || !vr.confident)
+      if (!vr.unsupportedCrop && (!sev.leafFound || !vr.confident))
         Card(
           color: Colors.amber.shade50,
-          child: const Padding(
-            padding: EdgeInsets.all(12),
-            child: Text('ఖచ్చితంగా గుర్తించలేకపోయాం. ఒకే ఆకును దగ్గరగా, నీడ లేకుండా మళ్ళీ ఫోటో తీయండి. క్రింది ఫలితం అంచనా మాత్రమే.'),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Text(vr.cropKey == null
+                ? 'ఖచ్చితంగా గుర్తించలేకపోయాం. పైన మీ పంటను ఎంచుకుని, ఒకే ఆకును దగ్గరగా మళ్ళీ ఫోటో తీయండి. మీ పంట జాబితాలో లేకపోతే "ఇతర పంట" ఎంచుకోండి. క్రింది ఫలితం అంచనా మాత్రమే.'
+                : 'ఖచ్చితంగా గుర్తించలేకపోయాం. ఒకే ఆకును దగ్గరగా, నీడ లేకుండా మళ్ళీ ఫోటో తీయండి. క్రింది ఫలితం అంచనా మాత్రమే.'),
           ),
         ),
       Card(
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text('${e.cropTe} · ${e.diseaseTe}', style: Theme.of(context).textTheme.titleLarge),
-            Text('${e.cropEn} · ${e.diseaseEn}', style: const TextStyle(color: Colors.black54)),
+            if (vr.unsupportedCrop) ...[
+              Text('పంట: మీరు ఎంచుకున్న ఇతర పంట', style: Theme.of(context).textTheme.titleLarge),
+              const Text('ఈ పంటకు వ్యాధి పేరు గుర్తించే మోడల్ ఇంకా లేదు. దెబ్బతిన్న భాగం మాత్రమే కొలిచాం.'),
+            ] else ...[
+              Text('పంట: ${e.cropTe}', style: Theme.of(context).textTheme.titleLarge),
+              Text('సమస్య: ${e.diseaseTe}', style: Theme.of(context).textTheme.titleMedium),
+              Text('${e.cropEn} · ${e.diseaseEn} · ${e.type}', style: const TextStyle(color: Colors.black54)),
+            ],
             const SizedBox(height: 10),
             Wrap(spacing: 8, runSpacing: 8, children: [
               Chip(
@@ -247,14 +285,14 @@ class _HomePageState extends State<HomePage> {
                 side: BorderSide(color: color),
                 label: Text('తీవ్రత: ${db.severityTe(sev.level)}', style: TextStyle(color: color, fontWeight: FontWeight.bold)),
               ),
-              Chip(label: Text('నమ్మకం ${(vr.best.score * 100).toStringAsFixed(0)}%')),
-              if (!e.healthy) Chip(label: Text('దెబ్బతిన్న భాగం ${(sev.lesionRatio * 100).toStringAsFixed(0)}%')),
+              if (!vr.unsupportedCrop) Chip(label: Text('నమ్మకం ${(vr.best.score * 100).toStringAsFixed(0)}%')),
+              if (!e.healthy || vr.unsupportedCrop) Chip(label: Text('దెబ్బతిన్న భాగం ${(sev.lesionRatio * 100).toStringAsFixed(0)}%')),
             ]),
-            if (!vr.confident)
+            if (!vr.confident && !vr.unsupportedCrop && vr.top.length > 1)
               Text('ఇతర అవకాశాలు: ${vr.top.skip(1).map((p) => '${db.entry(p.label).diseaseTe} ${(p.score * 100).toStringAsFixed(0)}%').join(', ')}',
                   style: const TextStyle(fontSize: 13)),
             const SizedBox(height: 6),
-            Text('లక్షణాలు: ${e.symptomsTe}'),
+            if (!vr.unsupportedCrop) Text('లక్షణాలు: ${e.symptomsTe}'),
           ]),
         ),
       ),
@@ -290,7 +328,8 @@ class _HomePageState extends State<HomePage> {
               ListTile(dense: true, leading: const Icon(Icons.check, size: 18), title: Text(s)),
           ],
         ),
-      ExpansionTile(
+      if (!vr.unsupportedCrop && e.spraysFor(sev.level).isNotEmpty) _sprayCard(e.spraysFor(sev.level)),
+      if (!vr.unsupportedCrop) ExpansionTile(
         title: const Text('ఎరువులు, నీటి యాజమాన్యం, కోత తర్వాత'),
         children: [
           ListTile(leading: const Icon(Icons.water_drop), title: Text(e.fertiliserIrrigation)),
@@ -301,8 +340,80 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Text('⚠ ${db.verifyNote}\nమూలం: ${e.source}', style: const TextStyle(fontSize: 12, color: Colors.black54)),
       ),
-      Text('సమయం: decode ${vr.decodeMs}ms · వ్యాధి గుర్తింపు ${vr.classifyMs}ms (model ${vr.inferenceMs.toStringAsFixed(1)}ms, INT8) · తీవ్రత ${vr.severityMs}ms',
+      Text('సమయం: severity (OpenCV) ${sev.nativeMs.toStringAsFixed(0)}ms · decode ${vr.decodeMs}ms · వ్యాధి గుర్తింపు ${vr.classifyMs}ms (model ${vr.inferenceMs.toStringAsFixed(1)}ms, INT8) · తీవ్రత ${vr.severityMs}ms',
           style: const TextStyle(fontSize: 12, color: Colors.black45)),
     ];
+  }
+
+  static const _icons = {
+    'masks': Icons.masks,
+    'science': Icons.science,
+    'water_drop': Icons.water_drop,
+    'wb_twilight': Icons.wb_twilight,
+    'flip': Icons.flip,
+    'umbrella': Icons.umbrella,
+    'no_food': Icons.no_food,
+    'wash': Icons.wash,
+    'timer': Icons.timer,
+  };
+
+  Widget _sprayCard(List<Spray> sprays) {
+    final db = _pipeline.db;
+    return Card(
+      color: const Color(0xFFF1F8E9),
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text('మందు & మోతాదు', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 8),
+          for (final sp in sprays)
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(12), border: Border.all(color: Colors.green.shade200)),
+              child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                // Picture of the product form: powder packet vs liquid bottle.
+                Container(
+                  width: 64,
+                  height: 80,
+                  decoration: BoxDecoration(
+                      color: sp.liquid ? Colors.blue.shade50 : Colors.orange.shade50, borderRadius: BorderRadius.circular(10)),
+                  child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Icon(sp.liquid ? Icons.local_drink : Icons.inventory_2, size: 34, color: sp.liquid ? Colors.blue : Colors.deepOrange),
+                    Text(sp.liquid ? 'ద్రవం' : 'పొడి', style: const TextStyle(fontSize: 12)),
+                  ]),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    Text(sp.nameTe, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    Text('${sp.nameEn} · ${sp.kind}', style: const TextStyle(fontSize: 12, color: Colors.black54)),
+                    const SizedBox(height: 4),
+                    Text('1 లీటరు నీటికి: ${sp.doseFor(1)}'),
+                    for (final t in db.tankSizes) Text('${t.$1}: ${sp.doseFor(t.$2)}', style: const TextStyle(fontWeight: FontWeight.w600)),
+                  ]),
+                ),
+              ]),
+            ),
+          const Divider(),
+          Text('ఎలా పిచికారీ చేయాలి', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 6),
+          for (final (i, st) in db.howToSpray.indexed)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Colors.green.shade100,
+                  child: Icon(_icons[st[0]] ?? Icons.check, color: Colors.green.shade900),
+                ),
+                const SizedBox(width: 10),
+                Expanded(child: Text('${i + 1}. ${st[1]}')),
+              ]),
+            ),
+        ]),
+      ),
+    );
   }
 }

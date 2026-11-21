@@ -48,7 +48,30 @@
    "disease_en": "Apple scab",
    "crop_te": "ఆపిల్",
    "fertiliser_irrigation_te": "ఎరువులు: చెట్టుకు సేంద్రియ ఎరువు 10-20 కిలోలు, సిఫార్సు మేరకు NPK. నీరు: పూత, కాయ దశలో నేల తేమ తగ్గనీయవద్దు.",
-   "post_harvest_te": "కోత తర్వాత: దెబ్బతిన్న పండ్లు వేరు చేసి, నీడలో గ్రేడింగ్ చేసి చల్లని చోట నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: దెబ్బతిన్న పండ్లు వేరు చేసి, నీడలో గ్రేడింగ్ చేసి చల్లని చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "హెక్సాకొనజోల్ 5% EC",
+      "name_en": "Hexaconazole 5% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Apple___Black_rot": {
    "disease_te": "ఆపిల్ నల్ల కుళ్ళు",
@@ -76,7 +99,30 @@
    "disease_en": "Black rot",
    "crop_te": "ఆపిల్",
    "fertiliser_irrigation_te": "ఎరువులు: చెట్టుకు సేంద్రియ ఎరువు 10-20 కిలోలు, సిఫార్సు మేరకు NPK. నీరు: పూత, కాయ దశలో నేల తేమ తగ్గనీయవద్దు.",
-   "post_harvest_te": "కోత తర్వాత: దెబ్బతిన్న పండ్లు వేరు చేసి, నీడలో గ్రేడింగ్ చేసి చల్లని చోట నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: దెబ్బతిన్న పండ్లు వేరు చేసి, నీడలో గ్రేడింగ్ చేసి చల్లని చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాప్టాన్ 50% WP",
+      "name_en": "Captan 50% WP",
+      "dose_per_l": 2.0,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Apple___Cedar_apple_rust": {
    "disease_te": "ఆపిల్ తుప్పు తెగులు",
@@ -103,7 +149,30 @@
    "disease_en": "Cedar apple rust",
    "crop_te": "ఆపిల్",
    "fertiliser_irrigation_te": "ఎరువులు: చెట్టుకు సేంద్రియ ఎరువు 10-20 కిలోలు, సిఫార్సు మేరకు NPK. నీరు: పూత, కాయ దశలో నేల తేమ తగ్గనీయవద్దు.",
-   "post_harvest_te": "కోత తర్వాత: దెబ్బతిన్న పండ్లు వేరు చేసి, నీడలో గ్రేడింగ్ చేసి చల్లని చోట నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: దెబ్బతిన్న పండ్లు వేరు చేసి, నీడలో గ్రేడింగ్ చేసి చల్లని చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "హెక్సాకొనజోల్ 5% EC",
+      "name_en": "Hexaconazole 5% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Apple___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -126,7 +195,12 @@
    "disease_en": "healthy",
    "crop_te": "ఆపిల్",
    "fertiliser_irrigation_te": "ఎరువులు: చెట్టుకు సేంద్రియ ఎరువు 10-20 కిలోలు, సిఫార్సు మేరకు NPK. నీరు: పూత, కాయ దశలో నేల తేమ తగ్గనీయవద్దు.",
-   "post_harvest_te": "కోత తర్వాత: దెబ్బతిన్న పండ్లు వేరు చేసి, నీడలో గ్రేడింగ్ చేసి చల్లని చోట నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: దెబ్బతిన్న పండ్లు వేరు చేసి, నీడలో గ్రేడింగ్ చేసి చల్లని చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Blueberry___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -149,7 +223,12 @@
    "disease_en": "healthy",
    "crop_te": "బ్లూబెర్రీ",
    "fertiliser_irrigation_te": "ఆమ్ల నేల (pH 4.5-5.5) అవసరం; మల్చింగ్ చేసి తేమ కాపాడండి.",
-   "post_harvest_te": "పండ్లను మెల్లగా కోసి వెంటనే చల్లబరచండి."
+   "post_harvest_te": "పండ్లను మెల్లగా కోసి వెంటనే చల్లబరచండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Cherry_(including_sour)___Powdery_mildew": {
    "disease_te": "చెర్రీ బూడిద తెగులు",
@@ -176,7 +255,30 @@
    "disease_en": "Powdery mildew",
    "crop_te": "చెర్రీ",
    "fertiliser_irrigation_te": "సేంద్రియ ఎరువు, సమతుల్య NPK; డ్రిప్ ద్వారా నీరు.",
-   "post_harvest_te": "కోసిన పండ్లను ఎండలో ఉంచవద్దు; చల్లని చోట నిల్వ."
+   "post_harvest_te": "కోసిన పండ్లను ఎండలో ఉంచవద్దు; చల్లని చోట నిల్వ.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "నీటిలో కరిగే గంధకం",
+      "name_en": "Wettable sulphur 80% WP",
+      "dose_per_l": 2.0,
+      "unit": "g",
+      "kind": "fungicide/acaricide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "హెక్సాకొనజోల్ 5% EC",
+      "name_en": "Hexaconazole 5% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Cherry_(including_sour)___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -199,7 +301,12 @@
    "disease_en": "healthy",
    "crop_te": "చెర్రీ",
    "fertiliser_irrigation_te": "సేంద్రియ ఎరువు, సమతుల్య NPK; డ్రిప్ ద్వారా నీరు.",
-   "post_harvest_te": "కోసిన పండ్లను ఎండలో ఉంచవద్దు; చల్లని చోట నిల్వ."
+   "post_harvest_te": "కోసిన పండ్లను ఎండలో ఉంచవద్దు; చల్లని చోట నిల్వ.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
    "disease_te": "మొక్కజొన్న బూడిద ఆకు మచ్చ",
@@ -227,7 +334,30 @@
    "disease_en": "Cercospora leaf spot Gray leaf spot",
    "crop_te": "మొక్కజొన్న",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి సుమారు 80-100 కిలోల నత్రజని 3 దఫాలుగా (విత్తేటప్పుడు, మోకాలి ఎత్తు, పూత దశ). నీరు: పూత, గింజ పాలు పోసుకునే దశలో నీటి ఎద్దడి రాకుండా చూడండి.",
-   "post_harvest_te": "కోత తర్వాత: కండెలను బాగా ఎండబెట్టి గింజ తేమ 12% లోపు చేసి, శుభ్రమైన సంచుల్లో ఎత్తైన చెక్కపై నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: కండెలను బాగా ఎండబెట్టి గింజ తేమ 12% లోపు చేసి, శుభ్రమైన సంచుల్లో ఎత్తైన చెక్కపై నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ప్రొపికొనజోల్ 25% EC",
+      "name_en": "Propiconazole 25% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Corn_(maize)___Common_rust_": {
    "disease_te": "మొక్కజొన్న తుప్పు తెగులు",
@@ -254,7 +384,30 @@
    "disease_en": "Common rust",
    "crop_te": "మొక్కజొన్న",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి సుమారు 80-100 కిలోల నత్రజని 3 దఫాలుగా (విత్తేటప్పుడు, మోకాలి ఎత్తు, పూత దశ). నీరు: పూత, గింజ పాలు పోసుకునే దశలో నీటి ఎద్దడి రాకుండా చూడండి.",
-   "post_harvest_te": "కోత తర్వాత: కండెలను బాగా ఎండబెట్టి గింజ తేమ 12% లోపు చేసి, శుభ్రమైన సంచుల్లో ఎత్తైన చెక్కపై నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: కండెలను బాగా ఎండబెట్టి గింజ తేమ 12% లోపు చేసి, శుభ్రమైన సంచుల్లో ఎత్తైన చెక్కపై నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ప్రొపికొనజోల్ 25% EC",
+      "name_en": "Propiconazole 25% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Corn_(maize)___Northern_Leaf_Blight": {
    "disease_te": "మొక్కజొన్న ఆకు ఎండు తెగులు (టర్సికం)",
@@ -282,7 +435,30 @@
    "disease_en": "Northern Leaf Blight",
    "crop_te": "మొక్కజొన్న",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి సుమారు 80-100 కిలోల నత్రజని 3 దఫాలుగా (విత్తేటప్పుడు, మోకాలి ఎత్తు, పూత దశ). నీరు: పూత, గింజ పాలు పోసుకునే దశలో నీటి ఎద్దడి రాకుండా చూడండి.",
-   "post_harvest_te": "కోత తర్వాత: కండెలను బాగా ఎండబెట్టి గింజ తేమ 12% లోపు చేసి, శుభ్రమైన సంచుల్లో ఎత్తైన చెక్కపై నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: కండెలను బాగా ఎండబెట్టి గింజ తేమ 12% లోపు చేసి, శుభ్రమైన సంచుల్లో ఎత్తైన చెక్కపై నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ప్రొపికొనజోల్ 25% EC",
+      "name_en": "Propiconazole 25% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Corn_(maize)___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -305,7 +481,12 @@
    "disease_en": "healthy",
    "crop_te": "మొక్కజొన్న",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి సుమారు 80-100 కిలోల నత్రజని 3 దఫాలుగా (విత్తేటప్పుడు, మోకాలి ఎత్తు, పూత దశ). నీరు: పూత, గింజ పాలు పోసుకునే దశలో నీటి ఎద్దడి రాకుండా చూడండి.",
-   "post_harvest_te": "కోత తర్వాత: కండెలను బాగా ఎండబెట్టి గింజ తేమ 12% లోపు చేసి, శుభ్రమైన సంచుల్లో ఎత్తైన చెక్కపై నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: కండెలను బాగా ఎండబెట్టి గింజ తేమ 12% లోపు చేసి, శుభ్రమైన సంచుల్లో ఎత్తైన చెక్కపై నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Grape___Black_rot": {
    "disease_te": "ద్రాక్ష నల్ల కుళ్ళు",
@@ -333,7 +514,21 @@
    "disease_en": "Black rot",
    "crop_te": "ద్రాక్ష",
    "fertiliser_irrigation_te": "ఎరువులు: కత్తిరింపు తర్వాత సేంద్రియ ఎరువు, సిఫార్సు మేరకు NPK. నీరు: డ్రిప్; కాయ పక్వ దశలో నీరు తగ్గించండి.",
-   "post_harvest_te": "కోత తర్వాత: గుత్తులను నీడలో గ్రేడింగ్ చేసి, చల్లని గదిలో నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: గుత్తులను నీడలో గ్రేడింగ్ చేసి, చల్లని గదిలో నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": []
+   }
   },
   "Grape___Esca_(Black_Measles)": {
    "disease_te": "ద్రాక్ష ఎస్కా (నల్ల మచ్చ)",
@@ -361,7 +556,12 @@
    "disease_en": "Esca (Black Measles)",
    "crop_te": "ద్రాక్ష",
    "fertiliser_irrigation_te": "ఎరువులు: కత్తిరింపు తర్వాత సేంద్రియ ఎరువు, సిఫార్సు మేరకు NPK. నీరు: డ్రిప్; కాయ పక్వ దశలో నీరు తగ్గించండి.",
-   "post_harvest_te": "కోత తర్వాత: గుత్తులను నీడలో గ్రేడింగ్ చేసి, చల్లని గదిలో నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: గుత్తులను నీడలో గ్రేడింగ్ చేసి, చల్లని గదిలో నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)": {
    "disease_te": "ద్రాక్ష ఆకు మచ్చ (ఐసారియాప్సిస్)",
@@ -388,7 +588,30 @@
    "disease_en": "Leaf blight (Isariopsis Leaf Spot)",
    "crop_te": "ద్రాక్ష",
    "fertiliser_irrigation_te": "ఎరువులు: కత్తిరింపు తర్వాత సేంద్రియ ఎరువు, సిఫార్సు మేరకు NPK. నీరు: డ్రిప్; కాయ పక్వ దశలో నీరు తగ్గించండి.",
-   "post_harvest_te": "కోత తర్వాత: గుత్తులను నీడలో గ్రేడింగ్ చేసి, చల్లని గదిలో నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: గుత్తులను నీడలో గ్రేడింగ్ చేసి, చల్లని గదిలో నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Grape___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -411,7 +634,12 @@
    "disease_en": "healthy",
    "crop_te": "ద్రాక్ష",
    "fertiliser_irrigation_te": "ఎరువులు: కత్తిరింపు తర్వాత సేంద్రియ ఎరువు, సిఫార్సు మేరకు NPK. నీరు: డ్రిప్; కాయ పక్వ దశలో నీరు తగ్గించండి.",
-   "post_harvest_te": "కోత తర్వాత: గుత్తులను నీడలో గ్రేడింగ్ చేసి, చల్లని గదిలో నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: గుత్తులను నీడలో గ్రేడింగ్ చేసి, చల్లని గదిలో నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Orange___Haunglongbing_(Citrus_greening)": {
    "disease_te": "నిమ్మజాతి గ్రీనింగ్ (HLB)",
@@ -441,7 +669,30 @@
    "disease_en": "Haunglongbing (Citrus greening)",
    "crop_te": "బత్తాయి / నిమ్మజాతి",
    "fertiliser_irrigation_te": "ఎరువులు: చెట్టు వయస్సు బట్టి సేంద్రియ ఎరువు + NPK, సూక్ష్మ పోషకాలు (జింక్) పిచికారీ. నీరు: బేసిన్/డ్రిప్; కాండం దగ్గర నీరు నిలవనీయవద్దు.",
-   "post_harvest_te": "కోత తర్వాత: కాయలను కత్తెరతో కోసి, దెబ్బతిన్నవి వేరు చేసి, గాలి ఆడే పెట్టెల్లో రవాణా చేయండి."
+   "post_harvest_te": "కోత తర్వాత: కాయలను కత్తెరతో కోసి, దెబ్బతిన్నవి వేరు చేసి, గాలి ఆడే పెట్టెల్లో రవాణా చేయండి.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "వేప నూనె 1500 ppm",
+      "name_en": "Neem oil 1500 ppm",
+      "dose_per_l": 5.0,
+      "unit": "ml",
+      "kind": "botanical",
+      "form": "liquid"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ],
+    "urgent": []
+   }
   },
   "Peach___Bacterial_spot": {
    "disease_te": "పీచ్ బ్యాక్టీరియా మచ్చ",
@@ -468,7 +719,21 @@
    "disease_en": "Bacterial spot",
    "crop_te": "పీచ్",
    "fertiliser_irrigation_te": "సమతుల్య NPK, సేంద్రియ ఎరువు; పూత దశలో తేమ.",
-   "post_harvest_te": "పండ్లను మెల్లగా నిర్వహించి చల్లని చోట నిల్వ."
+   "post_harvest_te": "పండ్లను మెల్లగా నిర్వహించి చల్లని చోట నిల్వ.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": []
+   }
   },
   "Peach___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -491,7 +756,12 @@
    "disease_en": "healthy",
    "crop_te": "పీచ్",
    "fertiliser_irrigation_te": "సమతుల్య NPK, సేంద్రియ ఎరువు; పూత దశలో తేమ.",
-   "post_harvest_te": "పండ్లను మెల్లగా నిర్వహించి చల్లని చోట నిల్వ."
+   "post_harvest_te": "పండ్లను మెల్లగా నిర్వహించి చల్లని చోట నిల్వ.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Pepper,_bell___Bacterial_spot": {
    "disease_te": "మిరప బ్యాక్టీరియా ఆకు మచ్చ",
@@ -520,7 +790,21 @@
    "disease_en": "Bacterial spot",
    "crop_te": "మిరప (బెల్ పెప్పర్)",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 8-10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా. నీరు: డ్రిప్ ఉత్తమం; ఆకులపై నీరు పడకుండా చూడండి.",
-   "post_harvest_te": "కోత తర్వాత: కాయలను నీడలో గ్రేడింగ్ చేసి, గాలి ఆడే ప్లాస్టిక్ క్రేట్లలో రవాణా చేయండి."
+   "post_harvest_te": "కోత తర్వాత: కాయలను నీడలో గ్రేడింగ్ చేసి, గాలి ఆడే ప్లాస్టిక్ క్రేట్లలో రవాణా చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": []
+   }
   },
   "Pepper,_bell___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -543,7 +827,12 @@
    "disease_en": "healthy",
    "crop_te": "మిరప (బెల్ పెప్పర్)",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 8-10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా. నీరు: డ్రిప్ ఉత్తమం; ఆకులపై నీరు పడకుండా చూడండి.",
-   "post_harvest_te": "కోత తర్వాత: కాయలను నీడలో గ్రేడింగ్ చేసి, గాలి ఆడే ప్లాస్టిక్ క్రేట్లలో రవాణా చేయండి."
+   "post_harvest_te": "కోత తర్వాత: కాయలను నీడలో గ్రేడింగ్ చేసి, గాలి ఆడే ప్లాస్టిక్ క్రేట్లలో రవాణా చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Potato___Early_blight": {
    "disease_te": "బంగాళదుంప ముందస్తు ఆకు ఎండు తెగులు",
@@ -571,7 +860,30 @@
    "disease_en": "Early blight",
    "crop_te": "బంగాళదుంప",
    "fertiliser_irrigation_te": "ఎరువులు: సిఫార్సు మేరకు NPK; మట్టి ఎగదోయడం సమయంలో నత్రజని రెండో విడత. నీరు: తేలికపాటి తరచు తడులు; దుంప పెరిగే దశలో నీటి ఎద్దడి వద్దు.",
-   "post_harvest_te": "కోత తర్వాత: దుంపలను నీడలో ఆరబెట్టి, ఆకుపచ్చ/కుళ్ళిన దుంపలు వేరు చేసి, చీకటి, చల్లని గదిలో నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: దుంపలను నీడలో ఆరబెట్టి, ఆకుపచ్చ/కుళ్ళిన దుంపలు వేరు చేసి, చీకటి, చల్లని గదిలో నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "క్లోరోథలోనిల్ 75% WP",
+      "name_en": "Chlorothalonil 75% WP",
+      "dose_per_l": 2.0,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Potato___Late_blight": {
    "disease_te": "బంగాళదుంప ఆలస్య ఆకు ఎండు తెగులు",
@@ -601,7 +913,39 @@
    "disease_en": "Late blight",
    "crop_te": "బంగాళదుంప",
    "fertiliser_irrigation_te": "ఎరువులు: సిఫార్సు మేరకు NPK; మట్టి ఎగదోయడం సమయంలో నత్రజని రెండో విడత. నీరు: తేలికపాటి తరచు తడులు; దుంప పెరిగే దశలో నీటి ఎద్దడి వద్దు.",
-   "post_harvest_te": "కోత తర్వాత: దుంపలను నీడలో ఆరబెట్టి, ఆకుపచ్చ/కుళ్ళిన దుంపలు వేరు చేసి, చీకటి, చల్లని గదిలో నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: దుంపలను నీడలో ఆరబెట్టి, ఆకుపచ్చ/కుళ్ళిన దుంపలు వేరు చేసి, చీకటి, చల్లని గదిలో నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "మెటాలాక్సిల్ 8% + మాంకోజెబ్ 64% WP",
+      "name_en": "Metalaxyl 8% + Mancozeb 64% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మెటాలాక్సిల్ 8% + మాంకోజెబ్ 64% WP",
+      "name_en": "Metalaxyl 8% + Mancozeb 64% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Potato___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -624,7 +968,12 @@
    "disease_en": "healthy",
    "crop_te": "బంగాళదుంప",
    "fertiliser_irrigation_te": "ఎరువులు: సిఫార్సు మేరకు NPK; మట్టి ఎగదోయడం సమయంలో నత్రజని రెండో విడత. నీరు: తేలికపాటి తరచు తడులు; దుంప పెరిగే దశలో నీటి ఎద్దడి వద్దు.",
-   "post_harvest_te": "కోత తర్వాత: దుంపలను నీడలో ఆరబెట్టి, ఆకుపచ్చ/కుళ్ళిన దుంపలు వేరు చేసి, చీకటి, చల్లని గదిలో నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: దుంపలను నీడలో ఆరబెట్టి, ఆకుపచ్చ/కుళ్ళిన దుంపలు వేరు చేసి, చీకటి, చల్లని గదిలో నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Raspberry___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -647,7 +996,12 @@
    "disease_en": "healthy",
    "crop_te": "రాస్ప్బెర్రీ",
    "fertiliser_irrigation_te": "సేంద్రియ ఎరువు, మల్చింగ్; డ్రిప్.",
-   "post_harvest_te": "పండ్లు త్వరగా పాడవుతాయి; వెంటనే చల్లబరచండి."
+   "post_harvest_te": "పండ్లు త్వరగా పాడవుతాయి; వెంటనే చల్లబరచండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Soybean___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -670,7 +1024,12 @@
    "disease_en": "healthy",
    "crop_te": "సోయాచిక్కుడు",
    "fertiliser_irrigation_te": "ఎరువులు: రైజోబియం విత్తన శుద్ధి, సిఫార్సు మేరకు భాస్వరం. నీరు: పూత, కాయ దశలో తడి.",
-   "post_harvest_te": "కోత తర్వాత: గింజలను 10% తేమ వరకు ఎండబెట్టి నిల్వ."
+   "post_harvest_te": "కోత తర్వాత: గింజలను 10% తేమ వరకు ఎండబెట్టి నిల్వ.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Squash___Powdery_mildew": {
    "disease_te": "బూడిద తెగులు (గుమ్మడి జాతి)",
@@ -698,7 +1057,39 @@
    "disease_en": "Powdery mildew",
    "crop_te": "గుమ్మడి / సొర జాతి",
    "fertiliser_irrigation_te": "ఎరువులు: గుంతకు సేంద్రియ ఎరువు + NPK. నీరు: పాదుల్లో నీరు; ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి, గాలి ఆడే చోట నిల్వ చేయండి."
+   "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి, గాలి ఆడే చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "వేప నూనె 1500 ppm",
+      "name_en": "Neem oil 1500 ppm",
+      "dose_per_l": 5.0,
+      "unit": "ml",
+      "kind": "botanical",
+      "form": "liquid"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "హెక్సాకొనజోల్ 5% EC",
+      "name_en": "Hexaconazole 5% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "హెక్సాకొనజోల్ 5% EC",
+      "name_en": "Hexaconazole 5% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Strawberry___Leaf_scorch": {
    "disease_te": "స్ట్రాబెర్రీ ఆకు మాడు",
@@ -725,7 +1116,30 @@
    "disease_en": "Leaf scorch",
    "crop_te": "స్ట్రాబెర్రీ",
    "fertiliser_irrigation_te": "మల్చింగ్, డ్రిప్ ఫర్టిగేషన్.",
-   "post_harvest_te": "పండ్లను ఉదయం కోసి వెంటనే చల్లబరచండి."
+   "post_harvest_te": "పండ్లను ఉదయం కోసి వెంటనే చల్లబరచండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాప్టాన్ 50% WP",
+      "name_en": "Captan 50% WP",
+      "dose_per_l": 2.0,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Strawberry___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -748,7 +1162,12 @@
    "disease_en": "healthy",
    "crop_te": "స్ట్రాబెర్రీ",
    "fertiliser_irrigation_te": "మల్చింగ్, డ్రిప్ ఫర్టిగేషన్.",
-   "post_harvest_te": "పండ్లను ఉదయం కోసి వెంటనే చల్లబరచండి."
+   "post_harvest_te": "పండ్లను ఉదయం కోసి వెంటనే చల్లబరచండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Tomato___Bacterial_spot": {
    "disease_te": "టమాట బ్యాక్టీరియా మచ్చ",
@@ -776,7 +1195,21 @@
    "disease_en": "Bacterial spot",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": []
+   }
   },
   "Tomato___Early_blight": {
    "disease_te": "టమాట ముందస్తు ఆకు ఎండు తెగులు",
@@ -804,7 +1237,30 @@
    "disease_en": "Early blight",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "క్లోరోథలోనిల్ 75% WP",
+      "name_en": "Chlorothalonil 75% WP",
+      "dose_per_l": 2.0,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Tomato___Late_blight": {
    "disease_te": "టమాట ఆలస్య ఆకు ఎండు తెగులు",
@@ -833,7 +1289,39 @@
    "disease_en": "Late blight",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "మెటాలాక్సిల్ 8% + మాంకోజెబ్ 64% WP",
+      "name_en": "Metalaxyl 8% + Mancozeb 64% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మెటాలాక్సిల్ 8% + మాంకోజెబ్ 64% WP",
+      "name_en": "Metalaxyl 8% + Mancozeb 64% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Tomato___Leaf_Mold": {
    "disease_te": "టమాట ఆకు బూజు",
@@ -861,7 +1349,30 @@
    "disease_en": "Leaf Mold",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "క్లోరోథలోనిల్ 75% WP",
+      "name_en": "Chlorothalonil 75% WP",
+      "dose_per_l": 2.0,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Tomato___Septoria_leaf_spot": {
    "disease_te": "టమాట సెప్టోరియా ఆకు మచ్చ",
@@ -889,7 +1400,30 @@
    "disease_en": "Septoria leaf spot",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "క్లోరోథలోనిల్ 75% WP",
+      "name_en": "Chlorothalonil 75% WP",
+      "dose_per_l": 2.0,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Tomato___Spider_mites Two-spotted_spider_mite": {
    "disease_te": "టమాట ఎర్రనల్లి (స్పైడర్ మైట్)",
@@ -918,7 +1452,39 @@
    "disease_en": "Spider mites Two-spotted spider mite",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "వేప నూనె 1500 ppm",
+      "name_en": "Neem oil 1500 ppm",
+      "dose_per_l": 5.0,
+      "unit": "ml",
+      "kind": "botanical",
+      "form": "liquid"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "నీటిలో కరిగే గంధకం 80% WP",
+      "name_en": "Wettable sulphur 80% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "fungicide/acaricide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "స్పైరోమెసిఫెన్ 22.9% SC",
+      "name_en": "Spiromesifen 22.9% SC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "acaricide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Tomato___Target_Spot": {
    "disease_te": "టమాట టార్గెట్ మచ్చ",
@@ -946,7 +1512,30 @@
    "disease_en": "Target Spot",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "క్లోరోథలోనిల్ 75% WP",
+      "name_en": "Chlorothalonil 75% WP",
+      "dose_per_l": 2.0,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
   },
   "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
    "disease_te": "టమాట ఆకు ముడత వైరస్",
@@ -979,7 +1568,39 @@
    "disease_en": "Tomato Yellow Leaf Curl Virus",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "వేప నూనె 1500 ppm",
+      "name_en": "Neem oil 1500 ppm",
+      "dose_per_l": 5.0,
+      "unit": "ml",
+      "kind": "botanical",
+      "form": "liquid"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ]
+   }
   },
   "Tomato___Tomato_mosaic_virus": {
    "disease_te": "టమాట మొజాయిక్ వైరస్",
@@ -1007,7 +1628,12 @@
    "disease_en": "Tomato mosaic virus",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   },
   "Tomato___healthy": {
    "disease_te": "ఆరోగ్యకరమైన ఆకు",
@@ -1030,7 +1656,184 @@
    "disease_en": "healthy",
    "crop_te": "టమాట",
    "fertiliser_irrigation_te": "ఎరువులు: ఎకరానికి 10 టన్నుల పశువుల ఎరువు, సిఫార్సు మేరకు NPK విడతలుగా; కాల్షియం లోపం రాకుండా చూడండి. నీరు: డ్రిప్ ఉత్తమం; క్రమంగా తడులు, ఆకులు తడవకుండా.",
-   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది."
+   "post_harvest_te": "కోత తర్వాత: పండ్లను ఉదయం కోసి, నీడలో గ్రేడింగ్ చేసి, ప్లాస్టిక్ క్రేట్లలో (బస్తాలు కాదు) రవాణా చేయండి; దీనివల్ల నష్టం తగ్గుతుంది.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
   }
- }
+ },
+ "crops": {
+  "Apple": {
+   "te": "ఆపిల్",
+   "en": "Apple",
+   "labels": [
+    "Apple___Apple_scab",
+    "Apple___Black_rot",
+    "Apple___Cedar_apple_rust",
+    "Apple___healthy"
+   ]
+  },
+  "Blueberry": {
+   "te": "బ్లూబెర్రీ",
+   "en": "Blueberry",
+   "labels": [
+    "Blueberry___healthy"
+   ]
+  },
+  "Cherry_(including_sour)": {
+   "te": "చెర్రీ",
+   "en": "Cherry (including sour)",
+   "labels": [
+    "Cherry_(including_sour)___Powdery_mildew",
+    "Cherry_(including_sour)___healthy"
+   ]
+  },
+  "Corn_(maize)": {
+   "te": "మొక్కజొన్న",
+   "en": "Corn (maize)",
+   "labels": [
+    "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot",
+    "Corn_(maize)___Common_rust_",
+    "Corn_(maize)___Northern_Leaf_Blight",
+    "Corn_(maize)___healthy"
+   ]
+  },
+  "Grape": {
+   "te": "ద్రాక్ష",
+   "en": "Grape",
+   "labels": [
+    "Grape___Black_rot",
+    "Grape___Esca_(Black_Measles)",
+    "Grape___Leaf_blight_(Isariopsis_Leaf_Spot)",
+    "Grape___healthy"
+   ]
+  },
+  "Orange": {
+   "te": "బత్తాయి / నిమ్మజాతి",
+   "en": "Orange",
+   "labels": [
+    "Orange___Haunglongbing_(Citrus_greening)"
+   ]
+  },
+  "Peach": {
+   "te": "పీచ్",
+   "en": "Peach",
+   "labels": [
+    "Peach___Bacterial_spot",
+    "Peach___healthy"
+   ]
+  },
+  "Pepper,_bell": {
+   "te": "మిరప (బెల్ పెప్పర్)",
+   "en": "Pepper bell",
+   "labels": [
+    "Pepper,_bell___Bacterial_spot",
+    "Pepper,_bell___healthy"
+   ]
+  },
+  "Potato": {
+   "te": "బంగాళదుంప",
+   "en": "Potato",
+   "labels": [
+    "Potato___Early_blight",
+    "Potato___Late_blight",
+    "Potato___healthy"
+   ]
+  },
+  "Raspberry": {
+   "te": "రాస్ప్బెర్రీ",
+   "en": "Raspberry",
+   "labels": [
+    "Raspberry___healthy"
+   ]
+  },
+  "Soybean": {
+   "te": "సోయాచిక్కుడు",
+   "en": "Soybean",
+   "labels": [
+    "Soybean___healthy"
+   ]
+  },
+  "Squash": {
+   "te": "గుమ్మడి / సొర జాతి",
+   "en": "Squash",
+   "labels": [
+    "Squash___Powdery_mildew"
+   ]
+  },
+  "Strawberry": {
+   "te": "స్ట్రాబెర్రీ",
+   "en": "Strawberry",
+   "labels": [
+    "Strawberry___Leaf_scorch",
+    "Strawberry___healthy"
+   ]
+  },
+  "Tomato": {
+   "te": "టమాట",
+   "en": "Tomato",
+   "labels": [
+    "Tomato___Bacterial_spot",
+    "Tomato___Early_blight",
+    "Tomato___Late_blight",
+    "Tomato___Leaf_Mold",
+    "Tomato___Septoria_leaf_spot",
+    "Tomato___Spider_mites Two-spotted_spider_mite",
+    "Tomato___Target_Spot",
+    "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+    "Tomato___Tomato_mosaic_virus",
+    "Tomato___healthy"
+   ]
+  }
+ },
+ "how_to_spray_te": [
+  [
+   "masks",
+   "చేతి తొడుగులు, ముక్కు-నోటికి మాస్క్, కళ్లద్దాలు, పొడవైన చొక్కా ధరించండి."
+  ],
+  [
+   "science",
+   "మందును కొలత కప్పుతో సరిగ్గా కొలవండి. ఎక్కువ వేస్తే పంటకు, మీకు హాని."
+  ],
+  [
+   "water_drop",
+   "ముందు చిన్న బకెట్‌లో కొద్దిగా నీటిలో కలిపి, తర్వాత ట్యాంకులో పోసి నీటితో నింపి బాగా కలపండి."
+  ],
+  [
+   "wb_twilight",
+   "ఉదయం లేదా సాయంత్రం, గాలి తక్కువగా ఉన్నప్పుడు పిచికారీ చేయండి. గాలికి ఎదురుగా చేయవద్దు."
+  ],
+  [
+   "flip",
+   "ఆకుల పై భాగం, అడుగు భాగం రెండూ తడిసేలా సన్నని తుంపరలుగా పిచికారీ చేయండి."
+  ],
+  [
+   "umbrella",
+   "వర్షం వచ్చే 4-6 గంటల ముందు పిచికారీ చేయవద్దు."
+  ],
+  [
+   "no_food",
+   "పిచికారీ చేసేటప్పుడు తినడం, తాగడం, పొగ త్రాగడం చేయవద్దు."
+  ],
+  [
+   "wash",
+   "తర్వాత సబ్బుతో స్నానం చేయండి. ఖాళీ డబ్బాలను పగలగొట్టి పాతిపెట్టండి; పిల్లలకు, పశువులకు దూరంగా ఉంచండి."
+  ],
+  [
+   "timer",
+   "కోతకు ముందు లేబుల్‌పై ఉన్న వేచి ఉండే రోజులు (PHI) తప్పక పాటించండి."
+  ]
+ ],
+ "tank_sizes": [
+  [
+   "15 లీ. స్ప్రేయర్ ట్యాంకు",
+   15
+  ],
+  [
+   "1 ఎకరం (≈200 లీ. నీరు)",
+   200
+  ]
+ ]
 }

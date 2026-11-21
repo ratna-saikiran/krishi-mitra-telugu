@@ -17,8 +17,9 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         LlmBridge(applicationContext, flutterEngine.dartExecutor.binaryMessenger)
+        SeverityBridge(flutterEngine.dartExecutor.binaryMessenger)
         VisionBridge(applicationContext, flutterEngine.dartExecutor.binaryMessenger,
-            FlutterInjector.instance().flutterLoader().getLookupKeyForAsset("assets/models/classifier_int8.tflite"))
+            FlutterInjector.instance().flutterLoader().getLookupKeyForAsset("assets/models/classifier.tflite"))
         // "Import Llama model": pick the .pte and tokenizer.model from phone
         // storage (e.g. Downloads) and copy them into the app's private files.
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "krishi/import").setMethodCallHandler { call, result ->

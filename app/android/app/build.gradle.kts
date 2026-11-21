@@ -58,4 +58,6 @@ dependencies {
     implementation("org.pytorch:executorch-android:1.0.0")
     // TFLite runtime for the INT8 vision model (XNNPACK on the Arm CPU).
     implementation("org.tensorflow:tensorflow-lite:2.17.0")
+    // OpenCV for leaf segmentation (GrabCut) and HSV lesion analysis.
+    implementation("org.opencv:opencv:4.12.0")
 }

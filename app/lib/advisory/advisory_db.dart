@@ -22,6 +22,31 @@ class AdvisoryEntry {
   List<String> get prevention => List<String>.from(j['prevention_te']);
   String get fertiliserIrrigation => j['fertiliser_irrigation_te'];
   String get postHarvest => j['post_harvest_te'];
+  List<Spray> spraysFor(String level) => level == 'none'
+      ? const []
+      : [for (final m in (j['sprays'][level] as List)) Spray(Map<String, dynamic>.from(m))];
+}
+
+class Spray {
+  final Map<String, dynamic> j;
+  Spray(this.j);
+  String get nameTe => j['name_te'];
+  String get nameEn => j['name_en'];
+  double get dosePerL => (j['dose_per_l'] as num).toDouble();
+  String get unit => j['unit']; // g | ml
+  String get unitTe => unit == 'g' ? 'గ్రా' : 'మి.లీ';
+  String get kind => j['kind'];
+  bool get liquid => j['form'] == 'liquid';
+  String doseFor(double litres) {
+    final v = dosePerL * litres;
+    return '${v == v.roundToDouble() ? v.toStringAsFixed(0) : v.toStringAsFixed(1)} $unitTe';
+  }
+}
+
+class CropInfo {
+  final String key, te, en;
+  final List<String> labels;
+  CropInfo(this.key, this.te, this.en, this.labels);
 }
 
 class AdvisoryDb {
@@ -35,6 +60,14 @@ class AdvisoryDb {
   List<String> genericSteps(String level) =>
       level == 'none' ? const [] : List<String>.from(_db['severity_generic'][level]);
   String get verifyNote => _db['verify_note_te'];
+  List<CropInfo> get crops => [
+        for (final e in (_db['crops'] as Map<String, dynamic>).entries)
+          CropInfo(e.key, e.value['te'], e.value['en'], List<String>.from(e.value['labels']))
+      ];
+  List<List<String>> get howToSpray =>
+      [for (final r in _db['how_to_spray_te'] as List) List<String>.from(r)];
+  List<(String, double)> get tankSizes =>
+      [for (final r in _db['tank_sizes'] as List) (r[0] as String, (r[1] as num).toDouble())];
 
   /// Deterministic Telugu advice, used as the fallback when the LLM is not
   /// installed or its output fails validation. Also the "verified steps" card.

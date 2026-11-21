@@ -1,81 +1,67 @@
-"""Lesion-area-ratio severity estimator (reference implementation).
+"""Lesion-area-ratio severity estimator (reference implementation, OpenCV).
 
-Kept deliberately simple and dependency-light so the Dart port in
-app/lib/vision/severity.dart is a line-by-line equivalent:
-  1. resize to 256x256, convert to HSV (H in degrees 0-360, S,V in 0-1)
-  2. leaf candidates: plant-coloured pixels (green/yellow/brown hue, S>0.15, V>0.12)
-  3. keep the largest 4-connected component, fill its holes -> leaf mask
-     (holes are usually dark/white lesions, so filling matters)
-  4. healthy tissue: hue 65-175 deg (green), S>0.10, V>0.10 (grid-searched)
+The Android app runs the same steps in android/.../SeverityBridge.kt with
+OpenCV for Android (Arm KleidiCV-accelerated builds):
+  1. centre-square crop, resize to 256x256
+  2. GrabCut initialised with the central rectangle (12% margin) -> foreground
+     (farmers are told to centre one leaf; this ignores background, soil and
+     neighbouring leaves, which a colour threshold alone could not)
+  3. keep the foreground component closest to the centre (area >= 2%), fill holes
+  4. healthy tissue: hue 65-175 deg, S > 0.10, V > 0.10 (grid-searched)
   5. ratio = |leaf & ~healthy| / |leaf|
   6. ratio < 0.10 mild, < 0.25 moderate, else urgent; high-risk diseases
-     (late blight, viruses, citrus greening) are bumped one level.
+     (late blight, viruses, citrus greening) are raised one level.
 """
-from collections import deque
+import cv2
 import numpy as np
 from PIL import Image
 
 N = 256
+MARGIN = 0.12
 MILD, MODERATE = 0.10, 0.25
 
-def hsv(rgb):
-    r, g, b = [rgb[..., i].astype(np.float32) / 255 for i in range(3)]
-    mx, mn = np.maximum(np.maximum(r, g), b), np.minimum(np.minimum(r, g), b)
-    d = mx - mn
-    h = np.zeros_like(mx)
-    m = d > 1e-6
-    rr = m & (mx == r); gg = m & (mx == g) & ~rr; bb = m & ~rr & ~gg
-    h[rr] = (60 * ((g - b)[rr] / d[rr])) % 360
-    h[gg] = 60 * ((b - r)[gg] / d[gg]) + 120
-    h[bb] = 60 * ((r - g)[bb] / d[bb]) + 240
-    s = np.where(mx > 0, d / np.maximum(mx, 1e-6), 0)
-    return h, s, mx
 
-def largest_cc(mask):
-    lab = np.zeros(mask.shape, np.int32); best, best_n, cur = 0, 0, 0
-    for y, x in zip(*np.nonzero(mask)):
-        if lab[y, x]: continue
-        cur += 1; q = deque([(y, x)]); lab[y, x] = cur; n = 0
-        while q:
-            cy, cx = q.popleft(); n += 1
-            for ny, nx in ((cy+1, cx), (cy-1, cx), (cy, cx+1), (cy, cx-1)):
-                if 0 <= ny < N and 0 <= nx < N and mask[ny, nx] and not lab[ny, nx]:
-                    lab[ny, nx] = cur; q.append((ny, nx))
-        if n > best_n: best, best_n = cur, n
-    return lab == best if best else mask
+def segment_leaf(rgb):
+    bgr = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+    mask = np.zeros((N, N), np.uint8)
+    m = int(N * MARGIN)
+    bgd, fgd = np.zeros((1, 65), np.float64), np.zeros((1, 65), np.float64)
+    cv2.grabCut(bgr, mask, (m, m, N - 2 * m, N - 2 * m), bgd, fgd, 4, cv2.GC_INIT_WITH_RECT)
+    leaf = ((mask == cv2.GC_FGD) | (mask == cv2.GC_PR_FGD)).astype(np.uint8)
+    n, lab, stats, cent = cv2.connectedComponentsWithStats(leaf, connectivity=4)
+    cands = [(np.hypot(*(cent[i] - N / 2)) / np.sqrt(stats[i, cv2.CC_STAT_AREA]), i)
+             for i in range(1, n) if stats[i, cv2.CC_STAT_AREA] >= 0.02 * N * N]
+    if not cands:
+        return np.zeros((N, N), bool)
+    leaf = (lab == min(cands)[1]).astype(np.uint8)
+    ff = leaf.copy()
+    cv2.floodFill(ff, np.zeros((N + 2, N + 2), np.uint8), (0, 0), 1)
+    return (leaf | (1 - ff)).astype(bool)
 
-def fill_holes(mask):
-    outside = np.zeros_like(mask); q = deque()
-    for i in range(N):
-        for y, x in ((0, i), (N-1, i), (i, 0), (i, N-1)):
-            if not mask[y, x] and not outside[y, x]:
-                outside[y, x] = True; q.append((y, x))
-    while q:
-        cy, cx = q.popleft()
-        for ny, nx in ((cy+1, cx), (cy-1, cx), (cy, cx+1), (cy, cx-1)):
-            if 0 <= ny < N and 0 <= nx < N and not mask[ny, nx] and not outside[ny, nx]:
-                outside[ny, nx] = True; q.append((ny, nx))
-    return ~outside
 
 def lesion_ratio(img: Image.Image):
-    rgb = np.asarray(img.convert("RGB").resize((N, N), Image.BILINEAR))
-    h, s, v = hsv(rgb)
-    plant = (s > 0.15) & (v > 0.12) & (h >= 15) & (h <= 170)
-    leaf = fill_holes(largest_cc(plant))
-    healthy = (h >= 65) & (h <= 175) & (s > 0.10) & (v > 0.10)
-    n_leaf = leaf.sum()
-    if n_leaf < 0.05 * N * N:
-        return 0.0, leaf, leaf
+    im = img.convert("RGB"); w, h = im.size; s = min(w, h)
+    im = im.crop(((w - s) // 2, (h - s) // 2, (w - s) // 2 + s, (h - s) // 2 + s))
+    rgb = cv2.resize(np.asarray(im), (N, N), interpolation=cv2.INTER_AREA)
+    leaf = segment_leaf(rgb)
+    hsv = cv2.cvtColor(rgb, cv2.COLOR_RGB2HSV_FULL).astype(np.float32)
+    hdeg, s_, v_ = hsv[..., 0] * 360 / 256, hsv[..., 1] / 255, hsv[..., 2] / 255
+    healthy = (hdeg >= 65) & (hdeg <= 175) & (s_ > 0.10) & (v_ > 0.10)
     lesion = leaf & ~healthy
-    return float(lesion.sum() / n_leaf), leaf, lesion
+    n_leaf = leaf.sum()
+    return (float(lesion.sum() / n_leaf) if n_leaf else 0.0), leaf, lesion
+
 
 def level(ratio, healthy_class=False, high_risk=False):
-    if healthy_class: return "none"
+    if healthy_class:
+        return "none"
     lv = 0 if ratio < MILD else 1 if ratio < MODERATE else 2
-    if high_risk: lv = min(2, lv + 1)
+    if high_risk:
+        lv = min(2, lv + 1)
     return ["mild", "moderate", "urgent"][lv]
+
 
 if __name__ == "__main__":
     import sys
-    r, *_ = lesion_ratio(Image.open(sys.argv[1]))
-    print(f"lesion ratio {r:.3f}")
+    r, leaf, _ = lesion_ratio(Image.open(sys.argv[1]))
+    print(f"lesion ratio {r:.3f}, leaf covers {leaf.mean():.2f} of the image")

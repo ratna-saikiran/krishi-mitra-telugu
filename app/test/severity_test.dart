@@ -1,20 +1,13 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter_test/flutter_test.dart';
-import 'package:image/image.dart' as img;
+import 'package:krishi_mitra/advisory/advisory_db.dart';
 import 'package:krishi_mitra/advisory/prompt.dart';
 import 'package:krishi_mitra/vision/severity.dart';
 
 void main() {
-  test('Dart severity matches Python reference (ml/severity.py)', () {
-    final exp = jsonDecode(File('test/fixtures/expected.json').readAsStringSync()) as Map<String, dynamic>;
-    exp.forEach((name, want) {
-      final im = img.decodeImage(File('test/fixtures/$name').readAsBytesSync())!;
-      final r = estimateSeverity(im);
-      // Resampling differs slightly between PIL and package:image.
-      expect(r.lesionRatio, closeTo((want as num).toDouble(), 0.03), reason: name);
-    });
+  test('spray dose scales to tank sizes', () {
+    final sp = Spray({'name_te': 'x', 'name_en': 'x', 'dose_per_l': 2.5, 'unit': 'g', 'kind': 'fungicide', 'form': 'powder'});
+    expect(sp.doseFor(15), '37.5 గ్రా');
+    expect(sp.doseFor(200), '500 గ్రా');
   });
 
   test('severity levels and high-risk bump', () {
