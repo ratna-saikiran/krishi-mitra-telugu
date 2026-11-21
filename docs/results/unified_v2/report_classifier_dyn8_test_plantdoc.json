@@ -1,0 +1,212 @@
+{
+ "model": "classifier_dyn8.tflite",
+ "size_mb": 3.554616,
+ "n": 236,
+ "accuracy": 0.5338983050847458,
+ "accuracy_95ci": [
+  0.4661016949152542,
+  0.5933262711864405
+ ],
+ "top5_accuracy": 0.8347457627118644,
+ "macro_precision": 0.6318025595803373,
+ "macro_recall": 0.5389356528245417,
+ "macro_f1": 0.5598238616672382,
+ "weighted_f1": 0.5587748830881418,
+ "ece": 0.1005073580259489,
+ "accuracy_vs_confidence_threshold": {
+  "0.0": {
+   "coverage": 1.0,
+   "accuracy": 0.5338983050847458
+  },
+  "0.4": {
+   "coverage": 0.5847457627118644,
+   "accuracy": 0.7028985507246377
+  },
+  "0.5": {
+   "coverage": 0.4491525423728814,
+   "accuracy": 0.7358490566037735
+  },
+  "0.6": {
+   "coverage": 0.3686440677966102,
+   "accuracy": 0.7701149425287356
+  },
+  "0.7": {
+   "coverage": 0.288135593220339,
+   "accuracy": 0.8088235294117647
+  },
+  "0.8": {
+   "coverage": 0.2033898305084746,
+   "accuracy": 0.8541666666666666
+  },
+  "0.9": {
+   "coverage": 0.07627118644067797,
+   "accuracy": 0.9444444444444444
+  }
+ },
+ "host_x86_ms_median": 2.745744000094419,
+ "per_class": {
+  "Apple___Apple_scab": {
+   "precision": 0.833,
+   "recall": 0.5,
+   "f1": 0.625,
+   "n": 10
+  },
+  "Apple___Cedar_apple_rust": {
+   "precision": 0.625,
+   "recall": 0.5,
+   "f1": 0.556,
+   "n": 10
+  },
+  "Apple___healthy": {
+   "precision": 0.538,
+   "recall": 0.778,
+   "f1": 0.636,
+   "n": 9
+  },
+  "Blueberry___healthy": {
+   "precision": 0.667,
+   "recall": 0.545,
+   "f1": 0.6,
+   "n": 11
+  },
+  "Cherry_(including_sour)___healthy": {
+   "precision": 0.667,
+   "recall": 0.2,
+   "f1": 0.308,
+   "n": 10
+  },
+  "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+   "precision": 0.25,
+   "recall": 0.5,
+   "f1": 0.333,
+   "n": 4
+  },
+  "Corn_(maize)___Common_rust_": {
+   "precision": 1.0,
+   "recall": 0.9,
+   "f1": 0.947,
+   "n": 10
+  },
+  "Corn_(maize)___Northern_Leaf_Blight": {
+   "precision": 0.625,
+   "recall": 0.417,
+   "f1": 0.5,
+   "n": 12
+  },
+  "Grape___Black_rot": {
+   "precision": 1.0,
+   "recall": 0.625,
+   "f1": 0.769,
+   "n": 8
+  },
+  "Grape___healthy": {
+   "precision": 1.0,
+   "recall": 0.917,
+   "f1": 0.957,
+   "n": 12
+  },
+  "Peach___healthy": {
+   "precision": 0.5,
+   "recall": 0.222,
+   "f1": 0.308,
+   "n": 9
+  },
+  "Pepper,_bell___Bacterial_spot": {
+   "precision": 0.714,
+   "recall": 0.556,
+   "f1": 0.625,
+   "n": 9
+  },
+  "Pepper,_bell___healthy": {
+   "precision": 0.833,
+   "recall": 0.625,
+   "f1": 0.714,
+   "n": 8
+  },
+  "Potato___Early_blight": {
+   "precision": 0.278,
+   "recall": 0.625,
+   "f1": 0.385,
+   "n": 8
+  },
+  "Potato___Late_blight": {
+   "precision": 0.4,
+   "recall": 0.25,
+   "f1": 0.308,
+   "n": 8
+  },
+  "Raspberry___healthy": {
+   "precision": 0.778,
+   "recall": 1.0,
+   "f1": 0.875,
+   "n": 7
+  },
+  "Soybean___healthy": {
+   "precision": 0.833,
+   "recall": 0.625,
+   "f1": 0.714,
+   "n": 8
+  },
+  "Squash___Powdery_mildew": {
+   "precision": 1.0,
+   "recall": 0.667,
+   "f1": 0.8,
+   "n": 6
+  },
+  "Strawberry___healthy": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 8
+  },
+  "Tomato___Bacterial_spot": {
+   "precision": 0.143,
+   "recall": 0.111,
+   "f1": 0.125,
+   "n": 9
+  },
+  "Tomato___Early_blight": {
+   "precision": 0.333,
+   "recall": 0.111,
+   "f1": 0.167,
+   "n": 9
+  },
+  "Tomato___Late_blight": {
+   "precision": 0.538,
+   "recall": 0.7,
+   "f1": 0.609,
+   "n": 10
+  },
+  "Tomato___Leaf_Mold": {
+   "precision": 0.286,
+   "recall": 0.333,
+   "f1": 0.308,
+   "n": 6
+  },
+  "Tomato___Septoria_leaf_spot": {
+   "precision": 0.467,
+   "recall": 0.636,
+   "f1": 0.538,
+   "n": 11
+  },
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+   "precision": 1.0,
+   "recall": 0.833,
+   "f1": 0.909,
+   "n": 6
+  },
+  "Tomato___Tomato_mosaic_virus": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "n": 10
+  },
+  "Tomato___healthy": {
+   "precision": 0.75,
+   "recall": 0.375,
+   "f1": 0.5,
+   "n": 8
+  }
+ },
+ "group_accuracy": 0.6949152542372882
+}

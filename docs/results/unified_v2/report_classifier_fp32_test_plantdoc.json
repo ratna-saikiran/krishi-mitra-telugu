@@ -1,0 +1,212 @@
+{
+ "model": "classifier_fp32.tflite",
+ "size_mb": 12.906412,
+ "n": 236,
+ "accuracy": 0.5466101694915254,
+ "accuracy_95ci": [
+  0.4788135593220339,
+  0.6059322033898306
+ ],
+ "top5_accuracy": 0.847457627118644,
+ "macro_precision": 0.6382275132275133,
+ "macro_recall": 0.5528713056490834,
+ "macro_f1": 0.5690525137677438,
+ "weighted_f1": 0.5685398343258659,
+ "ece": 0.08022997635653464,
+ "accuracy_vs_confidence_threshold": {
+  "0.0": {
+   "coverage": 1.0,
+   "accuracy": 0.5466101694915254
+  },
+  "0.4": {
+   "coverage": 0.5635593220338984,
+   "accuracy": 0.706766917293233
+  },
+  "0.5": {
+   "coverage": 0.4788135593220339,
+   "accuracy": 0.7345132743362832
+  },
+  "0.6": {
+   "coverage": 0.3983050847457627,
+   "accuracy": 0.7659574468085106
+  },
+  "0.7": {
+   "coverage": 0.3305084745762712,
+   "accuracy": 0.782051282051282
+  },
+  "0.8": {
+   "coverage": 0.21610169491525424,
+   "accuracy": 0.8235294117647058
+  },
+  "0.9": {
+   "coverage": 0.09322033898305085,
+   "accuracy": 1.0
+  }
+ },
+ "host_x86_ms_median": 1.6646295002828992,
+ "per_class": {
+  "Apple___Apple_scab": {
+   "precision": 1.0,
+   "recall": 0.5,
+   "f1": 0.667,
+   "n": 10
+  },
+  "Apple___Cedar_apple_rust": {
+   "precision": 0.667,
+   "recall": 0.6,
+   "f1": 0.632,
+   "n": 10
+  },
+  "Apple___healthy": {
+   "precision": 0.467,
+   "recall": 0.778,
+   "f1": 0.583,
+   "n": 9
+  },
+  "Blueberry___healthy": {
+   "precision": 0.7,
+   "recall": 0.636,
+   "f1": 0.667,
+   "n": 11
+  },
+  "Cherry_(including_sour)___healthy": {
+   "precision": 0.667,
+   "recall": 0.2,
+   "f1": 0.308,
+   "n": 10
+  },
+  "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+   "precision": 0.222,
+   "recall": 0.5,
+   "f1": 0.308,
+   "n": 4
+  },
+  "Corn_(maize)___Common_rust_": {
+   "precision": 1.0,
+   "recall": 0.8,
+   "f1": 0.889,
+   "n": 10
+  },
+  "Corn_(maize)___Northern_Leaf_Blight": {
+   "precision": 0.625,
+   "recall": 0.417,
+   "f1": 0.5,
+   "n": 12
+  },
+  "Grape___Black_rot": {
+   "precision": 1.0,
+   "recall": 0.625,
+   "f1": 0.769,
+   "n": 8
+  },
+  "Grape___healthy": {
+   "precision": 1.0,
+   "recall": 0.917,
+   "f1": 0.957,
+   "n": 12
+  },
+  "Peach___healthy": {
+   "precision": 0.5,
+   "recall": 0.111,
+   "f1": 0.182,
+   "n": 9
+  },
+  "Pepper,_bell___Bacterial_spot": {
+   "precision": 0.667,
+   "recall": 0.444,
+   "f1": 0.533,
+   "n": 9
+  },
+  "Pepper,_bell___healthy": {
+   "precision": 0.857,
+   "recall": 0.75,
+   "f1": 0.8,
+   "n": 8
+  },
+  "Potato___Early_blight": {
+   "precision": 0.333,
+   "recall": 0.625,
+   "f1": 0.435,
+   "n": 8
+  },
+  "Potato___Late_blight": {
+   "precision": 0.429,
+   "recall": 0.375,
+   "f1": 0.4,
+   "n": 8
+  },
+  "Raspberry___healthy": {
+   "precision": 0.778,
+   "recall": 1.0,
+   "f1": 0.875,
+   "n": 7
+  },
+  "Soybean___healthy": {
+   "precision": 0.833,
+   "recall": 0.625,
+   "f1": 0.714,
+   "n": 8
+  },
+  "Squash___Powdery_mildew": {
+   "precision": 1.0,
+   "recall": 0.833,
+   "f1": 0.909,
+   "n": 6
+  },
+  "Strawberry___healthy": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "n": 8
+  },
+  "Tomato___Bacterial_spot": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "n": 9
+  },
+  "Tomato___Early_blight": {
+   "precision": 0.333,
+   "recall": 0.222,
+   "f1": 0.267,
+   "n": 9
+  },
+  "Tomato___Late_blight": {
+   "precision": 0.583,
+   "recall": 0.7,
+   "f1": 0.636,
+   "n": 10
+  },
+  "Tomato___Leaf_Mold": {
+   "precision": 0.25,
+   "recall": 0.333,
+   "f1": 0.286,
+   "n": 6
+  },
+  "Tomato___Septoria_leaf_spot": {
+   "precision": 0.571,
+   "recall": 0.727,
+   "f1": 0.64,
+   "n": 11
+  },
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+   "precision": 1.0,
+   "recall": 0.833,
+   "f1": 0.909,
+   "n": 6
+  },
+  "Tomato___Tomato_mosaic_virus": {
+   "precision": 0.0,
+   "recall": 0.0,
+   "f1": 0.0,
+   "n": 10
+  },
+  "Tomato___healthy": {
+   "precision": 0.75,
+   "recall": 0.375,
+   "f1": 0.5,
+   "n": 8
+  }
+ },
+ "group_accuracy": 0.7033898305084746
+}
