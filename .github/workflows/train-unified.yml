@@ -24,9 +24,14 @@ jobs:
         run: |
           git clone --depth 1 --filter=blob:none --sparse https://github.com/spMohanty/PlantVillage-Dataset pv && (cd pv && git sparse-checkout set raw/color)
           git clone --depth 1 https://github.com/pratikkayal/PlantDoc-Dataset pd
+      - name: Get collected field photos (release "field-data", optional)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: mkdir -p collected && (gh release download field-data -R ${{ github.repository }} -p '*.zip' -D collected || echo "no field-data release yet")
       - name: Build unified dataset
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          COLLECTED_DIR: collected
         run: python ml/prepare_unified.py pv/raw/color pd data/unified && rm -rf pv pd ~/.cache/huggingface && du -sh data/unified && df -h /
       - uses: actions/upload-artifact@v4
         with:

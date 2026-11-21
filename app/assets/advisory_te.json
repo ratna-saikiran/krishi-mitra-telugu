@@ -11859,6 +11859,240 @@
     "urgent": []
    }
   },
+  "Spinach___Anthracnose": {
+   "disease_te": "ఆంత్రాక్నోస్",
+   "type": "fungal",
+   "symptoms_te": "",
+   "cause_te": "కొల్లెటోట్రైకమ్ శిలీంధ్రం (ఆంత్రాక్నోస్); వర్షం, తేమలో వ్యాపిస్తుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "మాంకోజెబ్ 75% WP 2.5 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "ప్రొపికొనజోల్ 25% EC 1 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "ఆరోగ్యకరమైన విత్తనం, విత్తన శుద్ధి.",
+    "ఎండిన కొమ్మలు, ఆకులు తొలగించండి."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Spinach",
+   "disease_en": "Anthracnose",
+   "crop_te": "పాలకూర",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + ప్రతి కోత తర్వాత తేలికగా యూరియా. నీరు: 4-5 రోజులకు ఒక తేలిక తడి; నీరు నిలవనీయవద్దు.",
+   "post_harvest_te": "కోత తర్వాత: ఉదయం కోసి, కట్టలుగా కట్టి నీడలో తడి గోనెపై ఉంచండి; అదే రోజు అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ప్రొపికొనజోల్ 25% EC",
+      "name_en": "Propiconazole 25% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Spinach___Bacterial_spot": {
+   "disease_te": "బ్యాక్టీరియా ఆకు మచ్చ",
+   "type": "bacterial",
+   "symptoms_te": "",
+   "cause_te": "బ్యాక్టీరియా తెగులు; వర్షపు చినుకులు, గాలి, విత్తనం ద్వారా వ్యాపిస్తుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "కాపర్ ఆక్సీక్లోరైడ్ 50% WP 3 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "కాపర్ ఆక్సీక్లోరైడ్ 50% WP 3 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి.",
+     "సోకిన మొక్కలను వేరుతో పీకి నాశనం చేయండి, తద్వారా ఇతర మొక్కలకు వ్యాపించదు."
+    ]
+   },
+   "prevention_te": [
+    "ఆరోగ్యకరమైన విత్తనం, విత్తన శుద్ధి.",
+    "అధిక నత్రజని వేయవద్దు."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Spinach",
+   "disease_en": "Bacterial spot",
+   "crop_te": "పాలకూర",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + ప్రతి కోత తర్వాత తేలికగా యూరియా. నీరు: 4-5 రోజులకు ఒక తేలిక తడి; నీరు నిలవనీయవద్దు.",
+   "post_harvest_te": "కోత తర్వాత: ఉదయం కోసి, కట్టలుగా కట్టి నీడలో తడి గోనెపై ఉంచండి; అదే రోజు అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ]
+   }
+  },
+  "Spinach___Downy_mildew": {
+   "disease_te": "డౌనీ బూజు తెగులు",
+   "type": "fungal",
+   "symptoms_te": "",
+   "cause_te": "డౌనీ బూజు తెగులు; చల్లని తేమ వాతావరణంలో ఆకు అడుగున బూజు.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "మాంకోజెబ్ 75% WP 2.5 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "మెటాలాక్సిల్ 8% + మాంకోజెబ్ 64% WP 2.5 గ్రా/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "ఆకులు తడవకుండా డ్రిప్ వాడండి.",
+    "మొక్కల మధ్య దూరం."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Spinach",
+   "disease_en": "Downy mildew",
+   "crop_te": "పాలకూర",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + ప్రతి కోత తర్వాత తేలికగా యూరియా. నీరు: 4-5 రోజులకు ఒక తేలిక తడి; నీరు నిలవనీయవద్దు.",
+   "post_harvest_te": "కోత తర్వాత: ఉదయం కోసి, కట్టలుగా కట్టి నీడలో తడి గోనెపై ఉంచండి; అదే రోజు అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మెటాలాక్సిల్ 8% + మాంకోజెబ్ 64% WP",
+      "name_en": "Metalaxyl 8% + Mancozeb 64% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
+  },
+  "Spinach___Pest_damage": {
+   "disease_te": "ఆకు తినే పురుగుల నష్టం",
+   "type": "pest",
+   "symptoms_te": "",
+   "cause_te": "ఆకులు, కాండం కొరికి తినే గొంగళి పురుగులు / పురుగులు.",
+   "steps": {
+    "mild": [
+     "గుడ్లు, గొంగళి పురుగులను ఏరి నాశనం చేయండి.",
+     "వేప గింజల కషాయం (NSKE) 5% పిచికారీ చేయండి."
+    ],
+    "moderate": [
+     "ఎమామెక్టిన్ బెంజోయేట్ 5% SG 0.4 గ్రా/లీటరు పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "క్లోరాంట్రానిలిప్రోల్ 18.5% SC 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "లింగాకర్షణ బుట్టలు (ఫెరోమోన్ ట్రాప్స్) ఎకరానికి 4-5 పెట్టండి.",
+    "పక్షి స్థావరాలు (T ఆకారపు కర్రలు) పెట్టండి."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Spinach",
+   "disease_en": "Pest damage",
+   "crop_te": "పాలకూర",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + ప్రతి కోత తర్వాత తేలికగా యూరియా. నీరు: 4-5 రోజులకు ఒక తేలిక తడి; నీరు నిలవనీయవద్దు.",
+   "post_harvest_te": "కోత తర్వాత: ఉదయం కోసి, కట్టలుగా కట్టి నీడలో తడి గోనెపై ఉంచండి; అదే రోజు అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "ఎమామెక్టిన్ బెంజోయేట్ 5% SG",
+      "name_en": "Emamectin benzoate 5% SG",
+      "dose_per_l": 0.4,
+      "unit": "g",
+      "kind": "insecticide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "క్లోరాంట్రానిలిప్రోల్ 18.5% SC",
+      "name_en": "Chlorantraniliprole 18.5% SC",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Spinach___healthy": {
+   "disease_te": "ఆరోగ్యకరమైన ఆకు",
+   "type": "healthy",
+   "symptoms_te": "వ్యాధి లక్షణాలు కనిపించలేదు.",
+   "cause_te": "-",
+   "steps": {
+    "mild": [
+     "పంటను వారానికి ఒకసారి పరిశీలిస్తూ ఉండండి."
+    ],
+    "moderate": [],
+    "urgent": []
+   },
+   "prevention_te": [
+    "సమతుల్య ఎరువులు, సకాలంలో నీటి తడులు కొనసాగించండి."
+   ],
+   "source": "TNAU Agritech Portal – Crop Protection",
+   "high_risk": false,
+   "crop_en": "Spinach",
+   "disease_en": "healthy",
+   "crop_te": "పాలకూర",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + ప్రతి కోత తర్వాత తేలికగా యూరియా. నీరు: 4-5 రోజులకు ఒక తేలిక తడి; నీరు నిలవనీయవద్దు.",
+   "post_harvest_te": "కోత తర్వాత: ఉదయం కోసి, కట్టలుగా కట్టి నీడలో తడి గోనెపై ఉంచండి; అదే రోజు అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
+  },
   "Squash___Powdery_mildew": {
    "disease_te": "బూడిద తెగులు (గుమ్మడి జాతి)",
    "type": "fungal",
@@ -13697,6 +13931,17 @@
    "en": "Soybean",
    "labels": [
     "Soybean___healthy"
+   ]
+  },
+  "Spinach": {
+   "te": "పాలకూర",
+   "en": "Spinach",
+   "labels": [
+    "Spinach___Anthracnose",
+    "Spinach___Bacterial_spot",
+    "Spinach___Downy_mildew",
+    "Spinach___Pest_damage",
+    "Spinach___healthy"
    ]
   },
   "Squash": {

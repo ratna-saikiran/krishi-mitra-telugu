@@ -101,6 +101,10 @@ HF = {
  # Amaranthus (red amaranth, "red spinach" in Bangladesh); no public disease set, crop recognition only
  "InriaXagriscienceFM/local_spinach_leaf_classification": {
   "Red Spinach Fresh": "Amaranthus___healthy", "Red Spinach Non Fresh": "Amaranthus___healthy"},
+ # Spinach (palak; Kulkarni & Gohokar 2026, Maharashtra, Mendeley 10.17632/ymtzd8cf6x.1)
+ "InriaXagriscienceFM/spinach_classification": {
+  "anthracnose": "Spinach___Anthracnose", "bacterial spot": "Spinach___Bacterial_spot", "downy mildew": "Spinach___Downy_mildew",
+  "healthy": "Spinach___healthy", "pest damage": "Spinach___Pest_damage"},
  # Field-condition healthy maize (East African MLN/MSV classes dropped)
  "Project-AgML/maize_disease_classification": {"Healthy": "Corn_(maize)___healthy", "MLN": None, "MSV": None},
 }

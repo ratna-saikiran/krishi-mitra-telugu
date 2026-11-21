@@ -89,5 +89,29 @@ for split, out, cap in (("train", "train", CAP_PEST), ("validation", "val", 40),
         cnt[k] += 1; save(ds[i]["image"], out, lab(k), f"ip{i}")
     print("ip102", split, sum(cnt.values()), flush=True)
 
+# 5. Field photos from the Krishi Data collector app (zips in COLLECTED_DIR,
+# folders <Crop>___<Condition>/*.jpg). Split 70/15/15 per class; training
+# copies are repeated 3x because these are the closest to real farmer photos.
+import glob, zipfile, io
+cdir = os.environ.get("COLLECTED_DIR", "")
+for zp in sorted(glob.glob(os.path.join(cdir, "*.zip"))) if cdir else []:
+    with zipfile.ZipFile(zp) as z:
+        by = defaultdict(list)
+        for n in z.namelist():
+            parts = n.split("/")
+            if len(parts) >= 2 and "___" in parts[-2] and n.lower().endswith((".jpg", ".jpeg", ".png")):
+                by[parts[-2]].append(n)
+        for labc, files in by.items():
+            files.sort(); rng.shuffle(files)
+            nt, nv = int(len(files) * 0.15), int(len(files) * 0.15)
+            for j, n in enumerate(files):
+                im = Image.open(io.BytesIO(z.read(n))).convert("RGB")
+                key = f"fd{abs(hash((zp, n))) % 10**10}"
+                if j < nt: save(im, "test_field", labc, key)
+                elif j < nt + nv: save(im, "val", labc, key)
+                else:
+                    for r in "abc": save(im, "train", labc, key + r)
+        print("collected", zp, {k: len(v) for k, v in by.items()}, flush=True)
+
 json.dump({s: dict(v) for s, v in stats.items()}, open(os.path.join(OUT, "stats.json"), "w"), indent=1)
 print({s: (len(v), sum(v.values())) for s, v in stats.items()})
