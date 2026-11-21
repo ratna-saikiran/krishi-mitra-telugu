@@ -1,0 +1,38 @@
+name: Probe dataset classes
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        default: ""
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pip install -q datasets huggingface_hub
+      - env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          IDS: ${{ inputs.ids }}
+        run: |
+          python - <<'PY'
+          import os
+          from datasets import load_dataset_builder
+          from huggingface_hub import hf_hub_download, HfApi
+          for i in os.environ["IDS"].split(","):
+              print("=" * 20, i)
+              try:
+                  b = load_dataset_builder(i)
+                  print("FEATURES", b.info.features)
+                  print("SPLITS", {k: v.num_examples for k, v in (b.info.splits or {}).items()})
+              except Exception as e:
+                  print("builder error", str(e)[:200])
+              try:
+                  files = [s.rfilename for s in HfApi().dataset_info(i).siblings]
+                  dirs = sorted({"/".join(f.split("/")[:3]) for f in files})[:60]
+                  print("PATHS", dirs)
+              except Exception as e:
+                  print("files error", e)
+              try:
+                  print("README", open(hf_hub_download(i, "README.md", repo_type="dataset")).read()[:1500])
+              except Exception:
+                  pass
+          PY
