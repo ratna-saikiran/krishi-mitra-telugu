@@ -14,6 +14,7 @@ class LlmStats {
 class LlmService {
   static const _ch = MethodChannel('krishi/llm');
   static const _ev = EventChannel('krishi/llm_tokens');
+  static const _import = MethodChannel('krishi/import');
   bool loaded = false;
   String? modelPath;
 
@@ -53,6 +54,11 @@ class LlmService {
   }
 
   String? lastStatsJson;
+
+  /// Opens the system file picker; copies the chosen .pte / tokenizer.model
+  /// into app storage. Returns the copied file names.
+  Future<List<String>> importModel() async =>
+      List<String>.from(await _import.invokeMethod<List<dynamic>>('pick') ?? const []);
 
   Future<void> stop() => _ch.invokeMethod('stop');
   Future<void> unload() async {

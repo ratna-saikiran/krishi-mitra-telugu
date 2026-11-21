@@ -66,6 +66,17 @@ class _HomePageState extends State<HomePage> {
     setState(() => _ready = true);
   }
 
+  Future<void> _importModel() async {
+    final names = await _llm.importModel();
+    final ok = await _llm.available();
+    if (!mounted) return;
+    setState(() => _llmAvailable = ok);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(ok
+            ? 'Llama సిద్ధం: ${names.join(', ')}'
+            : 'రెండు ఫైళ్లు ఎంచుకోండి: .pte మోడల్ మరియు tokenizer.model')));
+  }
+
   Future<void> _pick(ImageSource src) async {
     final x = await ImagePicker().pickImage(source: src, maxWidth: 1600, imageQuality: 92);
     if (x == null) return;
@@ -159,6 +170,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('కృషి మిత్ర · పంట వైద్యుడు'),
         actions: [
+          IconButton(
+            tooltip: 'Llama మోడల్ దిగుమతి',
+            icon: const Icon(Icons.download_for_offline),
+            onPressed: _busy || _generating ? null : _importModel,
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 12),
             child: Chip(
