@@ -1,0 +1,23 @@
+name: Probe pest datasets
+on: workflow_dispatch
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: pip install -q huggingface_hub
+      - env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          python - <<'PY'
+          from huggingface_hub import HfApi
+          api = HfApi()
+          for q in ["ip102", "IP102", "insect pest", "crop pest", "pest classification", "agricultural pests"]:
+              for d in api.list_datasets(search=q, limit=15, full=True):
+                  try:
+                      info = api.dataset_info(d.id, files_metadata=True)
+                      size = sum((s.size or 0) for s in info.siblings) / 1e9
+                      files = [s.rfilename for s in info.siblings][:6]
+                  except Exception as e:
+                      size, files = -1, str(e)[:80]
+                  print(f"{q!r:22} {d.id:55} dl={getattr(d,'downloads',None)} size={size:.2f}GB files={files}")
+          PY
