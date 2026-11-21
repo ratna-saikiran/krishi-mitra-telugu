@@ -23,7 +23,8 @@ def items(split):
         d = os.path.join(a.data, split, c)
         if os.path.isdir(d): out += [(os.path.join(d, f), ci) for f in sorted(os.listdir(d))]
     return out
-S = {k: items(k) for k in ("train", "val", "test")}
+TEST_DIRS = sorted(d for d in os.listdir(a.data) if d.startswith("test"))
+S = {k: items(k) for k in ["train", "val"] + TEST_DIRS}
 print({k: len(v) for k, v in S.items()}, "classes", len(classes))
 
 def load(path, label):
@@ -39,7 +40,7 @@ def ds(it, train):
     d = d.map(load, num_parallel_calls=tf.data.AUTOTUNE).batch(a.bs)
     if train: d = d.map(lambda x, y: (tf.clip_by_value(aug(x, training=True), 0, 255), y), num_parallel_calls=tf.data.AUTOTUNE)
     return d.map(lambda x, y: (x, tf.one_hot(y, len(classes)))).prefetch(tf.data.AUTOTUNE)
-tr, va, te = ds(S["train"], True), ds(S["val"], False), ds(S["test"], False)
+tr, va = ds(S["train"], True), ds(S["val"], False)
 
 base = tf.keras.applications.MobileNetV3Large(input_shape=(a.img, a.img, 3), include_top=False, weights="imagenet",
                                               include_preprocessing=True, pooling="avg")
@@ -67,6 +68,7 @@ conv = tf.lite.TFLiteConverter.from_keras_model(model); conv.optimizations = [tf
 open(os.path.join(a.out, "classifier_dyn8.tflite"), "wb").write(conv.convert())
 
 import sys; sys.path.insert(0, os.path.dirname(__file__)); from metrics_report import evaluate_tflite
-names = [c.split("_", 1)[1] if c[:3].isdigit() else c for c in classes]
+crop = lambda i: classes[i].split("___")[0]
 for m in ("classifier_fp32.tflite", "classifier_dyn8.tflite"):
-    evaluate_tflite(os.path.join(a.out, m), S["test"], names, os.path.join(a.out, "report_" + m.split(".")[0]), img=a.img)
+    for t in TEST_DIRS:
+        evaluate_tflite(os.path.join(a.out, m), S[t], classes, os.path.join(a.out, f"report_{m.split('.')[0]}_{t}"), img=a.img, group=crop)
