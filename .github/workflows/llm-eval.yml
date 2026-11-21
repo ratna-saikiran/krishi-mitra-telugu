@@ -1,0 +1,34 @@
+name: Evaluate Llama advice (Telugu)
+on:
+  workflow_dispatch:
+    inputs:
+      export_run_id:
+        required: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install executorch==1.0.0 pytorch-tokenizers tiktoken sentencepiece omegaconf hydra-core blobfile huggingface_hub
+      - uses: actions/download-artifact@v4
+        with:
+          name: llama-3.2-1b-executorch
+          run-id: ${{ inputs.export_run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: model
+      - env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python -c "from huggingface_hub import hf_hub_download as h; print(h('meta-llama/Llama-3.2-1B-Instruct','original/params.json',local_dir='ckpt'))"
+      - run: python llm/sample_advice.py --pte model/*.pte --tokenizer model/tokenizer.model --params ckpt/original/params.json --out llm_samples_v2.json
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: llm-samples
+          prerelease: true
+          make_latest: false
+          files: llm_samples_v2.json
