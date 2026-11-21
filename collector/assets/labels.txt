@@ -225,6 +225,11 @@ Rice___Stem_borer_dead_heart
 Rice___Tungro
 Rice___healthy
 Soybean___healthy
+Spinach___Anthracnose
+Spinach___Bacterial_spot
+Spinach___Downy_mildew
+Spinach___Pest_damage
+Spinach___healthy
 Squash___Powdery_mildew
 Strawberry___Leaf_scorch
 Strawberry___healthy
