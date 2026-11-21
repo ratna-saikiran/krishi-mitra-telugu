@@ -12,6 +12,7 @@ dependencies:
   image_picker: ^1.1.2
   image: ^4.2.0
   flutter_tts: ^4.0.2
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -22,5 +23,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/advisory_te.json
+    - assets/advisory_en.json
+    - assets/advisory_hi.json
     - assets/labels.txt
     - assets/models/classifier.tflite

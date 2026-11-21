@@ -1,8 +1,12 @@
-// Offline, curated advisory database (assets/advisory_te.json), built by
-// ml/build_advisory_db.py from TNAU / ICAR extension guidance.
+// Offline, curated advisory database (assets/advisory_<lang>.json), built by
+// ml/build_advisory_db.py (Telugu) and ml/build_i18n.py (English, Hindi) from
+// TNAU / ICAR extension guidance. Field names keep the _te suffix but hold the
+// text of the loaded language.
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+
+import '../l10n.dart';
 
 class AdvisoryEntry {
   final Map<String, dynamic> j;
@@ -34,12 +38,11 @@ class Spray {
   String get nameEn => j['name_en'];
   double get dosePerL => (j['dose_per_l'] as num).toDouble();
   String get unit => j['unit']; // g | ml
-  String get unitTe => unit == 'g' ? 'గ్రా' : 'మి.లీ';
   String get kind => j['kind'];
   bool get liquid => j['form'] == 'liquid';
-  String doseFor(double litres) {
+  String doseFor(double litres, [L l = const L(Lang.te)]) {
     final v = dosePerL * litres;
-    return '${v == v.roundToDouble() ? v.toStringAsFixed(0) : v.toStringAsFixed(1)} $unitTe';
+    return '${v == v.roundToDouble() ? v.toStringAsFixed(0) : v.toStringAsFixed(1)} ${unit == 'g' ? l.gram : l.ml}';
   }
 }
 
@@ -50,18 +53,20 @@ class CropInfo {
 }
 
 class AdvisoryDb {
-  late final Map<String, dynamic> _db;
-  Future<void> load() async {
-    _db = jsonDecode(await rootBundle.loadString('assets/advisory_te.json'));
+  late Map<String, dynamic> _db;
+  L l = const L(Lang.te);
+  Future<void> load([Lang lang = Lang.te]) async {
+    _db = jsonDecode(await rootBundle.loadString('assets/advisory_${lang.code}.json'));
+    l = L(lang);
   }
 
   AdvisoryEntry entry(String label) => AdvisoryEntry(_db['classes'][label]);
-  String severityTe(String level) => level == 'none' ? 'ఆరోగ్యకరం' : _db['severity_te'][level];
+  String severityTe(String level) => level == 'none' ? l.healthyLevel : _db['severity_te'][level];
   List<String> genericSteps(String level) =>
       level == 'none' ? const [] : List<String>.from(_db['severity_generic'][level]);
   String get verifyNote => _db['verify_note_te'];
-  /// Every Telugu crop and problem name, for the LLM name guardrail.
-  Set<String> get allNamesTe => {
+  /// Every crop and problem name in the loaded language, for the LLM name guardrail.
+  Set<String> get allNames => {
         for (final c in (_db['classes'] as Map<String, dynamic>).values) ...[c['disease_te'] as String, c['crop_te'] as String],
       };
   List<CropInfo> get crops => [
@@ -73,18 +78,18 @@ class AdvisoryDb {
   List<(String, double)> get tankSizes =>
       [for (final r in _db['tank_sizes'] as List) (r[0] as String, (r[1] as num).toDouble())];
 
-  /// Deterministic Telugu advice, used as the fallback when the LLM is not
+  /// Deterministic advice in the loaded language, used as the fallback when the LLM is not
   /// installed or its output fails validation. Also the "verified steps" card.
   List<String> templateAdvice(AdvisoryEntry e, String level) {
     if (e.healthy) {
-      return ['మీ ${e.cropTe} ఆకు ఆరోగ్యంగా ఉంది.', ...e.prevention, e.fertiliserIrrigation];
+      return [l.healthyLeaf(e.cropTe), ...e.prevention, e.fertiliserIrrigation];
     }
     return [
-      '${e.cropTe}: ${e.diseaseTe} — తీవ్రత: ${severityTe(level)}.',
-      'కారణం: ${e.causeTe}',
+      '${e.cropTe}: ${e.diseaseTe} — ${l.severity(severityTe(level))}.',
+      '${l.cause}: ${e.causeTe}',
       ...genericSteps(level),
       ...e.stepsFor(level),
-      'నివారణ: ${e.prevention.join(' ')}',
+      '${l.prevention}: ${e.prevention.join(' ')}',
     ];
   }
 }

@@ -129,7 +129,7 @@ D = {
 PEST_GROUP = [  # (keywords, template, Telugu group name) - first match wins
  (["plant hopper", "planthopper", "leafhopper", "cicadella", "erythroneura", "cicadellidae", "lycorma", "lawana", "salurnis", "flat beak"], "hopper", "దోమ (హాపర్)"),
  (["borer", "stem maggot", "stemfly", "parathrene", "xylotrechus", "rhytidodera"], "borer", "కాండం తొలిచే పురుగు"),
- (["aphid", "green bug", "toxoptera", "therioaphis", "viteus"], "sucking", "పేనుబంక"),
+ (["aphid", "aphis", "green bug", "toxoptera", "therioaphis", "viteus"], "sucking", "పేనుబంక"),
  (["pseudococcus", "icerya", "unaspis", "ceroplastes", "chrysomphalus", "parlatoria", "nipaecoccus"], "mealybug", "పిండినల్లి / పొలుసు పురుగు"),
  (["trialeurodes", "aleurocanthus"], "sucking", "తెల్లదోమ"),
  (["plant bug", "miridae", "apolygus", "lucorum"], "sucking", "రసం పీల్చే నల్లి (బగ్)"),

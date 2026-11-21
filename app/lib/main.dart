@@ -1,13 +1,15 @@
-// కృషి మిత్ర (Krishi Mitra): fully offline crop disease/pest advisor in Telugu.
+// Krishi Mitra: fully offline crop disease/pest advisor in Telugu, English and Hindi.
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'advisory/advisory_db.dart';
 import 'advisory/llm_service.dart';
 import 'advisory/prompt.dart';
+import 'l10n.dart';
 import 'pipeline.dart';
 import 'vision/severity.dart';
 
@@ -20,7 +22,7 @@ class KrishiApp extends StatelessWidget {
   const KrishiApp({super.key});
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'కృషి మిత్ర',
+        title: 'Krishi Mitra',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(colorSchemeSeed: const Color(0xFF2E7D32), useMaterial3: true),
         home: const HomePage(),
@@ -50,6 +52,8 @@ class _HomePageState extends State<HomePage> {
   String _advice = '';
   String? _adviceSource; // 'llm' | 'template'
   String _llmInfo = '';
+  Lang _lang = Lang.te;
+  L get l => L(_lang);
 
   @override
   void initState() {
@@ -58,14 +62,55 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _init() async {
-    await _pipeline.init();
+    String? saved;
+    try {
+      saved = (await SharedPreferences.getInstance()).getString('lang');
+    } catch (_) {}
+    _lang = LangInfo.parse(saved);
+    await _pipeline.init(_lang);
     try {
       _llmAvailable = await _llm.available();
     } catch (_) {
       _llmAvailable = false;
     }
-    await _tts.setLanguage('te-IN');
+    await _tts.setLanguage(_lang.ttsLocale);
     setState(() => _ready = true);
+    if (saved == null) await _chooseLanguage(first: true); // ask once, on first launch
+  }
+
+  /// Language picker: on first launch, and from the app bar any time.
+  Future<void> _chooseLanguage({bool first = false}) async {
+    final pick = await showDialog<Lang>(
+      context: context,
+      barrierDismissible: !first,
+      builder: (ctx) => SimpleDialog(
+        title: Text(l.chooseLanguage, style: const TextStyle(fontSize: 18)),
+        children: [
+          for (final lg in Lang.values)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+              child: FilledButton.tonal(
+                onPressed: () => Navigator.pop(ctx, lg),
+                child: Padding(padding: const EdgeInsets.all(12), child: Text(lg.native, style: const TextStyle(fontSize: 22))),
+              ),
+            ),
+        ],
+      ),
+    );
+    if (pick == null) return;
+    try {
+      await (await SharedPreferences.getInstance()).setString('lang', pick.code);
+    } catch (_) {}
+    await _pipeline.db.load(pick);
+    await _tts.setLanguage(pick.ttsLocale);
+    setState(() => _lang = pick);
+    final vr = _vr;
+    if (vr != null) {
+      // Re-show the current result and advice in the new language.
+      final nvr = vr.withEntry(_pipeline.db.entry(vr.top.first.label));
+      setState(() => _vr = nvr);
+      await _advise(nvr);
+    }
   }
 
   Future<void> _importModel() async {
@@ -75,8 +120,8 @@ class _HomePageState extends State<HomePage> {
     setState(() => _llmAvailable = ok);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(ok
-            ? 'Llama సిద్ధం: ${names.join(', ')}'
-            : 'రెండు ఫైళ్లు ఎంచుకోండి: .pte మోడల్ మరియు tokenizer.model')));
+            ? l.llamaReady(names.join(', '))
+            : l.pickTwoFiles)));
   }
 
   Future<void> _pick(ImageSource src) async {
@@ -102,19 +147,20 @@ class _HomePageState extends State<HomePage> {
 
   /// Optional correction: farmer picks the crop, same photo is re-analysed.
   Future<void> _correctCrop() async {
-    final crops = _pipeline.db.crops.where((c) => c.key != 'Pest').toList();
+    final known = _pipeline.classifier.labels.toSet();
+    final crops = _pipeline.db.crops.where((c) => c.key != 'Pest' && c.labels.any(known.contains)).toList();
     final pick = await showModalBottomSheet<String>(
       context: context,
       builder: (ctx) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-            const Text('సరైన పంటను ఎంచుకోండి', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Text(l.pickCrop, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(spacing: 8, runSpacing: 8, children: [
               for (final c in crops) ActionChip(label: Text(c.te), onPressed: () => Navigator.pop(ctx, c.key)),
-              ActionChip(label: const Text('పురుగు'), onPressed: () => Navigator.pop(ctx, 'Pest')),
-              ActionChip(label: const Text('ఇతర పంట (జాబితాలో లేదు)'), onPressed: () => Navigator.pop(ctx, 'other')),
+              ActionChip(label: Text(l.pest), onPressed: () => Navigator.pop(ctx, 'Pest')),
+              ActionChip(label: Text(l.otherCrop), onPressed: () => Navigator.pop(ctx, 'other')),
             ]),
           ]),
         ),
@@ -143,9 +189,9 @@ class _HomePageState extends State<HomePage> {
     if (vr.unknownCrop) {
       setState(() {
         _advice = [
-          'ఈ పంటను / సమస్యను ఖచ్చితంగా గుర్తించలేకపోయాం. ఆకు దెబ్బతిన్న భాగం: ${(vr.severity.lesionRatio * 100).toStringAsFixed(0)}%.',
+          l.unknownAdvice((vr.severity.lesionRatio * 100).toStringAsFixed(0)),
           ...db.genericSteps(severityLevel(vr.severity.lesionRatio)),
-          'దగ్గరలోని రైతు భరోసా కేంద్రంలో ఈ ఫోటో చూపించండి.',
+          l.showAtCentre,
         ].map((s) => '• $s').join('\n');
         _adviceSource = 'template';
       });
@@ -165,11 +211,12 @@ class _HomePageState extends State<HomePage> {
         levelTe: db.severityTe(level),
         lesionPct: vr.severity.lesionRatio * 100,
         confidence: vr.best.score,
-        verifiedSteps: verified);
+        verifiedSteps: verified,
+        lang: _lang);
     setState(() {
       _generating = true;
       _adviceSource = 'llm';
-      _llmInfo = 'Llama 3.2 1B లోడ్ అవుతోంది…';
+      _llmInfo = l.llamaLoading;
     });
     try {
       var loadMs = 0;
@@ -184,11 +231,11 @@ class _HomePageState extends State<HomePage> {
         buf.write(t);
         setState(() {
           _advice = buf.toString();
-          _llmInfo = 'Llama 3.2 1B (ExecuTorch, INT4) రాస్తోంది…';
+          _llmInfo = l.llamaWriting;
         });
       }
       final total = sw.elapsedMilliseconds;
-      final ok = validateAdvice(buf.toString(), prompt, otherNames: db.allNamesTe);
+      final ok = validateAdvice(buf.toString(), prompt, otherNames: db.allNames, lang: _lang);
       setState(() {
         _generating = false;
         final tps = n / ((total - (firstTokMs ?? 0)) / 1000).clamp(0.001, 1e9);
@@ -199,7 +246,7 @@ class _HomePageState extends State<HomePage> {
         } else {
           _advice = template.map((s) => '• $s').join('\n');
           _adviceSource = 'template';
-          _llmInfo += ' · AI జవాబు ధృవీకరణలో విఫలమైంది, ధృవీకరించిన సలహా చూపుతున్నాం';
+          _llmInfo += l.llmRejected;
         }
       });
     } catch (err) {
@@ -216,10 +263,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('కృషి మిత్ర · పంట వైద్యుడు'),
+        title: Text(l.appTitle),
         actions: [
+          TextButton.icon(
+            onPressed: _busy || _generating || !_ready ? null : () => _chooseLanguage(),
+            icon: const Icon(Icons.translate),
+            label: Text(_lang.native),
+          ),
           IconButton(
-            tooltip: 'Llama మోడల్ దిగుమతి',
+            tooltip: l.importLlama,
             icon: const Icon(Icons.download_for_offline),
             onPressed: _busy || _generating ? null : _importModel,
           ),
@@ -227,7 +279,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.only(right: 12),
             child: Chip(
               avatar: const Icon(Icons.wifi_off, size: 16),
-              label: Text(_llmAvailable ? 'ఆఫ్‌లైన్ · Llama' : 'ఆఫ్‌లైన్'),
+              label: Text(_llmAvailable ? '${l.offline} · Llama' : l.offline),
             ),
           ),
         ],
@@ -240,19 +292,19 @@ class _HomePageState extends State<HomePage> {
                   child: FilledButton.icon(
                     onPressed: _busy || _generating ? null : () => _pick(ImageSource.camera),
                     icon: const Icon(Icons.photo_camera),
-                    label: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 14), child: Text('ఫోటో తీయండి', style: TextStyle(fontSize: 18))),
+                    label: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 14), child: Text(l.takePhoto, style: const TextStyle(fontSize: 18))),
                   ),
                 ),
                 const SizedBox(width: 12),
                 OutlinedButton.icon(
                   onPressed: _busy || _generating ? null : () => _pick(ImageSource.gallery),
                   icon: const Icon(Icons.photo_library),
-                  label: const Padding(padding: EdgeInsets.symmetric(vertical: 14), child: Text('గ్యాలరీ')),
+                  label: Padding(padding: const EdgeInsets.symmetric(vertical: 14), child: Text(l.gallery)),
                 ),
               ]),
               const SizedBox(height: 8),
-              const Text('ఆకు లేదా పురుగును మధ్యలో, దగ్గరగా, వెలుతురులో ఫోటో తీయండి. పంట, వ్యాధి, పురుగు ఆటోమేటిక్‌గా గుర్తిస్తాం.', style: TextStyle(color: Colors.black54)),
+              Text(l.photoHint, style: const TextStyle(color: Colors.black54)),
               if (_busy) const Padding(padding: EdgeInsets.all(32), child: Center(child: CircularProgressIndicator())),
               if (_vr != null) ..._result(_vr!),
             ]),
@@ -272,16 +324,14 @@ class _HomePageState extends State<HomePage> {
         Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.memory(sev.overlayPng, height: 160, fit: BoxFit.cover))),
       ]),
       const SizedBox(height: 4),
-      Text(vr.isPest ? 'కుడి: విశ్లేషించిన భాగం' : 'కుడి: ఎరుపు = దెబ్బతిన్న భాగం', style: const TextStyle(fontSize: 12, color: Colors.black54)),
+      Text(vr.isPest ? l.rightAnalysed : l.rightRed, style: const TextStyle(fontSize: 12, color: Colors.black54)),
       const SizedBox(height: 12),
       if (vr.unknownCrop || !vr.confident)
         Card(
           color: Colors.amber.shade50,
           child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Text(vr.unknownCrop
-                ? 'పంటను ఖచ్చితంగా గుర్తించలేకపోయాం. ఒకే ఆకును దగ్గరగా మళ్ళీ ఫోటో తీయండి, లేదా క్రింద "పంట సరిచేయండి" నొక్కండి.'
-                : 'ఖచ్చితంగా గుర్తించలేకపోయాం. ఒకే ఆకును దగ్గరగా, నీడ లేకుండా మళ్ళీ ఫోటో తీయండి. క్రింది ఫలితం అంచనా మాత్రమే.'),
+            child: Text(vr.unknownCrop ? l.cropUnsure : l.diseaseUnsure),
           ),
         ),
       Card(
@@ -289,14 +339,14 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(14),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             if (vr.unknownCrop) ...[
-              Text('పంట: గుర్తించలేదు', style: Theme.of(context).textTheme.titleLarge),
-              const Text('ఈ పంట మా జాబితాలో లేకపోవచ్చు. దెబ్బతిన్న భాగం మాత్రమే కొలిచాం.'),
+              Text(l.cropNotRecognised, style: Theme.of(context).textTheme.titleLarge),
+              Text(l.cropMaybeMissing),
             ] else if (vr.isPest) ...[
-              Text('పురుగు: ${e.diseaseTe}', style: Theme.of(context).textTheme.titleLarge),
+              Text(l.pestLine(e.diseaseTe), style: Theme.of(context).textTheme.titleLarge),
               Text('Pest · ${e.diseaseEn}', style: const TextStyle(color: Colors.black54)),
             ] else ...[
-              Text('పంట: ${e.cropTe}${vr.cropCorrected ? ' (మీరు ఎంచుకున్నది)' : ''}', style: Theme.of(context).textTheme.titleLarge),
-              Text('సమస్య: ${e.diseaseTe}', style: Theme.of(context).textTheme.titleMedium),
+              Text(l.cropLine(e.cropTe, vr.cropCorrected), style: Theme.of(context).textTheme.titleLarge),
+              Text(l.problemLine(e.diseaseTe), style: Theme.of(context).textTheme.titleMedium),
               Text('${e.cropEn} · ${e.diseaseEn} · ${e.type}', style: const TextStyle(color: Colors.black54)),
             ],
             const SizedBox(height: 10),
@@ -304,24 +354,24 @@ class _HomePageState extends State<HomePage> {
               Chip(
                 backgroundColor: color.withValues(alpha: 0.15),
                 side: BorderSide(color: color),
-                label: Text('తీవ్రత: ${db.severityTe(sev.level)}', style: TextStyle(color: color, fontWeight: FontWeight.bold)),
+                label: Text(l.severity(db.severityTe(sev.level)), style: TextStyle(color: color, fontWeight: FontWeight.bold)),
               ),
-              if (!vr.unknownCrop && !vr.cropCorrected) Chip(label: Text('పంట నమ్మకం ${(vr.cropScore * 100).toStringAsFixed(0)}%')),
-              if (!vr.unknownCrop) Chip(label: Text('నమ్మకం ${(vr.best.score * 100).toStringAsFixed(0)}%')),
-              if (!vr.isPest && (!e.healthy || vr.unknownCrop)) Chip(label: Text('దెబ్బతిన్న భాగం ${(sev.lesionRatio * 100).toStringAsFixed(0)}%')),
+              if (!vr.unknownCrop && !vr.cropCorrected) Chip(label: Text(l.cropConfidence((vr.cropScore * 100).toStringAsFixed(0)))),
+              if (!vr.unknownCrop) Chip(label: Text(l.confidence((vr.best.score * 100).toStringAsFixed(0)))),
+              if (!vr.isPest && (!e.healthy || vr.unknownCrop)) Chip(label: Text(l.damaged((sev.lesionRatio * 100).toStringAsFixed(0)))),
             ]),
             if (!vr.confident && !vr.unknownCrop && vr.top.length > 1)
-              Text('ఇతర అవకాశాలు: ${vr.top.skip(1).map((p) => '${db.entry(p.label).diseaseTe} ${(p.score * 100).toStringAsFixed(0)}%').join(', ')}',
+              Text('${l.otherPossibilities}: ${vr.top.skip(1).map((p) => '${db.entry(p.label).diseaseTe} ${(p.score * 100).toStringAsFixed(0)}%').join(', ')}',
                   style: const TextStyle(fontSize: 13)),
             const SizedBox(height: 6),
-            if (!vr.unknownCrop && e.symptomsTe.isNotEmpty) Text('లక్షణాలు: ${e.symptomsTe}'),
-            if (!vr.unknownCrop && e.symptomsTe.isEmpty && !e.healthy) Text('కారణం: ${e.causeTe}'),
+            if (!vr.unknownCrop && e.symptomsTe.isNotEmpty) Text('${l.symptoms}: ${e.symptomsTe}'),
+            if (!vr.unknownCrop && e.symptomsTe.isEmpty && !e.healthy) Text('${l.cause}: ${e.causeTe}'),
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton.icon(
                 onPressed: _busy || _generating ? null : _correctCrop,
                 icon: const Icon(Icons.edit, size: 18),
-                label: const Text('పంట సరిచేయండి'),
+                label: Text(l.correctCrop),
               ),
             ),
           ]),
@@ -335,11 +385,11 @@ class _HomePageState extends State<HomePage> {
               Icon(_adviceSource == 'llm' ? Icons.auto_awesome : Icons.verified, color: Colors.green.shade800),
               const SizedBox(width: 6),
               Expanded(
-                child: Text(_adviceSource == 'llm' ? 'AI సలహా (Llama 3.2, ఆఫ్‌లైన్)' : 'సలహా (ధృవీకరించిన సమాచారం)',
+                child: Text(_adviceSource == 'llm' ? l.aiAdvice : l.verifiedAdvice,
                     style: Theme.of(context).textTheme.titleMedium),
               ),
               IconButton(
-                tooltip: 'వినండి',
+                tooltip: l.listen,
                 onPressed: _advice.isEmpty ? null : () => _tts.speak(_advice.replaceAll('•', '')),
                 icon: const Icon(Icons.volume_up),
               ),
@@ -353,7 +403,7 @@ class _HomePageState extends State<HomePage> {
       ),
       if (_adviceSource == 'llm' && !_generating)
         ExpansionTile(
-          title: const Text('ధృవీకరించిన చర్యలు (మూలం)'),
+          title: Text(l.verifiedSteps),
           children: [
             for (final s in [...db.genericSteps(sev.level), ...e.stepsFor(sev.level)])
               ListTile(dense: true, leading: const Icon(Icons.check, size: 18), title: Text(s)),
@@ -361,7 +411,7 @@ class _HomePageState extends State<HomePage> {
         ),
       if (!vr.unknownCrop && e.spraysFor(sev.level).isNotEmpty) _sprayCard(e.spraysFor(sev.level)),
       if (!vr.unknownCrop) ExpansionTile(
-        title: const Text('ఎరువులు, నీటి యాజమాన్యం, కోత తర్వాత'),
+        title: Text(l.fertiliserTitle),
         children: [
           ListTile(leading: const Icon(Icons.water_drop), title: Text(e.fertiliserIrrigation)),
           ListTile(leading: const Icon(Icons.inventory_2), title: Text(e.postHarvest)),
@@ -369,9 +419,9 @@ class _HomePageState extends State<HomePage> {
       ),
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Text('⚠ ${db.verifyNote}\nమూలం: ${e.source}', style: const TextStyle(fontSize: 12, color: Colors.black54)),
+        child: Text('⚠ ${db.verifyNote}\n${l.source}: ${e.source}', style: const TextStyle(fontSize: 12, color: Colors.black54)),
       ),
-      Text('సమయం: severity (OpenCV) ${sev.nativeMs.toStringAsFixed(0)}ms · decode ${vr.decodeMs}ms · వ్యాధి గుర్తింపు ${vr.classifyMs}ms (model ${vr.inferenceMs.toStringAsFixed(1)}ms, INT8) · తీవ్రత ${vr.severityMs}ms',
+      Text(l.timing(sev.nativeMs.toStringAsFixed(0), vr.decodeMs, vr.classifyMs, vr.inferenceMs.toStringAsFixed(1), vr.severityMs),
           style: const TextStyle(fontSize: 12, color: Colors.black45)),
     ];
   }
@@ -395,7 +445,7 @@ class _HomePageState extends State<HomePage> {
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text('మందు & మోతాదు', style: Theme.of(context).textTheme.titleMedium),
+          Text(l.sprayTitle, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           for (final sp in sprays)
             Container(
@@ -412,7 +462,7 @@ class _HomePageState extends State<HomePage> {
                       color: sp.liquid ? Colors.blue.shade50 : Colors.orange.shade50, borderRadius: BorderRadius.circular(10)),
                   child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Icon(sp.liquid ? Icons.local_drink : Icons.inventory_2, size: 34, color: sp.liquid ? Colors.blue : Colors.deepOrange),
-                    Text(sp.liquid ? 'ద్రవం' : 'పొడి', style: const TextStyle(fontSize: 12)),
+                    Text(sp.liquid ? l.liquid : l.powder, style: const TextStyle(fontSize: 12)),
                   ]),
                 ),
                 const SizedBox(width: 10),
@@ -421,14 +471,14 @@ class _HomePageState extends State<HomePage> {
                     Text(sp.nameTe, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     Text('${sp.nameEn} · ${sp.kind}', style: const TextStyle(fontSize: 12, color: Colors.black54)),
                     const SizedBox(height: 4),
-                    Text('1 లీటరు నీటికి: ${sp.doseFor(1)}'),
-                    for (final t in db.tankSizes) Text('${t.$1}: ${sp.doseFor(t.$2)}', style: const TextStyle(fontWeight: FontWeight.w600)),
+                    Text(l.perLitre(sp.doseFor(1, l))),
+                    for (final t in db.tankSizes) Text('${t.$1}: ${sp.doseFor(t.$2, l)}', style: const TextStyle(fontWeight: FontWeight.w600)),
                   ]),
                 ),
               ]),
             ),
           const Divider(),
-          Text('ఎలా పిచికారీ చేయాలి', style: Theme.of(context).textTheme.titleMedium),
+          Text(l.howToSpray, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 6),
           for (final (i, st) in db.howToSpray.indexed)
             Padding(

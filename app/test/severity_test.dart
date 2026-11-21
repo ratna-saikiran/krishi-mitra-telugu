@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:krishi_mitra/advisory/advisory_db.dart';
 import 'package:krishi_mitra/advisory/prompt.dart';
+import 'package:krishi_mitra/l10n.dart';
 import 'package:krishi_mitra/vision/severity.dart';
 
 void main() {
@@ -30,5 +34,31 @@ void main() {
     // Repeated sentence loop is rejected.
     expect(validateAdvice('1) పంట మార్పిడి మరియు పంట అవశేషాల నాశనం.\n2) పంట మార్పిడి మరియు పంట అవశేషాల నాశనం.\n3) మంచిది చేయండి.', facts), isNull);
     expect(validateAdvice('This is early blight. Spray mancozeb 2.5 g per litre of water today please.', facts), isNull);
+  });
+
+  test('guardrail checks the chosen language script', () {
+    const facts = 'Mancozeb 75% WP 2.5 g per litre';
+    const en = 'This is early blight. Spray mancozeb 2.5 g per litre of water today, on both sides of the leaves.';
+    expect(validateAdvice(en, facts, lang: Lang.en), isNotNull);
+    expect(validateAdvice(en, facts, lang: Lang.hi), isNull);
+    const hi = 'यह अगेती झुलसा है। आज ही मैंकोज़ेब 2.5 ग्राम प्रति लीटर पानी में मिलाकर छिड़कें।';
+    expect(validateAdvice(hi, facts, lang: Lang.hi), isNotNull);
+    expect(validateAdvice(hi, facts, lang: Lang.te), isNull);
+  });
+
+  test('Telugu, English and Hindi advisory files cover the same classes and doses', () {
+    Map<String, dynamic> load(String l) => jsonDecode(File('assets/advisory_$l.json').readAsStringSync());
+    final te = load('te'), en = load('en'), hi = load('hi');
+    final labels = File('assets/labels.txt').readAsLinesSync().where((x) => x.trim().isNotEmpty);
+    for (final db in [te, en, hi]) {
+      final classes = db['classes'] as Map<String, dynamic>;
+      for (final lab in labels) {
+        expect(classes.containsKey(lab), isTrue, reason: lab);
+        expect(jsonEncode([for (final lv in ['mild', 'moderate', 'urgent']) for (final s in classes[lab]['sprays'][lv]) s['dose_per_l']]),
+            jsonEncode([for (final lv in ['mild', 'moderate', 'urgent']) for (final s in te['classes'][lab]['sprays'][lv]) s['dose_per_l']]));
+      }
+    }
+    expect(RegExp('[\u0C00-\u0C7F]').hasMatch(jsonEncode(en['classes'])), isFalse);
+    expect(RegExp('[\u0C00-\u0C7F]').hasMatch(jsonEncode(hi['classes'])), isFalse);
   });
 }

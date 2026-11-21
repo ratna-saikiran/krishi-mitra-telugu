@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:image/image.dart' as img;
 
 import 'advisory/advisory_db.dart';
+import 'l10n.dart';
 import 'vision/classifier.dart';
 import 'vision/severity.dart';
 
@@ -25,6 +26,9 @@ class VisionResult {
   VisionResult(this.top, this.cropKey, this.cropScore, this.cropCorrected, this.severity, this.entry, this.decodeMs,
       this.classifyMs, this.severityMs, this.inferenceMs);
   Prediction get best => top.first;
+  /// Same result with the advisory entry re-read (after a language change).
+  VisionResult withEntry(AdvisoryEntry e) =>
+      VisionResult(top, cropKey, cropScore, cropCorrected, severity, e, decodeMs, classifyMs, severityMs, inferenceMs);
   bool get unknownCrop => cropKey == null;
   bool get isPest => cropKey == 'Pest';
   bool get confident => !unknownCrop && best.score >= kDiseaseConfidence;
@@ -36,9 +40,9 @@ class Pipeline {
   img.Image? _last; // last photo, kept so the farmer can correct the crop
   List<Prediction>? _lastAll;
 
-  Future<void> init() async {
+  Future<void> init([Lang lang = Lang.te]) async {
     await classifier.load();
-    await db.load();
+    await db.load(lang);
   }
 
   static String cropOf(String label) => label.split('___').first;
@@ -88,6 +92,7 @@ class Pipeline {
     } else {
       top = all.take(3).toList();
     }
+    if (top.isEmpty) top = all.take(3).toList(); // crop the model has no class for
     top = top.take(3).toList();
     final entry = db.entry(top.first.label);
     final pest = crop == 'Pest';

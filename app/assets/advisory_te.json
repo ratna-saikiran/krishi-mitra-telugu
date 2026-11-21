@@ -22,6 +22,34 @@
   ]
  },
  "classes": {
+  "Amaranthus___healthy": {
+   "disease_te": "ఆరోగ్యకరమైన ఆకు",
+   "type": "healthy",
+   "symptoms_te": "వ్యాధి లక్షణాలు కనిపించలేదు.",
+   "cause_te": "-",
+   "steps": {
+    "mild": [
+     "పంటను వారానికి ఒకసారి పరిశీలిస్తూ ఉండండి."
+    ],
+    "moderate": [],
+    "urgent": []
+   },
+   "prevention_te": [
+    "సమతుల్య ఎరువులు, సకాలంలో నీటి తడులు కొనసాగించండి."
+   ],
+   "source": "TNAU Agritech Portal – Crop Protection",
+   "high_risk": false,
+   "crop_en": "Amaranthus",
+   "disease_en": "healthy",
+   "crop_te": "తోటకూర",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + కోత తర్వాత తేలికగా యూరియా. నీరు: 3-4 రోజులకు ఒక తేలిక తడి.",
+   "post_harvest_te": "కోత తర్వాత: ఉదయం కోసి, కట్టలుగా కట్టి నీడలో తడి గోనెపై ఉంచండి; అదే రోజు అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
+  },
   "Apple___Apple_scab": {
    "disease_te": "ఆపిల్ స్కాబ్ (పొక్కు తెగులు)",
    "type": "fungal",
@@ -1057,6 +1085,486 @@
    "crop_te": "వంకాయ",
    "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా. నీరు: డ్రిప్ ఉత్తమం; 5-7 రోజులకు ఒక తడి.",
    "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి నీడలో గ్రేడింగ్ చేయండి; గాలి ఆడే క్రేట్లలో రవాణా.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
+  },
+  "Cabbage___Alternaria_leaf_spot": {
+   "disease_te": "ఆల్టర్నేరియా ఆకు మచ్చ",
+   "type": "fungal",
+   "symptoms_te": "",
+   "cause_te": "శిలీంధ్రం వల్ల వచ్చే ఆకు మచ్చ తెగులు; తేమ వాతావరణంలో పెరుగుతుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "మాంకోజెబ్ 75% WP 2.5 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "ప్రొపికొనజోల్ 25% EC 1 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "పంట మార్పిడి, పంట అవశేషాల నాశనం.",
+    "మొక్కల మధ్య సరైన దూరం."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Cabbage",
+   "disease_en": "Alternaria leaf spot",
+   "crop_te": "క్యాబేజీ",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా. నీరు: 7-10 రోజులకు ఒక తడి; గడ్డ కట్టే దశలో క్రమంగా.",
+   "post_harvest_te": "కోత తర్వాత: గడ్డ గట్టిపడిన వెంటనే కోసి, బయటి ఆకులు ఉంచి రవాణా చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ప్రొపికొనజోల్ 25% EC",
+      "name_en": "Propiconazole 25% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Cabbage___Caterpillar_damage": {
+   "disease_te": "ఆకు తినే గొంగళి పురుగు",
+   "type": "pest",
+   "symptoms_te": "",
+   "cause_te": "ఆకులు, కాండం కొరికి తినే గొంగళి పురుగులు / పురుగులు.",
+   "steps": {
+    "mild": [
+     "గుడ్లు, గొంగళి పురుగులను ఏరి నాశనం చేయండి.",
+     "వేప గింజల కషాయం (NSKE) 5% పిచికారీ చేయండి."
+    ],
+    "moderate": [
+     "ఎమామెక్టిన్ బెంజోయేట్ 5% SG 0.4 గ్రా/లీటరు పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "క్లోరాంట్రానిలిప్రోల్ 18.5% SC 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "లింగాకర్షణ బుట్టలు (ఫెరోమోన్ ట్రాప్స్) ఎకరానికి 4-5 పెట్టండి.",
+    "పక్షి స్థావరాలు (T ఆకారపు కర్రలు) పెట్టండి."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Cabbage",
+   "disease_en": "Caterpillar damage",
+   "crop_te": "క్యాబేజీ",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా. నీరు: 7-10 రోజులకు ఒక తడి; గడ్డ కట్టే దశలో క్రమంగా.",
+   "post_harvest_te": "కోత తర్వాత: గడ్డ గట్టిపడిన వెంటనే కోసి, బయటి ఆకులు ఉంచి రవాణా చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "ఎమామెక్టిన్ బెంజోయేట్ 5% SG",
+      "name_en": "Emamectin benzoate 5% SG",
+      "dose_per_l": 0.4,
+      "unit": "g",
+      "kind": "insecticide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "క్లోరాంట్రానిలిప్రోల్ 18.5% SC",
+      "name_en": "Chlorantraniliprole 18.5% SC",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Cabbage___healthy": {
+   "disease_te": "ఆరోగ్యకరమైన ఆకు",
+   "type": "healthy",
+   "symptoms_te": "వ్యాధి లక్షణాలు కనిపించలేదు.",
+   "cause_te": "-",
+   "steps": {
+    "mild": [
+     "పంటను వారానికి ఒకసారి పరిశీలిస్తూ ఉండండి."
+    ],
+    "moderate": [],
+    "urgent": []
+   },
+   "prevention_te": [
+    "సమతుల్య ఎరువులు, సకాలంలో నీటి తడులు కొనసాగించండి."
+   ],
+   "source": "TNAU Agritech Portal – Crop Protection",
+   "high_risk": false,
+   "crop_en": "Cabbage",
+   "disease_en": "healthy",
+   "crop_te": "క్యాబేజీ",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా. నీరు: 7-10 రోజులకు ఒక తడి; గడ్డ కట్టే దశలో క్రమంగా.",
+   "post_harvest_te": "కోత తర్వాత: గడ్డ గట్టిపడిన వెంటనే కోసి, బయటి ఆకులు ఉంచి రవాణా చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
+  },
+  "Cauliflower___Alternaria_leaf_spot": {
+   "disease_te": "ఆల్టర్నేరియా ఆకు మచ్చ",
+   "type": "fungal",
+   "symptoms_te": "",
+   "cause_te": "శిలీంధ్రం వల్ల వచ్చే ఆకు మచ్చ తెగులు; తేమ వాతావరణంలో పెరుగుతుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "మాంకోజెబ్ 75% WP 2.5 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "ప్రొపికొనజోల్ 25% EC 1 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "పంట మార్పిడి, పంట అవశేషాల నాశనం.",
+    "మొక్కల మధ్య సరైన దూరం."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Cauliflower",
+   "disease_en": "Alternaria leaf spot",
+   "crop_te": "కాలీఫ్లవర్ (గోబి పువ్వు)",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా; బోరాన్ లోపం ఉంటే బోరాక్స్. నీరు: 7-10 రోజులకు ఒక తడి; పువ్వు దశలో నీటి ఎద్దడి వద్దు.",
+   "post_harvest_te": "కోత తర్వాత: గట్టిగా, తెల్లగా ఉన్నప్పుడు ఆకులతో సహా కోసి, నీడలో ఉంచి త్వరగా అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ప్రొపికొనజోల్ 25% EC",
+      "name_en": "Propiconazole 25% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Cauliflower___Bacterial_soft_rot": {
+   "disease_te": "మెత్తని కుళ్ళు తెగులు",
+   "type": "bacterial",
+   "symptoms_te": "",
+   "cause_te": "బ్యాక్టీరియా తెగులు; వర్షపు చినుకులు, గాలి, విత్తనం ద్వారా వ్యాపిస్తుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "కాపర్ ఆక్సీక్లోరైడ్ 50% WP 3 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "కాపర్ ఆక్సీక్లోరైడ్ 50% WP 3 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి.",
+     "సోకిన మొక్కలను వేరుతో పీకి నాశనం చేయండి, తద్వారా ఇతర మొక్కలకు వ్యాపించదు."
+    ]
+   },
+   "prevention_te": [
+    "ఆరోగ్యకరమైన విత్తనం, విత్తన శుద్ధి.",
+    "అధిక నత్రజని వేయవద్దు."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Cauliflower",
+   "disease_en": "Bacterial soft rot",
+   "crop_te": "కాలీఫ్లవర్ (గోబి పువ్వు)",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా; బోరాన్ లోపం ఉంటే బోరాక్స్. నీరు: 7-10 రోజులకు ఒక తడి; పువ్వు దశలో నీటి ఎద్దడి వద్దు.",
+   "post_harvest_te": "కోత తర్వాత: గట్టిగా, తెల్లగా ఉన్నప్పుడు ఆకులతో సహా కోసి, నీడలో ఉంచి త్వరగా అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ]
+   }
+  },
+  "Cauliflower___Black_rot": {
+   "disease_te": "నల్ల కుళ్ళు తెగులు (బ్యాక్టీరియా)",
+   "type": "bacterial",
+   "symptoms_te": "",
+   "cause_te": "బ్యాక్టీరియా తెగులు; వర్షపు చినుకులు, గాలి, విత్తనం ద్వారా వ్యాపిస్తుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "కాపర్ ఆక్సీక్లోరైడ్ 50% WP 3 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "కాపర్ ఆక్సీక్లోరైడ్ 50% WP 3 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి.",
+     "సోకిన మొక్కలను వేరుతో పీకి నాశనం చేయండి, తద్వారా ఇతర మొక్కలకు వ్యాపించదు."
+    ]
+   },
+   "prevention_te": [
+    "ఆరోగ్యకరమైన విత్తనం, విత్తన శుద్ధి.",
+    "అధిక నత్రజని వేయవద్దు."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Cauliflower",
+   "disease_en": "Black rot",
+   "crop_te": "కాలీఫ్లవర్ (గోబి పువ్వు)",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా; బోరాన్ లోపం ఉంటే బోరాక్స్. నీరు: 7-10 రోజులకు ఒక తడి; పువ్వు దశలో నీటి ఎద్దడి వద్దు.",
+   "post_harvest_te": "కోత తర్వాత: గట్టిగా, తెల్లగా ఉన్నప్పుడు ఆకులతో సహా కోసి, నీడలో ఉంచి త్వరగా అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ]
+   }
+  },
+  "Cauliflower___Caterpillar_damage": {
+   "disease_te": "ఆకు తినే గొంగళి పురుగు (డైమండ్ బ్యాక్ మాత్)",
+   "type": "pest",
+   "symptoms_te": "",
+   "cause_te": "ఆకులు, కాండం కొరికి తినే గొంగళి పురుగులు / పురుగులు.",
+   "steps": {
+    "mild": [
+     "గుడ్లు, గొంగళి పురుగులను ఏరి నాశనం చేయండి.",
+     "వేప గింజల కషాయం (NSKE) 5% పిచికారీ చేయండి."
+    ],
+    "moderate": [
+     "ఎమామెక్టిన్ బెంజోయేట్ 5% SG 0.4 గ్రా/లీటరు పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "క్లోరాంట్రానిలిప్రోల్ 18.5% SC 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "లింగాకర్షణ బుట్టలు (ఫెరోమోన్ ట్రాప్స్) ఎకరానికి 4-5 పెట్టండి.",
+    "పక్షి స్థావరాలు (T ఆకారపు కర్రలు) పెట్టండి."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Cauliflower",
+   "disease_en": "Caterpillar damage",
+   "crop_te": "కాలీఫ్లవర్ (గోబి పువ్వు)",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా; బోరాన్ లోపం ఉంటే బోరాక్స్. నీరు: 7-10 రోజులకు ఒక తడి; పువ్వు దశలో నీటి ఎద్దడి వద్దు.",
+   "post_harvest_te": "కోత తర్వాత: గట్టిగా, తెల్లగా ఉన్నప్పుడు ఆకులతో సహా కోసి, నీడలో ఉంచి త్వరగా అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "ఎమామెక్టిన్ బెంజోయేట్ 5% SG",
+      "name_en": "Emamectin benzoate 5% SG",
+      "dose_per_l": 0.4,
+      "unit": "g",
+      "kind": "insecticide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "క్లోరాంట్రానిలిప్రోల్ 18.5% SC",
+      "name_en": "Chlorantraniliprole 18.5% SC",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Cauliflower___Downy_mildew": {
+   "disease_te": "డౌనీ బూజు తెగులు",
+   "type": "fungal",
+   "symptoms_te": "",
+   "cause_te": "డౌనీ బూజు తెగులు; చల్లని తేమ వాతావరణంలో ఆకు అడుగున బూజు.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "మాంకోజెబ్ 75% WP 2.5 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "మెటాలాక్సిల్ 8% + మాంకోజెబ్ 64% WP 2.5 గ్రా/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "ఆకులు తడవకుండా డ్రిప్ వాడండి.",
+    "మొక్కల మధ్య దూరం."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Cauliflower",
+   "disease_en": "Downy mildew",
+   "crop_te": "కాలీఫ్లవర్ (గోబి పువ్వు)",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా; బోరాన్ లోపం ఉంటే బోరాక్స్. నీరు: 7-10 రోజులకు ఒక తడి; పువ్వు దశలో నీటి ఎద్దడి వద్దు.",
+   "post_harvest_te": "కోత తర్వాత: గట్టిగా, తెల్లగా ఉన్నప్పుడు ఆకులతో సహా కోసి, నీడలో ఉంచి త్వరగా అమ్మండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "మెటాలాక్సిల్ 8% + మాంకోజెబ్ 64% WP",
+      "name_en": "Metalaxyl 8% + Mancozeb 64% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ]
+   }
+  },
+  "Cauliflower___Mosaic_virus": {
+   "disease_te": "పసుపు మొజాయిక్ వైరస్",
+   "type": "viral",
+   "symptoms_te": "",
+   "cause_te": "వైరస్; పేనుబంక (అఫిడ్స్) ద్వారా వ్యాపిస్తుంది. మందు లేదు, పేనుబంకను నియంత్రించాలి.",
+   "steps": {
+    "mild": [
+     "ఎకరానికి 10-12 పసుపు జిగురు అట్టలు పెట్టండి.",
+     "వేప నూనె 1500 ppm 5 మి.లీ/లీటరు (సబ్బు ద్రావణంతో) పిచికారీ చేయండి."
+    ],
+    "moderate": [
+     "సోకిన మొక్కలను వేరుతో పీకి నాశనం చేయండి, తద్వారా ఇతర మొక్కలకు వ్యాపించదు.",
+     "పేనుబంక నివారణకు ఇమిడాక్లోప్రిడ్ 17.8% SL 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "సోకిన మొక్కలను వేరుతో పీకి నాశనం చేయండి, తద్వారా ఇతర మొక్కలకు వ్యాపించదు.",
+     "పేనుబంక నివారణకు ఇమిడాక్లోప్రిడ్ 17.8% SL 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "వ్యాధి రహిత విత్తనం/మొక్కలు.",
+    "పొలం చుట్టూ మొక్కజొన్న వంటి అడ్డు పంట వేయండి."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": true,
+   "crop_en": "Cauliflower",
+   "disease_en": "Mosaic virus",
+   "crop_te": "కాలీఫ్లవర్ (గోబి పువ్వు)",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా; బోరాన్ లోపం ఉంటే బోరాక్స్. నీరు: 7-10 రోజులకు ఒక తడి; పువ్వు దశలో నీటి ఎద్దడి వద్దు.",
+   "post_harvest_te": "కోత తర్వాత: గట్టిగా, తెల్లగా ఉన్నప్పుడు ఆకులతో సహా కోసి, నీడలో ఉంచి త్వరగా అమ్మండి.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "వేప నూనె 1500 ppm",
+      "name_en": "Neem oil 1500 ppm",
+      "dose_per_l": 5.0,
+      "unit": "ml",
+      "kind": "botanical",
+      "form": "liquid"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Cauliflower___healthy": {
+   "disease_te": "ఆరోగ్యకరమైన ఆకు",
+   "type": "healthy",
+   "symptoms_te": "వ్యాధి లక్షణాలు కనిపించలేదు.",
+   "cause_te": "-",
+   "steps": {
+    "mild": [
+     "పంటను వారానికి ఒకసారి పరిశీలిస్తూ ఉండండి."
+    ],
+    "moderate": [],
+    "urgent": []
+   },
+   "prevention_te": [
+    "సమతుల్య ఎరువులు, సకాలంలో నీటి తడులు కొనసాగించండి."
+   ],
+   "source": "TNAU Agritech Portal – Crop Protection",
+   "high_risk": false,
+   "crop_en": "Cauliflower",
+   "disease_en": "healthy",
+   "crop_te": "కాలీఫ్లవర్ (గోబి పువ్వు)",
+   "fertiliser_irrigation_te": "ఎరువులు: పశువుల ఎరువు + సిఫార్సు మేరకు NPK విడతలుగా; బోరాన్ లోపం ఉంటే బోరాక్స్. నీరు: 7-10 రోజులకు ఒక తడి; పువ్వు దశలో నీటి ఎద్దడి వద్దు.",
+   "post_harvest_te": "కోత తర్వాత: గట్టిగా, తెల్లగా ఉన్నప్పుడు ఆకులతో సహా కోసి, నీడలో ఉంచి త్వరగా అమ్మండి.",
    "sprays": {
     "mild": [],
     "moderate": [],
@@ -2234,6 +2742,160 @@
     "urgent": []
    }
   },
+  "Gourd___Alternaria_leaf_blight": {
+   "disease_te": "ఆల్టర్నేరియా ఆకు ఎండు తెగులు",
+   "type": "fungal",
+   "symptoms_te": "",
+   "cause_te": "శిలీంధ్రం వల్ల వచ్చే ఆకు మచ్చ తెగులు; తేమ వాతావరణంలో పెరుగుతుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "మాంకోజెబ్ 75% WP 2.5 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "ప్రొపికొనజోల్ 25% EC 1 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "పంట మార్పిడి, పంట అవశేషాల నాశనం.",
+    "మొక్కల మధ్య సరైన దూరం."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Gourd",
+   "disease_en": "Alternaria leaf blight",
+   "crop_te": "గుమ్మడి / సొర / బూడిద గుమ్మడి జాతి",
+   "fertiliser_irrigation_te": "ఎరువులు: గుంతకు సేంద్రియ ఎరువు + NPK. నీరు: పాదుల్లో నీరు; ఆకులు తడవకుండా.",
+   "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి, గాలి ఆడే చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ప్రొపికొనజోల్ 25% EC",
+      "name_en": "Propiconazole 25% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Gourd___Angular_leaf_spot": {
+   "disease_te": "కోణాకార ఆకు మచ్చ (బ్యాక్టీరియా)",
+   "type": "bacterial",
+   "symptoms_te": "",
+   "cause_te": "బ్యాక్టీరియా తెగులు; వర్షపు చినుకులు, గాలి, విత్తనం ద్వారా వ్యాపిస్తుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "కాపర్ ఆక్సీక్లోరైడ్ 50% WP 3 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "కాపర్ ఆక్సీక్లోరైడ్ 50% WP 3 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి.",
+     "సోకిన మొక్కలను వేరుతో పీకి నాశనం చేయండి, తద్వారా ఇతర మొక్కలకు వ్యాపించదు."
+    ]
+   },
+   "prevention_te": [
+    "ఆరోగ్యకరమైన విత్తనం, విత్తన శుద్ధి.",
+    "అధిక నత్రజని వేయవద్దు."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Gourd",
+   "disease_en": "Angular leaf spot",
+   "crop_te": "గుమ్మడి / సొర / బూడిద గుమ్మడి జాతి",
+   "fertiliser_irrigation_te": "ఎరువులు: గుంతకు సేంద్రియ ఎరువు + NPK. నీరు: పాదుల్లో నీరు; ఆకులు తడవకుండా.",
+   "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి, గాలి ఆడే చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "కాపర్ ఆక్సీక్లోరైడ్ 50% WP",
+      "name_en": "Copper oxychloride 50% WP",
+      "dose_per_l": 3.0,
+      "unit": "g",
+      "kind": "bactericide/fungicide",
+      "form": "powder"
+     }
+    ]
+   }
+  },
+  "Gourd___Anthracnose": {
+   "disease_te": "ఆంత్రాక్నోస్",
+   "type": "fungal",
+   "symptoms_te": "",
+   "cause_te": "కొల్లెటోట్రైకమ్ శిలీంధ్రం (ఆంత్రాక్నోస్); వర్షం, తేమలో వ్యాపిస్తుంది.",
+   "steps": {
+    "mild": [
+     "సోకిన ఆకులు/భాగాలను తీసి పొలం బయట నాశనం చేయండి."
+    ],
+    "moderate": [
+     "మాంకోజెబ్ 75% WP 2.5 గ్రా/లీటరు నీటికి కలిపి పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "ప్రొపికొనజోల్ 25% EC 1 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "ఆరోగ్యకరమైన విత్తనం, విత్తన శుద్ధి.",
+    "ఎండిన కొమ్మలు, ఆకులు తొలగించండి."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Gourd",
+   "disease_en": "Anthracnose",
+   "crop_te": "గుమ్మడి / సొర / బూడిద గుమ్మడి జాతి",
+   "fertiliser_irrigation_te": "ఎరువులు: గుంతకు సేంద్రియ ఎరువు + NPK. నీరు: పాదుల్లో నీరు; ఆకులు తడవకుండా.",
+   "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి, గాలి ఆడే చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "మాంకోజెబ్ 75% WP",
+      "name_en": "Mancozeb 75% WP",
+      "dose_per_l": 2.5,
+      "unit": "g",
+      "kind": "fungicide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ప్రొపికొనజోల్ 25% EC",
+      "name_en": "Propiconazole 25% EC",
+      "dose_per_l": 1.0,
+      "unit": "ml",
+      "kind": "fungicide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
   "Gourd___Aphids": {
    "disease_te": "పేనుబంక",
    "type": "pest",
@@ -2411,6 +3073,67 @@
     ]
    }
   },
+  "Gourd___Leaf_eating_beetle": {
+   "disease_te": "ఆకు తినే పురుగు (గుమ్మడి పెంకు పురుగు)",
+   "type": "pest",
+   "symptoms_te": "",
+   "cause_te": "పెంకు పురుగులు / ముక్కు పురుగులు; ఆకులు, మొగ్గలు, కాండం తింటాయి.",
+   "steps": {
+    "mild": [
+     "పురుగులను ఏరి కిరోసిన్ నీటిలో వేసి నాశనం చేయండి.",
+     "వేప నూనె 1500 ppm 5 మి.లీ/లీటరు (సబ్బు ద్రావణంతో) పిచికారీ చేయండి."
+    ],
+    "moderate": [
+     "ఎమామెక్టిన్ బెంజోయేట్ 5% SG 0.4 గ్రా/లీటరు పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "క్లోరాంట్రానిలిప్రోల్ 18.5% SC 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "లోతుగా దున్నండి (నిద్రావస్థ దశలు బయటపడతాయి).",
+    "పంట అవశేషాల నాశనం."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Gourd",
+   "disease_en": "Leaf eating beetle",
+   "crop_te": "గుమ్మడి / సొర / బూడిద గుమ్మడి జాతి",
+   "fertiliser_irrigation_te": "ఎరువులు: గుంతకు సేంద్రియ ఎరువు + NPK. నీరు: పాదుల్లో నీరు; ఆకులు తడవకుండా.",
+   "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి, గాలి ఆడే చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "వేప నూనె 1500 ppm",
+      "name_en": "Neem oil 1500 ppm",
+      "dose_per_l": 5.0,
+      "unit": "ml",
+      "kind": "botanical",
+      "form": "liquid"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "ఎమామెక్టిన్ బెంజోయేట్ 5% SG",
+      "name_en": "Emamectin benzoate 5% SG",
+      "dose_per_l": 0.4,
+      "unit": "g",
+      "kind": "insecticide",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "క్లోరాంట్రానిలిప్రోల్ 18.5% SC",
+      "name_en": "Chlorantraniliprole 18.5% SC",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
   "Gourd___Leaf_miner": {
    "disease_te": "ఆకు సొరంగ పురుగు",
    "type": "pest",
@@ -2457,6 +3180,121 @@
       "dose_per_l": 0.4,
       "unit": "g",
       "kind": "insecticide",
+      "form": "powder"
+     }
+    ]
+   }
+  },
+  "Gourd___Mosaic_virus": {
+   "disease_te": "మొజాయిక్ వైరస్",
+   "type": "viral",
+   "symptoms_te": "",
+   "cause_te": "వైరస్; పేనుబంక (అఫిడ్స్) ద్వారా వ్యాపిస్తుంది. మందు లేదు, పేనుబంకను నియంత్రించాలి.",
+   "steps": {
+    "mild": [
+     "ఎకరానికి 10-12 పసుపు జిగురు అట్టలు పెట్టండి.",
+     "వేప నూనె 1500 ppm 5 మి.లీ/లీటరు (సబ్బు ద్రావణంతో) పిచికారీ చేయండి."
+    ],
+    "moderate": [
+     "సోకిన మొక్కలను వేరుతో పీకి నాశనం చేయండి, తద్వారా ఇతర మొక్కలకు వ్యాపించదు.",
+     "పేనుబంక నివారణకు ఇమిడాక్లోప్రిడ్ 17.8% SL 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "సోకిన మొక్కలను వేరుతో పీకి నాశనం చేయండి, తద్వారా ఇతర మొక్కలకు వ్యాపించదు.",
+     "పేనుబంక నివారణకు ఇమిడాక్లోప్రిడ్ 17.8% SL 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "వ్యాధి రహిత విత్తనం/మొక్కలు.",
+    "పొలం చుట్టూ మొక్కజొన్న వంటి అడ్డు పంట వేయండి."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": true,
+   "crop_en": "Gourd",
+   "disease_en": "Mosaic virus",
+   "crop_te": "గుమ్మడి / సొర / బూడిద గుమ్మడి జాతి",
+   "fertiliser_irrigation_te": "ఎరువులు: గుంతకు సేంద్రియ ఎరువు + NPK. నీరు: పాదుల్లో నీరు; ఆకులు తడవకుండా.",
+   "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి, గాలి ఆడే చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [
+     {
+      "name_te": "వేప నూనె 1500 ppm",
+      "name_en": "Neem oil 1500 ppm",
+      "dose_per_l": 5.0,
+      "unit": "ml",
+      "kind": "botanical",
+      "form": "liquid"
+     }
+    ],
+    "moderate": [
+     {
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
+      "dose_per_l": 0.3,
+      "unit": "ml",
+      "kind": "insecticide",
+      "form": "liquid"
+     }
+    ]
+   }
+  },
+  "Gourd___Nutrient_deficiency": {
+   "disease_te": "పోషక లోపం",
+   "type": "nutrient",
+   "symptoms_te": "",
+   "cause_te": "పోషక లోపం (నత్రజని, సూక్ష్మ పోషకాలు); వ్యాధి కాదు.",
+   "steps": {
+    "mild": [
+     "నేల పరీక్ష చేయించండి."
+    ],
+    "moderate": [
+     "19:19:19 నీటిలో కరిగే ఎరువు 5 గ్రా/లీటరు ఆకులపై పిచికారీ చేయండి."
+    ],
+    "urgent": [
+     "19:19:19 నీటిలో కరిగే ఎరువు 5 గ్రా/లీటరు ఆకులపై పిచికారీ చేయండి.",
+     "సూక్ష్మ పోషక మిశ్రమం సిఫార్సు మేరకు పిచికారీ చేయండి."
+    ]
+   },
+   "prevention_te": [
+    "నేల పరీక్ష ఆధారంగా సమతుల్య ఎరువులు.",
+    "సేంద్రియ ఎరువు వాడండి."
+   ],
+   "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
+   "high_risk": false,
+   "crop_en": "Gourd",
+   "disease_en": "Nutrient deficiency",
+   "crop_te": "గుమ్మడి / సొర / బూడిద గుమ్మడి జాతి",
+   "fertiliser_irrigation_te": "ఎరువులు: గుంతకు సేంద్రియ ఎరువు + NPK. నీరు: పాదుల్లో నీరు; ఆకులు తడవకుండా.",
+   "post_harvest_te": "కోత తర్వాత: కాయలను తొడిమతో కోసి, గాలి ఆడే చోట నిల్వ చేయండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [
+     {
+      "name_te": "19:19:19 నీటిలో కరిగే ఎరువు",
+      "name_en": "NPK 19:19:19 (water soluble)",
+      "dose_per_l": 5.0,
+      "unit": "g",
+      "kind": "fertiliser",
+      "form": "powder"
+     }
+    ],
+    "urgent": [
+     {
+      "name_te": "19:19:19 నీటిలో కరిగే ఎరువు",
+      "name_en": "NPK 19:19:19 (water soluble)",
+      "dose_per_l": 5.0,
+      "unit": "g",
+      "kind": "fertiliser",
       "form": "powder"
      }
     ]
@@ -4664,25 +5502,25 @@
    }
   },
   "Pest___Aphis_citricola_Vander_Goot": {
-   "disease_te": "గొంగళి పురుగు (Aphis citricola Vander Goot)",
+   "disease_te": "పేనుబంక (Aphis citricola Vander Goot)",
    "type": "pest",
    "symptoms_te": "",
-   "cause_te": "ఆకులు, కాండం కొరికి తినే గొంగళి పురుగులు / పురుగులు.",
+   "cause_te": "రసం పీల్చే పురుగులు; ఆకులు ముడుచుకుపోతాయి, వైరస్‌లను వ్యాపింపజేస్తాయి.",
    "steps": {
     "mild": [
-     "గుడ్లు, గొంగళి పురుగులను ఏరి నాశనం చేయండి.",
-     "వేప గింజల కషాయం (NSKE) 5% పిచికారీ చేయండి."
+     "వేప నూనె 1500 ppm 5 మి.లీ/లీటరు (సబ్బు ద్రావణంతో) పిచికారీ చేయండి."
     ],
     "moderate": [
-     "ఎమామెక్టిన్ బెంజోయేట్ 5% SG 0.4 గ్రా/లీటరు పిచికారీ చేయండి."
+     "ఇమిడాక్లోప్రిడ్ 17.8% SL 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
     ],
     "urgent": [
-     "క్లోరాంట్రానిలిప్రోల్ 18.5% SC 0.3 మి.లీ/లీటరు పిచికారీ చేయండి."
+     "ఇమిడాక్లోప్రిడ్ 17.8% SL 0.3 మి.లీ/లీటరు పిచికారీ చేయండి.",
+     "7-10 రోజుల తర్వాత అవసరమైతే వేరే గ్రూప్ మందు వాడండి."
     ]
    },
    "prevention_te": [
-    "లింగాకర్షణ బుట్టలు (ఫెరోమోన్ ట్రాప్స్) ఎకరానికి 4-5 పెట్టండి.",
-    "పక్షి స్థావరాలు (T ఆకారపు కర్రలు) పెట్టండి."
+    "అధిక నత్రజని వేయవద్దు.",
+    "సహజ శత్రువులు (అక్షింతల పురుగులు) కాపాడండి."
    ],
    "source": "TNAU Agritech / ICAR-NCIPM / ANGRAU-PJTSAU PoP (condensed)",
    "high_risk": false,
@@ -4692,21 +5530,30 @@
    "fertiliser_irrigation_te": "సమగ్ర సస్యరక్షణ (IPM): పొలాన్ని తరచు పరిశీలించండి; సహజ శత్రువులను కాపాడండి; అవసరమైనప్పుడే మందు.",
    "post_harvest_te": "కోత తర్వాత: నిల్వ చేసే ముందు గింజలు బాగా ఆరబెట్టండి; నిల్వ పురుగులకు గోదాం శుభ్రత పాటించండి.",
    "sprays": {
-    "mild": [],
+    "mild": [
+     {
+      "name_te": "వేప నూనె 1500 ppm",
+      "name_en": "Neem oil 1500 ppm",
+      "dose_per_l": 5.0,
+      "unit": "ml",
+      "kind": "botanical",
+      "form": "liquid"
+     }
+    ],
     "moderate": [
      {
-      "name_te": "ఎమామెక్టిన్ బెంజోయేట్ 5% SG",
-      "name_en": "Emamectin benzoate 5% SG",
-      "dose_per_l": 0.4,
-      "unit": "g",
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
+      "dose_per_l": 0.3,
+      "unit": "ml",
       "kind": "insecticide",
-      "form": "powder"
+      "form": "liquid"
      }
     ],
     "urgent": [
      {
-      "name_te": "క్లోరాంట్రానిలిప్రోల్ 18.5% SC",
-      "name_en": "Chlorantraniliprole 18.5% SC",
+      "name_te": "ఇమిడాక్లోప్రిడ్ 17.8% SL",
+      "name_en": "Imidacloprid 17.8% SL",
       "dose_per_l": 0.3,
       "unit": "ml",
       "kind": "insecticide",
@@ -12463,6 +13310,13 @@
   }
  },
  "crops": {
+  "Amaranthus": {
+   "te": "తోటకూర",
+   "en": "Amaranthus",
+   "labels": [
+    "Amaranthus___healthy"
+   ]
+  },
   "Apple": {
    "te": "ఆపిల్",
    "en": "Apple",
@@ -12512,6 +13366,28 @@
     "Brinjal___Powdery_mildew",
     "Brinjal___Wilt",
     "Brinjal___healthy"
+   ]
+  },
+  "Cabbage": {
+   "te": "క్యాబేజీ",
+   "en": "Cabbage",
+   "labels": [
+    "Cabbage___Alternaria_leaf_spot",
+    "Cabbage___Caterpillar_damage",
+    "Cabbage___healthy"
+   ]
+  },
+  "Cauliflower": {
+   "te": "కాలీఫ్లవర్ (గోబి పువ్వు)",
+   "en": "Cauliflower",
+   "labels": [
+    "Cauliflower___Alternaria_leaf_spot",
+    "Cauliflower___Bacterial_soft_rot",
+    "Cauliflower___Black_rot",
+    "Cauliflower___Caterpillar_damage",
+    "Cauliflower___Downy_mildew",
+    "Cauliflower___Mosaic_virus",
+    "Cauliflower___healthy"
    ]
   },
   "Cherry_(including_sour)": {
@@ -12572,10 +13448,16 @@
    "te": "గుమ్మడి / సొర / బూడిద గుమ్మడి జాతి",
    "en": "Gourd",
    "labels": [
+    "Gourd___Alternaria_leaf_blight",
+    "Gourd___Angular_leaf_spot",
+    "Gourd___Anthracnose",
     "Gourd___Aphids",
     "Gourd___Downy_mildew",
     "Gourd___Leaf_curl_virus",
+    "Gourd___Leaf_eating_beetle",
     "Gourd___Leaf_miner",
+    "Gourd___Mosaic_virus",
+    "Gourd___Nutrient_deficiency",
     "Gourd___healthy"
    ]
   },
