@@ -1,0 +1,35 @@
+name: Train pest classifier (IP102-style)
+on:
+  workflow_dispatch:
+    inputs:
+      dataset:
+        default: "EnmmmmOvO/insect-pest-dataset"
+      epochs_ft:
+        default: "5"
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install tensorflow-cpu pillow scikit-learn matplotlib datasets huggingface_hub
+      - name: Prepare data
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: python ml/prepare_pest_data.py "${{ inputs.dataset }}" data/pests && du -sh data/pests
+      - name: Train + evaluate
+        run: python ml/train_folder_classifier.py --data data/pests --out ml/out_pests --epochs_ft ${{ inputs.epochs_ft }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pest-model
+          path: |
+            ml/out_pests/*.tflite
+            ml/out_pests/*.json
+            ml/out_pests/*.png
+            ml/out_pests/labels.txt

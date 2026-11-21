@@ -13,6 +13,8 @@ p.add_argument("--pv", required=True)
 p.add_argument("--out", default="ml/out")
 p.add_argument("--plantdoc_train", default=None, help="PlantDoc train dir: field images mixed into training")
 p.add_argument("--pd_repeat", type=int, default=3)
+p.add_argument("--pd_val_frac", type=float, default=0.15, help="PlantDoc train images held out for validation/early stopping")
+p.add_argument("--label_smoothing", type=float, default=0.1)
 p.add_argument("--train_per_class", type=int, default=300)
 p.add_argument("--val_per_class", type=int, default=40)
 p.add_argument("--test_per_class", type=int, default=100)
@@ -39,7 +41,11 @@ if a.plantdoc_train:
     for d, lab in PD2PV.items():
         dd = os.path.join(a.plantdoc_train, d)
         if os.path.isdir(dd):
-            pd += [(os.path.join(dd, f), classes.index(lab)) for f in sorted(os.listdir(dd))]
+            fs = [(os.path.join(dd, f), classes.index(lab)) for f in sorted(os.listdir(dd))]
+            random.Random(1).shuffle(fs)
+            nv = int(round(len(fs) * a.pd_val_frac))
+            split["val"] += fs[:nv]          # field images in validation too
+            pd += fs[nv:]
     print("plantdoc train", len(pd))
     split["train"] += pd * a.pd_repeat
 for k, v in split.items():
@@ -71,6 +77,7 @@ def ds(items, train):
     if train:
         d = d.map(lambda x, y: (tf.clip_by_value(aug(x, training=True), 0, 255), y),
                   num_parallel_calls=tf.data.AUTOTUNE)
+    d = d.map(lambda x, y: (x, tf.one_hot(y, len(classes))))
     return d.prefetch(tf.data.AUTOTUNE)
 
 tr, va, te = ds(split["train"], True), ds(split["val"], False), ds(split["test"], False)
@@ -84,7 +91,8 @@ x = base(inp, training=False)
 x = tf.keras.layers.Dropout(0.3)(x)
 out = tf.keras.layers.Dense(len(classes), activation="softmax")(x)
 model = tf.keras.Model(inp, out)
-model.compile(tf.keras.optimizers.Adam(1e-3), "sparse_categorical_crossentropy", metrics=["accuracy"])
+LOSS = tf.keras.losses.CategoricalCrossentropy(label_smoothing=a.label_smoothing)
+model.compile(tf.keras.optimizers.Adam(1e-3), LOSS, metrics=["accuracy"])
 t = time.time(); model.fit(tr, validation_data=va, epochs=a.epochs_head, verbose=2)
 print("stage1 s", time.time() - t)
 
@@ -93,8 +101,12 @@ for l in base.layers[:-60]:
     l.trainable = False
 for l in base.layers:
     if isinstance(l, tf.keras.layers.BatchNormalization): l.trainable = False
-model.compile(tf.keras.optimizers.Adam(1e-4), "sparse_categorical_crossentropy", metrics=["accuracy"])
-t = time.time(); model.fit(tr, validation_data=va, epochs=a.epochs_ft, verbose=2)
+steps = a.epochs_ft * int(tr.cardinality().numpy())
+sched = tf.keras.optimizers.schedules.CosineDecay(1e-4, max(1, steps), alpha=0.05)
+model.compile(tf.keras.optimizers.Adam(sched), LOSS, metrics=["accuracy"])
+es = tf.keras.callbacks.EarlyStopping(monitor="val_accuracy", patience=2, restore_best_weights=True)
+t = time.time(); hist = model.fit(tr, validation_data=va, epochs=a.epochs_ft, verbose=2, callbacks=[es])
+json.dump(hist.history, open(os.path.join(a.out, "history_ft.json"), "w"))
 print("stage2 s", time.time() - t)
 model.save(os.path.join(a.out, "classifier.keras"))
 print("keras test", model.evaluate(te, verbose=0))
