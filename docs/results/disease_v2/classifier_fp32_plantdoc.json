@@ -1,0 +1,212 @@
+{
+ "model": "classifier_fp32.tflite",
+ "size_mb": 12.064576,
+ "n": 236,
+ "accuracy": 0.6016949152542372,
+ "accuracy_95ci": [
+  0.538135593220339,
+  0.6652542372881356
+ ],
+ "top5_accuracy": 0.9067796610169492,
+ "macro_precision": 0.6312950937950937,
+ "macro_recall": 0.5995350328683663,
+ "macro_f1": 0.5896391184968285,
+ "weighted_f1": 0.5963796210124624,
+ "ece": 0.23332073261677208,
+ "accuracy_vs_confidence_threshold": {
+  "0.0": {
+   "coverage": 1.0,
+   "accuracy": 0.6016949152542372
+  },
+  "0.4": {
+   "coverage": 0.9533898305084746,
+   "accuracy": 0.6266666666666667
+  },
+  "0.5": {
+   "coverage": 0.8898305084745762,
+   "accuracy": 0.6476190476190476
+  },
+  "0.6": {
+   "coverage": 0.847457627118644,
+   "accuracy": 0.665
+  },
+  "0.7": {
+   "coverage": 0.7923728813559322,
+   "accuracy": 0.679144385026738
+  },
+  "0.8": {
+   "coverage": 0.6483050847457628,
+   "accuracy": 0.738562091503268
+  },
+  "0.9": {
+   "coverage": 0.5466101694915254,
+   "accuracy": 0.8217054263565892
+  }
+ },
+ "host_x86_ms_median": 4.18390949971581,
+ "per_class": {
+  "Apple___Apple_scab": {
+   "precision": 0.875,
+   "recall": 0.7,
+   "f1": 0.778,
+   "n": 10
+  },
+  "Apple___Cedar_apple_rust": {
+   "precision": 0.8,
+   "recall": 0.8,
+   "f1": 0.8,
+   "n": 10
+  },
+  "Apple___healthy": {
+   "precision": 0.438,
+   "recall": 0.778,
+   "f1": 0.56,
+   "n": 9
+  },
+  "Blueberry___healthy": {
+   "precision": 0.636,
+   "recall": 0.636,
+   "f1": 0.636,
+   "n": 11
+  },
+  "Cherry_(including_sour)___healthy": {
+   "precision": 0.5,
+   "recall": 0.3,
+   "f1": 0.375,
+   "n": 10
+  },
+  "Corn_(maize)___Cercospora_leaf_spot Gray_leaf_spot": {
+   "precision": 0.286,
+   "recall": 0.5,
+   "f1": 0.364,
+   "n": 4
+  },
+  "Corn_(maize)___Common_rust_": {
+   "precision": 1.0,
+   "recall": 0.8,
+   "f1": 0.889,
+   "n": 10
+  },
+  "Corn_(maize)___Northern_Leaf_Blight": {
+   "precision": 0.727,
+   "recall": 0.667,
+   "f1": 0.696,
+   "n": 12
+  },
+  "Grape___Black_rot": {
+   "precision": 1.0,
+   "recall": 0.625,
+   "f1": 0.769,
+   "n": 8
+  },
+  "Grape___healthy": {
+   "precision": 0.9,
+   "recall": 0.75,
+   "f1": 0.818,
+   "n": 12
+  },
+  "Peach___healthy": {
+   "precision": 0.8,
+   "recall": 0.889,
+   "f1": 0.842,
+   "n": 9
+  },
+  "Pepper,_bell___Bacterial_spot": {
+   "precision": 0.455,
+   "recall": 0.556,
+   "f1": 0.5,
+   "n": 9
+  },
+  "Pepper,_bell___healthy": {
+   "precision": 0.6,
+   "recall": 0.75,
+   "f1": 0.667,
+   "n": 8
+  },
+  "Potato___Early_blight": {
+   "precision": 0.444,
+   "recall": 0.5,
+   "f1": 0.471,
+   "n": 8
+  },
+  "Potato___Late_blight": {
+   "precision": 0.222,
+   "recall": 0.25,
+   "f1": 0.235,
+   "n": 8
+  },
+  "Raspberry___healthy": {
+   "precision": 0.667,
+   "recall": 0.857,
+   "f1": 0.75,
+   "n": 7
+  },
+  "Soybean___healthy": {
+   "precision": 0.429,
+   "recall": 0.375,
+   "f1": 0.4,
+   "n": 8
+  },
+  "Squash___Powdery_mildew": {
+   "precision": 1.0,
+   "recall": 0.833,
+   "f1": 0.909,
+   "n": 6
+  },
+  "Strawberry___healthy": {
+   "precision": 0.8,
+   "recall": 1.0,
+   "f1": 0.889,
+   "n": 8
+  },
+  "Tomato___Bacterial_spot": {
+   "precision": 0.2,
+   "recall": 0.111,
+   "f1": 0.143,
+   "n": 9
+  },
+  "Tomato___Early_blight": {
+   "precision": 0.6,
+   "recall": 0.667,
+   "f1": 0.632,
+   "n": 9
+  },
+  "Tomato___Late_blight": {
+   "precision": 0.667,
+   "recall": 0.6,
+   "f1": 0.632,
+   "n": 10
+  },
+  "Tomato___Leaf_Mold": {
+   "precision": 0.222,
+   "recall": 0.333,
+   "f1": 0.267,
+   "n": 6
+  },
+  "Tomato___Septoria_leaf_spot": {
+   "precision": 0.444,
+   "recall": 0.727,
+   "f1": 0.552,
+   "n": 11
+  },
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+   "precision": 0.833,
+   "recall": 0.833,
+   "f1": 0.833,
+   "n": 6
+  },
+  "Tomato___Tomato_mosaic_virus": {
+   "precision": 1.0,
+   "recall": 0.1,
+   "f1": 0.182,
+   "n": 10
+  },
+  "Tomato___healthy": {
+   "precision": 0.5,
+   "recall": 0.25,
+   "f1": 0.333,
+   "n": 8
+  }
+ },
+ "group_accuracy": 0.75
+}
