@@ -12,6 +12,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--pte", required=True); ap.add_argument("--tokenizer", required=True)
 ap.add_argument("--params", required=True); ap.add_argument("--out", default="llm_samples.json")
 ap.add_argument("--max_new", type=int, default=400)
+ap.add_argument("--styles", default="te_te,en_te,en_en,te_short,te_oneshot")
 a = ap.parse_args()
 from executorch.examples.models.llama.runner.native import NativeLlamaRunner
 
@@ -29,6 +30,26 @@ def facts_te(e, level, lesion):
             f"తీవ్రత: {db['severity_te'][level]} ({level}), ఆకు దెబ్బతిన్న భాగం {lesion}%\n"
             f"కారణం: {e['cause_te']}\nధృవీకరించిన చర్యలు:\n" + "".join(f"- {s}\n" for s in steps) +
             f"నివారణ: {' '.join(e['prevention_te'])}\n")
+
+def facts_short(e, level, lesion):
+    sp = "; ".join(f"{x['name_te']} లీటరు నీటికి {x['dose_per_l']:g} {'గ్రా.' if x['unit']=='g' else 'మి.లీ.'}" for x in e["sprays"][level])
+    return (f"పంట: {e['crop_te']}\nసమస్య: {e['disease_te']}\nతీవ్రత: {db['severity_te'][level]}, ఆకు దెబ్బతిన్న భాగం {lesion}%\n"
+            f"పిచికారీ: {sp or 'మందు లేదు; దెబ్బతిన్న మొక్కలు తీసివేయండి'}\n")
+
+TASK_SHORT = ("Write exactly 2 short sentences in simple Telugu for the farmer: what the problem is, and what to do today. "
+              "Do not repeat the fact list. Copy the dose exactly.")
+# One worked example (a class not in the test cases) to show the length and tone.
+SHOT_USER = ("పంట: బంగాళదుంప\nసమస్య: ఆలస్య ఆకు ఎండు తెగులు\nతీవ్రత: మధ్యస్థం, ఆకు దెబ్బతిన్న భాగం 20%\n"
+             "పిచికారీ: మాంకోజెబ్ లీటరు నీటికి 2.5 గ్రా.\n\n")
+SHOT_ANS = ("మీ బంగాళదుంప పంటకు ఆలస్య ఆకు ఎండు తెగులు సోకింది, ఆకులలో ఐదో వంతు దెబ్బతింది. "
+            "ఈ రోజే లీటరు నీటికి 2.5 గ్రా. మాంకోజెబ్ కలిపి ఆకుల రెండు వైపులా పిచికారీ చేయండి.")
+
+def chat_shot(system, user):
+    return ("<|start_header_id|>system<|end_header_id|>\n\n" + system + "<|eot_id|>"
+            "<|start_header_id|>user<|end_header_id|>\n\n" + SHOT_USER + TASK_SHORT + "<|eot_id|>"
+            "<|start_header_id|>assistant<|end_header_id|>\n\n" + SHOT_ANS + "<|eot_id|>"
+            "<|start_header_id|>user<|end_header_id|>\n\n" + user + "<|eot_id|>"
+            "<|start_header_id|>assistant<|end_header_id|>\n\n")
 
 def facts_en(e, level, lesion):
     sp = "; ".join(f"{x['name_en']} {x['dose_per_l']:g} {x['unit']} per litre" for x in e["sprays"][level]) or "no chemical; remove affected plants"
@@ -52,14 +73,20 @@ def decode(ids):
     return tok.model.decode([i for i in ids if i < 128000]) if hasattr(tok, "model") else tok.decode(ids)
 
 cases = [("Tomato___Early_blight", "moderate", 18), ("Tomato___Late_blight", "urgent", 35),
-         ("Rice___Blast", "moderate", 15), ("Cotton___Leaf_curl_virus", "urgent", 30)]
+         ("Rice___Blast", "moderate", 15), ("Cotton___Leaf_curl_virus", "urgent", 30),
+         ("Chilli___Mites_and_thrips", "moderate", 22), ("Groundnut___Tikka_leaf_spot", "mild", 8)]
 res = []
 for label, level, lesion in cases:
     e = db["classes"].get(label)
     if not e: continue
-    for style, prompt, facts in (("te_te", chat(SYS_TE, facts_te(e, level, lesion) + "\n" + TASK_TE), facts_te(e, level, lesion)),
-                                 ("en_te", chat(SYS_TE, facts_en(e, level, lesion) + TASK_EN_TE), facts_en(e, level, lesion)),
-                                 ("en_en", chat("You are a friendly agricultural extension officer. Use only the facts given.", facts_en(e, level, lesion) + TASK_EN), facts_en(e, level, lesion))):
+    fs = facts_short(e, level, lesion)
+    styles = {"te_te": (chat(SYS_TE, facts_te(e, level, lesion) + "\n" + TASK_TE), facts_te(e, level, lesion)),
+              "en_te": (chat(SYS_TE, facts_en(e, level, lesion) + TASK_EN_TE), facts_en(e, level, lesion)),
+              "en_en": (chat("You are a friendly agricultural extension officer. Use only the facts given.", facts_en(e, level, lesion) + TASK_EN), facts_en(e, level, lesion)),
+              "te_short": (chat(SYS_TE, fs + "\n" + TASK_SHORT), fs),
+              "te_oneshot": (chat_shot(SYS_TE, fs + "\n" + TASK_SHORT), fs)}
+    for style in a.styles.split(","):
+        prompt, facts = styles[style]
         ids = tok.encode(prompt, bos=True, eos=False)
         t = time.time()
         out_ids = runner.generate(prompt_tokens=ids, max_seq_len=min(2048, len(ids) + a.max_new), temperature=0.0)
