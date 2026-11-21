@@ -17,6 +17,9 @@ jobs:
           import os
           from datasets import load_dataset_builder
           from huggingface_hub import hf_hub_download, HfApi
+          if os.environ["IDS"].startswith("author:"):
+              for d in HfApi().list_datasets(author=os.environ["IDS"][7:], limit=200): print("DS", d.id)
+              raise SystemExit
           for i in os.environ["IDS"].split(","):
               print("=" * 20, i)
               try:
