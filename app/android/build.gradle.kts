@@ -22,3 +22,9 @@ subprojects {
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
+
+// Android lint crashes on the image_picker plugin's Javadoc under AGP 9;
+// release lint is not needed for this sideloaded build.
+subprojects {
+    tasks.matching { it.name.startsWith("lintVital") }.configureEach { enabled = false }
+}
