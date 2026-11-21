@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> {
   String _advice = '';
   String? _adviceSource; // 'llm' | 'template'
   String _llmInfo = '';
-  String? _crop; // null = auto, 'other' = unsupported crop
 
   @override
   void initState() {
@@ -93,7 +92,7 @@ class _HomePageState extends State<HomePage> {
       _llmInfo = '';
     });
     await Future<void>.delayed(const Duration(milliseconds: 50)); // let spinner paint
-    final vr = await _pipeline.runVision(bytes, cropKey: _crop); // stage 1+2 (vision), sequential
+    final vr = await _pipeline.runVision(bytes); // stage 1+2 (vision), sequential
     setState(() {
       _vr = vr;
       _busy = false;
@@ -101,15 +100,50 @@ class _HomePageState extends State<HomePage> {
     await _advise(vr); // stage 3 (advisory) only after vision is done
   }
 
+  /// Optional correction: farmer picks the crop, same photo is re-analysed.
+  Future<void> _correctCrop() async {
+    final crops = _pipeline.db.crops.where((c) => c.key != 'Pest').toList();
+    final pick = await showModalBottomSheet<String>(
+      context: context,
+      builder: (ctx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Text('సరైన పంటను ఎంచుకోండి', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 8),
+            Wrap(spacing: 8, runSpacing: 8, children: [
+              for (final c in crops) ActionChip(label: Text(c.te), onPressed: () => Navigator.pop(ctx, c.key)),
+              ActionChip(label: const Text('పురుగు'), onPressed: () => Navigator.pop(ctx, 'Pest')),
+              ActionChip(label: const Text('ఇతర పంట (జాబితాలో లేదు)'), onPressed: () => Navigator.pop(ctx, 'other')),
+            ]),
+          ]),
+        ),
+      ),
+    );
+    if (pick == null) return;
+    setState(() {
+      _busy = true;
+      _advice = '';
+      _adviceSource = null;
+      _llmInfo = '';
+    });
+    final vr = await _pipeline.runVision(null, forceCrop: pick);
+    setState(() {
+      _vr = vr;
+      _busy = false;
+    });
+    await _advise(vr);
+  }
+
   Future<void> _advise(VisionResult vr) async {
     final db = _pipeline.db;
     final e = vr.entry;
     final level = vr.severity.level;
     final template = db.templateAdvice(e, level);
-    if (vr.unsupportedCrop) {
+    if (vr.unknownCrop) {
       setState(() {
         _advice = [
-          'ఈ పంటకు వ్యాధి గుర్తింపు మోడల్ ఇంకా లేదు. ఆకు దెబ్బతిన్న భాగం: ${(vr.severity.lesionRatio * 100).toStringAsFixed(0)}%.',
+          'ఈ పంటను / సమస్యను ఖచ్చితంగా గుర్తించలేకపోయాం. ఆకు దెబ్బతిన్న భాగం: ${(vr.severity.lesionRatio * 100).toStringAsFixed(0)}%.',
           ...db.genericSteps(severityLevel(vr.severity.lesionRatio)),
           'దగ్గరలోని రైతు భరోసా కేంద్రంలో ఈ ఫోటో చూపించండి.',
         ].map((s) => '• $s').join('\n');
@@ -218,23 +252,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ]),
               const SizedBox(height: 8),
-              const Text('ఒక ఆకును మధ్యలో, దగ్గరగా, వెలుతురులో ఫోటో తీయండి.', style: TextStyle(color: Colors.black54)),
-              const SizedBox(height: 10),
-              const Text('మీ పంట ఏది?', style: TextStyle(fontWeight: FontWeight.bold)),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(children: [
-                  for (final c in [(null, 'ఆటో'), for (final ci in _pipeline.db.crops) (ci.key, ci.te), ('other', 'ఇతర పంట')])
-                    Padding(
-                      padding: const EdgeInsets.only(right: 6),
-                      child: ChoiceChip(
-                        label: Text(c.$2),
-                        selected: _crop == c.$1,
-                        onSelected: (_) => setState(() => _crop = c.$1),
-                      ),
-                    ),
-                ]),
-              ),
+              const Text('ఆకు లేదా పురుగును మధ్యలో, దగ్గరగా, వెలుతురులో ఫోటో తీయండి. పంట, వ్యాధి, పురుగు ఆటోమేటిక్‌గా గుర్తిస్తాం.', style: TextStyle(color: Colors.black54)),
               if (_busy) const Padding(padding: EdgeInsets.all(32), child: Center(child: CircularProgressIndicator())),
               if (_vr != null) ..._result(_vr!),
             ]),
@@ -254,15 +272,15 @@ class _HomePageState extends State<HomePage> {
         Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.memory(sev.overlayPng, height: 160, fit: BoxFit.cover))),
       ]),
       const SizedBox(height: 4),
-      const Text('కుడి: ఎరుపు = దెబ్బతిన్న భాగం', style: TextStyle(fontSize: 12, color: Colors.black54)),
+      Text(vr.isPest ? 'కుడి: విశ్లేషించిన భాగం' : 'కుడి: ఎరుపు = దెబ్బతిన్న భాగం', style: const TextStyle(fontSize: 12, color: Colors.black54)),
       const SizedBox(height: 12),
-      if (!vr.unsupportedCrop && (!sev.leafFound || !vr.confident))
+      if (vr.unknownCrop || !vr.confident)
         Card(
           color: Colors.amber.shade50,
           child: Padding(
             padding: const EdgeInsets.all(12),
-            child: Text(vr.cropKey == null
-                ? 'ఖచ్చితంగా గుర్తించలేకపోయాం. పైన మీ పంటను ఎంచుకుని, ఒకే ఆకును దగ్గరగా మళ్ళీ ఫోటో తీయండి. మీ పంట జాబితాలో లేకపోతే "ఇతర పంట" ఎంచుకోండి. క్రింది ఫలితం అంచనా మాత్రమే.'
+            child: Text(vr.unknownCrop
+                ? 'పంటను ఖచ్చితంగా గుర్తించలేకపోయాం. ఒకే ఆకును దగ్గరగా మళ్ళీ ఫోటో తీయండి, లేదా క్రింద "పంట సరిచేయండి" నొక్కండి.'
                 : 'ఖచ్చితంగా గుర్తించలేకపోయాం. ఒకే ఆకును దగ్గరగా, నీడ లేకుండా మళ్ళీ ఫోటో తీయండి. క్రింది ఫలితం అంచనా మాత్రమే.'),
           ),
         ),
@@ -270,11 +288,14 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            if (vr.unsupportedCrop) ...[
-              Text('పంట: మీరు ఎంచుకున్న ఇతర పంట', style: Theme.of(context).textTheme.titleLarge),
-              const Text('ఈ పంటకు వ్యాధి పేరు గుర్తించే మోడల్ ఇంకా లేదు. దెబ్బతిన్న భాగం మాత్రమే కొలిచాం.'),
+            if (vr.unknownCrop) ...[
+              Text('పంట: గుర్తించలేదు', style: Theme.of(context).textTheme.titleLarge),
+              const Text('ఈ పంట మా జాబితాలో లేకపోవచ్చు. దెబ్బతిన్న భాగం మాత్రమే కొలిచాం.'),
+            ] else if (vr.isPest) ...[
+              Text('పురుగు: ${e.diseaseTe}', style: Theme.of(context).textTheme.titleLarge),
+              Text('Pest · ${e.diseaseEn}', style: const TextStyle(color: Colors.black54)),
             ] else ...[
-              Text('పంట: ${e.cropTe}', style: Theme.of(context).textTheme.titleLarge),
+              Text('పంట: ${e.cropTe}${vr.cropCorrected ? ' (మీరు ఎంచుకున్నది)' : ''}', style: Theme.of(context).textTheme.titleLarge),
               Text('సమస్య: ${e.diseaseTe}', style: Theme.of(context).textTheme.titleMedium),
               Text('${e.cropEn} · ${e.diseaseEn} · ${e.type}', style: const TextStyle(color: Colors.black54)),
             ],
@@ -285,14 +306,24 @@ class _HomePageState extends State<HomePage> {
                 side: BorderSide(color: color),
                 label: Text('తీవ్రత: ${db.severityTe(sev.level)}', style: TextStyle(color: color, fontWeight: FontWeight.bold)),
               ),
-              if (!vr.unsupportedCrop) Chip(label: Text('నమ్మకం ${(vr.best.score * 100).toStringAsFixed(0)}%')),
-              if (!e.healthy || vr.unsupportedCrop) Chip(label: Text('దెబ్బతిన్న భాగం ${(sev.lesionRatio * 100).toStringAsFixed(0)}%')),
+              if (!vr.unknownCrop && !vr.cropCorrected) Chip(label: Text('పంట నమ్మకం ${(vr.cropScore * 100).toStringAsFixed(0)}%')),
+              if (!vr.unknownCrop) Chip(label: Text('నమ్మకం ${(vr.best.score * 100).toStringAsFixed(0)}%')),
+              if (!vr.isPest && (!e.healthy || vr.unknownCrop)) Chip(label: Text('దెబ్బతిన్న భాగం ${(sev.lesionRatio * 100).toStringAsFixed(0)}%')),
             ]),
-            if (!vr.confident && !vr.unsupportedCrop && vr.top.length > 1)
+            if (!vr.confident && !vr.unknownCrop && vr.top.length > 1)
               Text('ఇతర అవకాశాలు: ${vr.top.skip(1).map((p) => '${db.entry(p.label).diseaseTe} ${(p.score * 100).toStringAsFixed(0)}%').join(', ')}',
                   style: const TextStyle(fontSize: 13)),
             const SizedBox(height: 6),
-            if (!vr.unsupportedCrop) Text('లక్షణాలు: ${e.symptomsTe}'),
+            if (!vr.unknownCrop && e.symptomsTe.isNotEmpty) Text('లక్షణాలు: ${e.symptomsTe}'),
+            if (!vr.unknownCrop && e.symptomsTe.isEmpty && !e.healthy) Text('కారణం: ${e.causeTe}'),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: _busy || _generating ? null : _correctCrop,
+                icon: const Icon(Icons.edit, size: 18),
+                label: const Text('పంట సరిచేయండి'),
+              ),
+            ),
           ]),
         ),
       ),
@@ -328,8 +359,8 @@ class _HomePageState extends State<HomePage> {
               ListTile(dense: true, leading: const Icon(Icons.check, size: 18), title: Text(s)),
           ],
         ),
-      if (!vr.unsupportedCrop && e.spraysFor(sev.level).isNotEmpty) _sprayCard(e.spraysFor(sev.level)),
-      if (!vr.unsupportedCrop) ExpansionTile(
+      if (!vr.unknownCrop && e.spraysFor(sev.level).isNotEmpty) _sprayCard(e.spraysFor(sev.level)),
+      if (!vr.unknownCrop) ExpansionTile(
         title: const Text('ఎరువులు, నీటి యాజమాన్యం, కోత తర్వాత'),
         children: [
           ListTile(leading: const Icon(Icons.water_drop), title: Text(e.fertiliserIrrigation)),

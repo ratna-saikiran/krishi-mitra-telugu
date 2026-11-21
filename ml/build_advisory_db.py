@@ -113,12 +113,18 @@ HEALTHY = D("ఆరోగ్యకరమైన ఆకు", "healthy", "వ్య
 
 import re
 SPRAY_RE = re.compile(r"([^.;:]*?)\s(\d+(?:\.\d+)?)%?\s?(?:\+[^/]*?)?\s?(WP|EC|SL|SC)?\s(\d+(?:\.\d+)?)\s(గ్రా|మి\.లీ)/లీటరు")
-KIND = [("ఇమిడాక్లోప్రిడ్", "insecticide"), ("స్పైరోమెసిఫెన్", "acaricide"), ("గంధకం", "fungicide/acaricide"),
+KIND = [("ఇమిడాక్లోప్రిడ్", "insecticide"), ("క్లోరాంట్రానిలిప్రోల్", "insecticide"), ("ఎమామెక్టిన్", "insecticide"),
+        ("ఫిప్రోనిల్", "insecticide"), ("పైమెట్రోజిన్", "insecticide"), ("బుప్రోఫెజిన్", "insecticide"), ("క్లోర్‌పైరిఫాస్", "insecticide"),
+        ("19:19:19", "fertiliser"), ("మెగ్నీషియం", "fertiliser"), ("స్పైరోమెసిఫెన్", "acaricide"), ("గంధకం", "fungicide/acaricide"),
         ("కాపర్", "bactericide/fungicide"), ("బోర్డో", "fungicide"), ("వేప", "botanical")]
 EN = {"మెటాలాక్సిల్": "Metalaxyl 8% + Mancozeb 64% WP", "మాంకోజెబ్": "Mancozeb 75% WP", "కాపర్": "Copper oxychloride 50% WP",
       "క్లోరోథలోనిల్": "Chlorothalonil 75% WP", "హెక్సాకొనజోల్": "Hexaconazole 5% EC", "ప్రొపికొనజోల్": "Propiconazole 25% EC",
       "కాప్టాన్": "Captan 50% WP", "గంధకం": "Wettable sulphur 80% WP", "ఇమిడాక్లోప్రిడ్": "Imidacloprid 17.8% SL",
-      "స్పైరోమెసిఫెన్": "Spiromesifen 22.9% SC", "వేప నూనె": "Neem oil 1500 ppm"}
+      "స్పైరోమెసిఫెన్": "Spiromesifen 22.9% SC", "వేప నూనె": "Neem oil 1500 ppm",
+      "క్లోరాంట్రానిలిప్రోల్": "Chlorantraniliprole 18.5% SC", "ఎమామెక్టిన్": "Emamectin benzoate 5% SG",
+      "ఫిప్రోనిల్": "Fipronil 5% SC", "పైమెట్రోజిన్": "Pymetrozine 50% WG", "బుప్రోఫెజిన్": "Buprofezin 25% SC",
+      "కార్బెండజిమ్": "Carbendazim 50% WP (soil drench)", "క్లోర్‌పైరిఫాస్": "Chlorpyriphos 20% EC (soil drench)",
+      "మెగ్నీషియం సల్ఫేట్": "Magnesium sulphate", "19:19:19": "NPK 19:19:19 (water soluble)"}
 
 def sprays(steps):
     out = []
@@ -132,11 +138,27 @@ def sprays(steps):
         name_te = re.sub(r"^(తెల్లదోమ/రసం పీల్చే పురుగుల నివారణకు|సిల్లిడ్ నివారణకు|బోర్డో మిశ్రమం 1% లేదా)\s*", "", name_te)
         kind = next((k for t, k in KIND if t in st), "fungicide")
         form = "liquid" if any(f in name_en for f in (" EC", " SL", " SC", "oil")) else "powder"
+        name_te = re.sub(r"^((పచ్చదోమ|పేనుబంక|తెల్లదోమ|రసం పీల్చే పురుగుల) నివారణకు|నల్లికి:)\s*", "", name_te)
+        name_te = re.sub(r"\s*(ద్రావణాన్ని|పిచికారీ|ఆకులపై).*$", "", name_te)
         if not any(x["name_en"] == name_en for x in out):
             out.append(dict(name_te=name_te, name_en=name_en, dose_per_l=dose, unit=unit, kind=kind, form=form))
     return out
 
-labels = [l.strip() for l in open(os.path.join(os.path.dirname(__file__), "labels.txt")) if l.strip()]
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(__file__))
+import advisory_extra as X
+LABELS = _sys.argv[1] if len(_sys.argv) > 1 else os.path.join(os.path.dirname(__file__), "labels.txt")
+labels = [l.strip() for l in open(LABELS) if l.strip()]
+for k, (te, fert, post) in X.CROPS.items():
+    crops.setdefault(k, (te, fert, post))
+for lab, (te, tpl) in X.D.items():
+    kind, cause, mild, mod, urg, prev, hr = X.T[tpl]
+    diseases.setdefault(lab, D(te, kind, "", cause, mild, mod, urg, prev, src=X.SRC, high_risk=hr))
+_ip = [l.strip() for l in open(os.path.join(os.path.dirname(__file__), "ip102_classes.txt")) if l.strip()]
+for n in _ip:
+    te, tpl = X.pest_entry(n)
+    kind, cause, mild, mod, urg, prev, hr = X.T[tpl]
+    diseases.setdefault("Pest___" + n.replace(" ", "_").replace("/", "-"), D(te, "pest", "", cause, mild, mod, urg, prev, src=X.SRC, high_risk=hr))
 out = {"version": 1, "verify_note_te": VERIFY,
        "severity_te": {"mild": "తక్కువ (ప్రారంభ దశ)", "moderate": "మధ్యస్థం", "urgent": "తీవ్రం – వెంటనే చర్య"},
        "severity_generic": severity_generic, "classes": {}}
@@ -144,6 +166,8 @@ for lab in labels:
     crop, dis = lab.split("___")
     entry = dict(HEALTHY) if dis == "healthy" else diseases[lab]
     cte, fert, post = crops[crop]
+    if crop == "Pest":
+        entry = dict(entry, symptoms_te="")
     entry = dict(entry, crop_en=crop.replace("_", " "), disease_en=dis.replace("_", " ").strip(),
                  crop_te=cte, fertiliser_irrigation_te=fert, post_harvest_te=post)
     entry["sprays"] = {lv: sprays(entry["steps"][lv]) for lv in ("mild", "moderate", "urgent")}
@@ -161,7 +185,7 @@ out["how_to_spray_te"] = [
     ["timer", "కోతకు ముందు లేబుల్‌పై ఉన్న వేచి ఉండే రోజులు (PHI) తప్పక పాటించండి."],
 ]
 out["tank_sizes"] = [["15 లీ. స్ప్రేయర్ ట్యాంకు", 15], ["1 ఎకరం (≈200 లీ. నీరు)", 200]]
-missing = set(diseases) - set(labels)
+missing = [l for l in labels if l.split("___")[1] != "healthy" and l not in diseases]
 assert not missing, missing
 dst = os.path.join(os.path.dirname(__file__), "..", "app", "assets", "advisory_te.json")
 json.dump(out, open(dst, "w"), ensure_ascii=False, indent=1)

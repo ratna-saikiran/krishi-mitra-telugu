@@ -17,7 +17,9 @@ String buildPrompt({
   final facts = StringBuffer()
     ..writeln('పంట: ${e.cropTe} (${e.cropEn})')
     ..writeln('సమస్య: ${e.diseaseTe} (${e.diseaseEn})')
-    ..writeln('తీవ్రత: $levelTe ($level), ఆకు దెబ్బతిన్న భాగం ${lesionPct.toStringAsFixed(0)}%')
+    ..writeln(e.type == 'pest'
+        ? 'తీవ్రత: $levelTe ($level), పురుగు ఫోటోలో కనిపించింది'
+        : 'తీవ్రత: $levelTe ($level), ఆకు దెబ్బతిన్న భాగం ${lesionPct.toStringAsFixed(0)}%')
     ..writeln('కారణం: ${e.causeTe}')
     ..writeln('ధృవీకరించిన చర్యలు:');
   for (final s in verifiedSteps) {
