@@ -38,4 +38,12 @@ jobs:
                   print("README", open(hf_hub_download(i, "README.md", repo_type="dataset")).read()[:1500])
               except Exception:
                   pass
+              try:
+                  import pandas as pd
+                  df = pd.read_csv(hf_hub_download(i, "annotations.csv", repo_type="dataset"))
+                  print("ANNOT", df.shape, list(df.columns))
+                  for c in df.columns[1:4]:
+                      print("COUNTS", c, df[c].value_counts().head(60).to_dict())
+              except Exception:
+                  pass
           PY
