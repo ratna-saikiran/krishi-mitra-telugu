@@ -1,0 +1,662 @@
+{
+ "model": "classifier_dyn8.tflite",
+ "size_mb": 3.559488,
+ "n": 5787,
+ "accuracy": 0.5386210471747019,
+ "accuracy_95ci": [
+  0.5265249697598064,
+  0.552099533437014
+ ],
+ "top5_accuracy": 0.8080179713150164,
+ "macro_precision": 0.5766616403315815,
+ "macro_recall": 0.5312070113221008,
+ "macro_f1": 0.5393377423817071,
+ "weighted_f1": 0.5417044903294157,
+ "ece": 0.07038779652538912,
+ "accuracy_vs_confidence_threshold": {
+  "0.0": {
+   "coverage": 1.0,
+   "accuracy": 0.5386210471747019
+  },
+  "0.4": {
+   "coverage": 0.5109728702263695,
+   "accuracy": 0.770375380453162
+  },
+  "0.5": {
+   "coverage": 0.4048729911871436,
+   "accuracy": 0.8267178830559112
+  },
+  "0.6": {
+   "coverage": 0.32071885260065663,
+   "accuracy": 0.8787715517241379
+  },
+  "0.7": {
+   "coverage": 0.24503196820459652,
+   "accuracy": 0.9104372355430184
+  },
+  "0.8": {
+   "coverage": 0.1778123379989632,
+   "accuracy": 0.9387755102040817
+  },
+  "0.9": {
+   "coverage": 0.09504060825989287,
+   "accuracy": 0.9618181818181818
+  }
+ },
+ "host_x86_ms_median": 7.942385000205832,
+ "per_class": {
+  "Pest___Adristyrannus": {
+   "precision": 0.711,
+   "recall": 0.533,
+   "f1": 0.61,
+   "n": 60
+  },
+  "Pest___Aleurocanthus_spiniferus": {
+   "precision": 0.662,
+   "recall": 0.85,
+   "f1": 0.745,
+   "n": 60
+  },
+  "Pest___Ampelophaga": {
+   "precision": 0.712,
+   "recall": 0.617,
+   "f1": 0.661,
+   "n": 60
+  },
+  "Pest___Aphis_citricola_Vander_Goot": {
+   "precision": 0.519,
+   "recall": 0.683,
+   "f1": 0.59,
+   "n": 60
+  },
+  "Pest___Apolygus_lucorum": {
+   "precision": 0.553,
+   "recall": 0.433,
+   "f1": 0.486,
+   "n": 60
+  },
+  "Pest___Bactrocera_tsuneonis": {
+   "precision": 0.714,
+   "recall": 0.196,
+   "f1": 0.308,
+   "n": 51
+  },
+  "Pest___Beet_spot_flies": {
+   "precision": 0.493,
+   "recall": 0.583,
+   "f1": 0.534,
+   "n": 60
+  },
+  "Pest___Brevipoalpus_lewisi_McGregor": {
+   "precision": 0.714,
+   "recall": 0.625,
+   "f1": 0.667,
+   "n": 24
+  },
+  "Pest___Ceroplastes_rubens": {
+   "precision": 0.889,
+   "recall": 0.8,
+   "f1": 0.842,
+   "n": 60
+  },
+  "Pest___Chlumetia_transversa": {
+   "precision": 0.436,
+   "recall": 0.283,
+   "f1": 0.343,
+   "n": 60
+  },
+  "Pest___Chrysomphalus_aonidum": {
+   "precision": 0.76,
+   "recall": 0.633,
+   "f1": 0.691,
+   "n": 60
+  },
+  "Pest___Cicadella_viridis": {
+   "precision": 0.671,
+   "recall": 0.85,
+   "f1": 0.75,
+   "n": 60
+  },
+  "Pest___Cicadellidae": {
+   "precision": 0.59,
+   "recall": 0.767,
+   "f1": 0.667,
+   "n": 60
+  },
+  "Pest___Colomerus_vitis": {
+   "precision": 0.806,
+   "recall": 0.472,
+   "f1": 0.595,
+   "n": 53
+  },
+  "Pest___Dacus_dorsalis(Hendel)": {
+   "precision": 0.581,
+   "recall": 0.717,
+   "f1": 0.642,
+   "n": 60
+  },
+  "Pest___Dasineura_sp": {
+   "precision": 0.561,
+   "recall": 0.383,
+   "f1": 0.455,
+   "n": 60
+  },
+  "Pest___Deporaus_marginatus_Pascoe": {
+   "precision": 0.878,
+   "recall": 0.6,
+   "f1": 0.713,
+   "n": 60
+  },
+  "Pest___Erythroneura_apicalis": {
+   "precision": 0.667,
+   "recall": 0.545,
+   "f1": 0.6,
+   "n": 22
+  },
+  "Pest___Icerya_purchasi_Maskell": {
+   "precision": 0.518,
+   "recall": 0.717,
+   "f1": 0.601,
+   "n": 60
+  },
+  "Pest___Lawana_imitata_Melichar": {
+   "precision": 0.661,
+   "recall": 0.683,
+   "f1": 0.672,
+   "n": 60
+  },
+  "Pest___Limacodidae": {
+   "precision": 0.738,
+   "recall": 0.75,
+   "f1": 0.744,
+   "n": 60
+  },
+  "Pest___Locustoidea": {
+   "precision": 0.633,
+   "recall": 0.833,
+   "f1": 0.719,
+   "n": 60
+  },
+  "Pest___Lycorma_delicatula": {
+   "precision": 0.707,
+   "recall": 0.683,
+   "f1": 0.695,
+   "n": 60
+  },
+  "Pest___Mango_flat_beak_leafhopper": {
+   "precision": 0.75,
+   "recall": 0.214,
+   "f1": 0.333,
+   "n": 28
+  },
+  "Pest___Miridae": {
+   "precision": 0.383,
+   "recall": 0.3,
+   "f1": 0.336,
+   "n": 60
+  },
+  "Pest___Nipaecoccus_vastalor": {
+   "precision": 0.714,
+   "recall": 0.333,
+   "f1": 0.455,
+   "n": 30
+  },
+  "Pest___Panonchus_citri_McGregor": {
+   "precision": 0.588,
+   "recall": 0.667,
+   "f1": 0.625,
+   "n": 60
+  },
+  "Pest___Papilio_xuthus": {
+   "precision": 0.889,
+   "recall": 0.933,
+   "f1": 0.911,
+   "n": 60
+  },
+  "Pest___Parlatoria_zizyphus_Lucus": {
+   "precision": 0.778,
+   "recall": 0.304,
+   "f1": 0.438,
+   "n": 23
+  },
+  "Pest___Phyllocnistis_citrella_Stainton": {
+   "precision": 0.512,
+   "recall": 0.7,
+   "f1": 0.592,
+   "n": 60
+  },
+  "Pest___Phyllocoptes_oleiverus_ashmead": {
+   "precision": 0.825,
+   "recall": 0.635,
+   "f1": 0.717,
+   "n": 52
+  },
+  "Pest___Pieris_canidia": {
+   "precision": 0.903,
+   "recall": 0.933,
+   "f1": 0.918,
+   "n": 60
+  },
+  "Pest___Polyphagotars_onemus_latus": {
+   "precision": 0.8,
+   "recall": 0.308,
+   "f1": 0.444,
+   "n": 26
+  },
+  "Pest___Potosiabre_vitarsis": {
+   "precision": 0.831,
+   "recall": 0.9,
+   "f1": 0.864,
+   "n": 60
+  },
+  "Pest___Prodenia_litura": {
+   "precision": 0.4,
+   "recall": 0.4,
+   "f1": 0.4,
+   "n": 60
+  },
+  "Pest___Pseudococcus_comstocki_Kuwana": {
+   "precision": 0.667,
+   "recall": 0.6,
+   "f1": 0.632,
+   "n": 60
+  },
+  "Pest___Rhytidodera_bowrinii_white": {
+   "precision": 0.557,
+   "recall": 0.65,
+   "f1": 0.6,
+   "n": 60
+  },
+  "Pest___Rice_Stemfly": {
+   "precision": 0.452,
+   "recall": 0.467,
+   "f1": 0.459,
+   "n": 60
+  },
+  "Pest___Salurnis_marginella_Guerr": {
+   "precision": 0.692,
+   "recall": 0.75,
+   "f1": 0.72,
+   "n": 60
+  },
+  "Pest___Scirtothrips_dorsalis_Hood": {
+   "precision": 0.443,
+   "recall": 0.65,
+   "f1": 0.527,
+   "n": 60
+  },
+  "Pest___Sternochetus_frigidus": {
+   "precision": 0.434,
+   "recall": 0.6,
+   "f1": 0.503,
+   "n": 60
+  },
+  "Pest___Tetradacus_c_Bactrocera_minax": {
+   "precision": 0.705,
+   "recall": 0.717,
+   "f1": 0.711,
+   "n": 60
+  },
+  "Pest___Thrips": {
+   "precision": 0.368,
+   "recall": 0.233,
+   "f1": 0.286,
+   "n": 60
+  },
+  "Pest___Toxoptera_aurantii": {
+   "precision": 0.673,
+   "recall": 0.55,
+   "f1": 0.606,
+   "n": 60
+  },
+  "Pest___Toxoptera_citricidus": {
+   "precision": 0.5,
+   "recall": 0.316,
+   "f1": 0.387,
+   "n": 57
+  },
+  "Pest___Trialeurodes_vaporariorum": {
+   "precision": 0.5,
+   "recall": 0.783,
+   "f1": 0.61,
+   "n": 60
+  },
+  "Pest___Unaspis_yanonensis": {
+   "precision": 0.61,
+   "recall": 0.6,
+   "f1": 0.605,
+   "n": 60
+  },
+  "Pest___Viteus_vitifoliae": {
+   "precision": 0.479,
+   "recall": 0.583,
+   "f1": 0.526,
+   "n": 60
+  },
+  "Pest___Xylotrechus": {
+   "precision": 0.75,
+   "recall": 0.7,
+   "f1": 0.724,
+   "n": 60
+  },
+  "Pest___alfalfa_plant_bug": {
+   "precision": 0.455,
+   "recall": 0.583,
+   "f1": 0.511,
+   "n": 60
+  },
+  "Pest___alfalfa_seed_chalcid": {
+   "precision": 0.6,
+   "recall": 0.375,
+   "f1": 0.462,
+   "n": 56
+  },
+  "Pest___alfalfa_weevil": {
+   "precision": 0.574,
+   "recall": 0.45,
+   "f1": 0.505,
+   "n": 60
+  },
+  "Pest___aphids": {
+   "precision": 0.241,
+   "recall": 0.217,
+   "f1": 0.228,
+   "n": 60
+  },
+  "Pest___army_worm": {
+   "precision": 0.448,
+   "recall": 0.433,
+   "f1": 0.441,
+   "n": 60
+  },
+  "Pest___asiatic_rice_borer": {
+   "precision": 0.298,
+   "recall": 0.467,
+   "f1": 0.364,
+   "n": 60
+  },
+  "Pest___beet_army_worm": {
+   "precision": 0.283,
+   "recall": 0.433,
+   "f1": 0.342,
+   "n": 60
+  },
+  "Pest___beet_fly": {
+   "precision": 0.529,
+   "recall": 0.281,
+   "f1": 0.367,
+   "n": 32
+  },
+  "Pest___beet_weevil": {
+   "precision": 0.6,
+   "recall": 0.55,
+   "f1": 0.574,
+   "n": 60
+  },
+  "Pest___bird_cherry-oataphid": {
+   "precision": 0.219,
+   "recall": 0.267,
+   "f1": 0.241,
+   "n": 60
+  },
+  "Pest___black_cutworm": {
+   "precision": 0.318,
+   "recall": 0.35,
+   "f1": 0.333,
+   "n": 60
+  },
+  "Pest___blister_beetle": {
+   "precision": 0.291,
+   "recall": 0.267,
+   "f1": 0.278,
+   "n": 60
+  },
+  "Pest___brown_plant_hopper": {
+   "precision": 0.386,
+   "recall": 0.283,
+   "f1": 0.327,
+   "n": 60
+  },
+  "Pest___cabbage_army_worm": {
+   "precision": 0.271,
+   "recall": 0.317,
+   "f1": 0.292,
+   "n": 60
+  },
+  "Pest___cerodonta_denticornis": {
+   "precision": 0.625,
+   "recall": 0.357,
+   "f1": 0.455,
+   "n": 42
+  },
+  "Pest___corn_borer": {
+   "precision": 0.463,
+   "recall": 0.517,
+   "f1": 0.488,
+   "n": 60
+  },
+  "Pest___english_grain_aphid": {
+   "precision": 0.181,
+   "recall": 0.217,
+   "f1": 0.197,
+   "n": 60
+  },
+  "Pest___flax_budworm": {
+   "precision": 0.333,
+   "recall": 0.117,
+   "f1": 0.173,
+   "n": 60
+  },
+  "Pest___flea_beetle": {
+   "precision": 0.789,
+   "recall": 0.75,
+   "f1": 0.769,
+   "n": 60
+  },
+  "Pest___grain_spreader_thrips": {
+   "precision": 0.667,
+   "recall": 0.462,
+   "f1": 0.545,
+   "n": 52
+  },
+  "Pest___green_bug": {
+   "precision": 0.306,
+   "recall": 0.25,
+   "f1": 0.275,
+   "n": 60
+  },
+  "Pest___grub": {
+   "precision": 0.736,
+   "recall": 0.883,
+   "f1": 0.803,
+   "n": 60
+  },
+  "Pest___large_cutworm": {
+   "precision": 0.15,
+   "recall": 0.15,
+   "f1": 0.15,
+   "n": 60
+  },
+  "Pest___legume_blister_beetle": {
+   "precision": 0.556,
+   "recall": 0.667,
+   "f1": 0.606,
+   "n": 60
+  },
+  "Pest___longlegged_spider_mite": {
+   "precision": 0.578,
+   "recall": 0.433,
+   "f1": 0.495,
+   "n": 60
+  },
+  "Pest___lytta_polita": {
+   "precision": 0.514,
+   "recall": 0.6,
+   "f1": 0.554,
+   "n": 60
+  },
+  "Pest___meadow_moth": {
+   "precision": 0.674,
+   "recall": 0.483,
+   "f1": 0.563,
+   "n": 60
+  },
+  "Pest___mole_cricket": {
+   "precision": 0.839,
+   "recall": 0.867,
+   "f1": 0.852,
+   "n": 60
+  },
+  "Pest___odontothrips_loti": {
+   "precision": 0.8,
+   "recall": 0.593,
+   "f1": 0.681,
+   "n": 54
+  },
+  "Pest___oides_decempunctata": {
+   "precision": 0.982,
+   "recall": 0.933,
+   "f1": 0.957,
+   "n": 60
+  },
+  "Pest___paddy_stem_maggot": {
+   "precision": 0.293,
+   "recall": 0.2,
+   "f1": 0.238,
+   "n": 60
+  },
+  "Pest___parathrene_regalis": {
+   "precision": 0.957,
+   "recall": 0.524,
+   "f1": 0.677,
+   "n": 42
+  },
+  "Pest___peach_borer": {
+   "precision": 0.772,
+   "recall": 0.733,
+   "f1": 0.752,
+   "n": 60
+  },
+  "Pest___penthaleus_major": {
+   "precision": 0.806,
+   "recall": 0.483,
+   "f1": 0.604,
+   "n": 60
+  },
+  "Pest___red_spider": {
+   "precision": 0.578,
+   "recall": 0.617,
+   "f1": 0.597,
+   "n": 60
+  },
+  "Pest___rice_gall_midge": {
+   "precision": 0.521,
+   "recall": 0.633,
+   "f1": 0.571,
+   "n": 60
+  },
+  "Pest___rice_leaf_caterpillar": {
+   "precision": 0.343,
+   "recall": 0.383,
+   "f1": 0.362,
+   "n": 60
+  },
+  "Pest___rice_leaf_roller": {
+   "precision": 0.429,
+   "recall": 0.6,
+   "f1": 0.5,
+   "n": 60
+  },
+  "Pest___rice_leafhopper": {
+   "precision": 0.5,
+   "recall": 0.333,
+   "f1": 0.4,
+   "n": 60
+  },
+  "Pest___rice_shell_pest": {
+   "precision": 0.429,
+   "recall": 0.3,
+   "f1": 0.353,
+   "n": 60
+  },
+  "Pest___rice_water_weevil": {
+   "precision": 0.475,
+   "recall": 0.483,
+   "f1": 0.479,
+   "n": 60
+  },
+  "Pest___sericaorient_alismots_chulsky": {
+   "precision": 0.86,
+   "recall": 0.638,
+   "f1": 0.733,
+   "n": 58
+  },
+  "Pest___small_brown_plant_hopper": {
+   "precision": 0.338,
+   "recall": 0.4,
+   "f1": 0.366,
+   "n": 60
+  },
+  "Pest___tarnished_plant_bug": {
+   "precision": 0.561,
+   "recall": 0.533,
+   "f1": 0.547,
+   "n": 60
+  },
+  "Pest___therioaphis_maculata_Buckton": {
+   "precision": 0.333,
+   "recall": 0.15,
+   "f1": 0.207,
+   "n": 60
+  },
+  "Pest___wheat_blossom_midge": {
+   "precision": 0.769,
+   "recall": 0.833,
+   "f1": 0.8,
+   "n": 60
+  },
+  "Pest___wheat_phloeothrips": {
+   "precision": 0.532,
+   "recall": 0.55,
+   "f1": 0.541,
+   "n": 60
+  },
+  "Pest___wheat_sawfly": {
+   "precision": 0.788,
+   "recall": 0.683,
+   "f1": 0.732,
+   "n": 60
+  },
+  "Pest___white_backed_plant_hopper": {
+   "precision": 0.394,
+   "recall": 0.433,
+   "f1": 0.413,
+   "n": 60
+  },
+  "Pest___white_margined_moth": {
+   "precision": 0.478,
+   "recall": 0.489,
+   "f1": 0.484,
+   "n": 45
+  },
+  "Pest___wireworm": {
+   "precision": 0.661,
+   "recall": 0.683,
+   "f1": 0.672,
+   "n": 60
+  },
+  "Pest___yellow_cutworm": {
+   "precision": 0.323,
+   "recall": 0.35,
+   "f1": 0.336,
+   "n": 60
+  },
+  "Pest___yellow_rice_borer": {
+   "precision": 0.593,
+   "recall": 0.533,
+   "f1": 0.561,
+   "n": 60
+  }
+ },
+ "group_accuracy": 0.9692414031449801
+}
