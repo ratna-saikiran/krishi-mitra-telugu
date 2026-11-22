@@ -4846,6 +4846,34 @@
     "urgent": []
    }
   },
+  "Other___healthy": {
+   "disease_te": "ఆరోగ్యకరమైన ఆకు",
+   "type": "healthy",
+   "symptoms_te": "వ్యాధి లక్షణాలు కనిపించలేదు.",
+   "cause_te": "-",
+   "steps": {
+    "mild": [
+     "పంటను వారానికి ఒకసారి పరిశీలిస్తూ ఉండండి."
+    ],
+    "moderate": [],
+    "urgent": []
+   },
+   "prevention_te": [
+    "సమతుల్య ఎరువులు, సకాలంలో నీటి తడులు కొనసాగించండి."
+   ],
+   "source": "TNAU Agritech Portal – Crop Protection",
+   "high_risk": false,
+   "crop_en": "Other",
+   "disease_en": "healthy",
+   "crop_te": "ఇతర మొక్క (మా పంటల జాబితాలో లేదు)",
+   "fertiliser_irrigation_te": "ఈ మొక్క మా పంటల జాబితాలో లేదు.",
+   "post_harvest_te": "దగ్గరలోని రైతు భరోసా కేంద్రంలో ఫోటో చూపించండి.",
+   "sprays": {
+    "mild": [],
+    "moderate": [],
+    "urgent": []
+   }
+  },
   "Papaya___Leaf_curl_virus": {
    "disease_te": "ఆకు ముడత వైరస్",
    "type": "viral",
@@ -13754,6 +13782,13 @@
     "Orange___Powdery_mildew",
     "Orange___Spiny_whitefly",
     "Orange___healthy"
+   ]
+  },
+  "Other": {
+   "te": "ఇతర మొక్క (మా పంటల జాబితాలో లేదు)",
+   "en": "Other",
+   "labels": [
+    "Other___healthy"
    ]
   },
   "Papaya": {

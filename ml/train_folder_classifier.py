@@ -31,7 +31,8 @@ def load(path, label):
     img = tf.io.decode_image(tf.io.read_file(path), channels=3, expand_animations=False)
     return tf.image.resize(img, (a.img, a.img)), label
 aug = tf.keras.Sequential([tf.keras.layers.RandomFlip("horizontal_and_vertical"), tf.keras.layers.RandomRotation(0.15),
-                           tf.keras.layers.RandomZoom((-0.1, 0.3)), tf.keras.layers.RandomBrightness(0.25, value_range=(0, 255)),
+                           tf.keras.layers.RandomZoom((-0.2, 0.5)), tf.keras.layers.RandomTranslation(0.1, 0.1),  # whole-plant / off-centre shots
+                           tf.keras.layers.RandomBrightness(0.25, value_range=(0, 255)),
                            tf.keras.layers.RandomContrast(0.3)])
 def ds(it, train):
     pa, la = zip(*it)

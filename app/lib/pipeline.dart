@@ -85,7 +85,8 @@ class Pipeline {
     } else {
       final bestCrop = cropP.entries.reduce((a, b) => a.value >= b.value ? a : b);
       cropScore = bestCrop.value;
-      crop = cropScore >= kCropConfidence ? bestCrop.key : null;
+      // "Other" = open-set class (flowers, weeds, non-crop plants): reject.
+      crop = cropScore >= kCropConfidence && bestCrop.key != 'Other' ? bestCrop.key : null;
     }
     // Classes within the crop, renormalised (a crop with one class keeps its raw score).
     var top = <Prediction>[];

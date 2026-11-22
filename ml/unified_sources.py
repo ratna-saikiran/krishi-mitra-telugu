@@ -108,6 +108,16 @@ HF = {
  # Okra pods (on the plant and harvested) so pods/plants, not only leaves, read as okra
  "Project-AgML/okra_maturity_classification": {"Mature": "Okra___healthy", "Over-mature": "Okra___healthy", "Under-mature": "Okra___healthy"},
  "Project-AgML/vegetable_classification_bangladesh": {"Ladies finger": "Okra___healthy"},
+ # Open-set "not one of our crops" class: ornamental flowers (incl. hibiscus,
+ # rose, marigold), weeds and rangeland background. The app treats crop
+ # "Other" as not recognised instead of forcing the nearest crop.
+ "Project-AgML/tropical_flower_variety_classification": {k: "Other___healthy" for k in (
+  "Bougainvillea", "Crown of thorns", "Hibiscus", "Jungle geranium", "Madagascar periwinkle", "Marigold", "Rose")},
+ "nelorth/oxford-flowers": {str(i): "Other___healthy" for i in range(1, 103)},
+ "Project-AgML/deepweeds_classification": {str(i): "Other___healthy" for i in range(9)},
+ "Project-AgML/plant_seedlings_aarhus": {k: "Other___healthy" for k in (
+  "black_grass", "charlock", "cleavers", "common_chickweed", "fat_hen", "loose_silkybent", "scentless_mayweed",
+  "shepherds_purse", "smallflowered_cranesbill")},
  # Field-condition healthy maize (East African MLN/MSV classes dropped)
  "Project-AgML/maize_disease_classification": {"Healthy": "Corn_(maize)___healthy", "MLN": None, "MSV": None},
 }

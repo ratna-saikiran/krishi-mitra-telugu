@@ -7,11 +7,12 @@ on:
       epochs_head:
         default: "2"
       epochs_ft:
-        default: "4"
+        default: "7"
+# Two jobs so the dataset build (~1 h) doesn't eat the training job's 6 h limit.
 jobs:
-  train:
+  data:
     runs-on: ubuntu-latest
-    timeout-minutes: 355
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - name: Free disk space
@@ -19,7 +20,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install tensorflow-cpu pillow scikit-learn matplotlib datasets huggingface_hub
+      - run: pip install pillow datasets huggingface_hub
       - name: Get PlantVillage + PlantDoc
         run: |
           git clone --depth 1 --filter=blob:none --sparse https://github.com/spMohanty/PlantVillage-Dataset pv && (cd pv && git sparse-checkout set raw/color)
@@ -33,10 +34,33 @@ jobs:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           COLLECTED_DIR: collected
         run: python ml/prepare_unified.py pv/raw/color pd data/unified && rm -rf pv pd ~/.cache/huggingface && du -sh data/unified && df -h /
+      - run: tar -cf unified.tar -C data unified
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unified-data
+          path: unified.tar
+          compression-level: 0
+          retention-days: 3
       - uses: actions/upload-artifact@v4
         with:
           name: unified-stats
           path: data/unified/stats.json
+  train:
+    needs: data
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install tensorflow-cpu pillow scikit-learn matplotlib
+      - uses: actions/download-artifact@v4
+        with:
+          name: unified-data
+      - run: mkdir -p data && tar -xf unified.tar -C data && rm unified.tar && du -sh data/unified
       - name: Train + evaluate
         run: python ml/train_folder_classifier.py --data data/unified --out ml/out_unified --epochs_head ${{ inputs.epochs_head }} --epochs_ft ${{ inputs.epochs_ft }}
       - uses: actions/upload-artifact@v4

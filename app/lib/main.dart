@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
   /// Optional correction: farmer picks the crop, same photo is re-analysed.
   Future<void> _correctCrop() async {
     final known = _pipeline.classifier.labels.toSet();
-    final crops = _pipeline.db.crops.where((c) => c.key != 'Pest' && c.labels.any(known.contains)).toList();
+    final crops = _pipeline.db.crops.where((c) => c.key != 'Pest' && c.key != 'Other' && c.labels.any(known.contains)).toList();
     final pick = await showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true, // long crop list: let the sheet grow and scroll
