@@ -96,6 +96,7 @@ Orange___Mealybugs
 Orange___Powdery_mildew
 Orange___Spiny_whitefly
 Orange___healthy
+Other___healthy
 Papaya___Leaf_curl_virus
 Papaya___Mealybug
 Papaya___Mites
