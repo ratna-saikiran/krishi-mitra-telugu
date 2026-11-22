@@ -12,7 +12,9 @@ p = argparse.ArgumentParser()
 p.add_argument("--data", required=True); p.add_argument("--out", required=True)
 p.add_argument("--img", type=int, default=224); p.add_argument("--bs", type=int, default=64)
 p.add_argument("--epochs_head", type=int, default=2); p.add_argument("--epochs_ft", type=int, default=5)
-p.add_argument("--unfreeze", type=int, default=80); p.add_argument("--label_smoothing", type=float, default=0.1)
+p.add_argument("--unfreeze", type=int, default=80)
+p.add_argument("--backbone", default="mobilenetv3large", choices=["mobilenetv3large", "efficientnetv2b0", "efficientnetv2b1", "efficientnetv2b2"])
+p.add_argument("--ft_lr", type=float, default=2e-4); p.add_argument("--label_smoothing", type=float, default=0.1)
 a = p.parse_args(); os.makedirs(a.out, exist_ok=True); tf.random.set_seed(0)
 
 classes = sorted(os.listdir(os.path.join(a.data, "train")))
@@ -43,8 +45,15 @@ def ds(it, train):
     return d.map(lambda x, y: (x, tf.one_hot(y, len(classes)))).prefetch(tf.data.AUTOTUNE)
 tr, va = ds(S["train"], True), ds(S["val"], False)
 
-base = tf.keras.applications.MobileNetV3Large(input_shape=(a.img, a.img, 3), include_top=False, weights="imagenet",
-                                              include_preprocessing=True, pooling="avg")
+# All backbones take raw RGB 0-255 (preprocessing is inside the model), so the
+# app's input path is the same whichever one is shipped.
+if a.backbone == "mobilenetv3large":
+    base = tf.keras.applications.MobileNetV3Large(input_shape=(a.img, a.img, 3), include_top=False, weights="imagenet",
+                                                  include_preprocessing=True, pooling="avg")
+else:
+    B = {"efficientnetv2b0": tf.keras.applications.EfficientNetV2B0, "efficientnetv2b1": tf.keras.applications.EfficientNetV2B1,
+         "efficientnetv2b2": tf.keras.applications.EfficientNetV2B2}[a.backbone]
+    base = B(input_shape=(a.img, a.img, 3), include_top=False, weights="imagenet", include_preprocessing=True, pooling="avg")
 base.trainable = False
 inp = tf.keras.Input((a.img, a.img, 3)); x = base(inp, training=False)
 out = tf.keras.layers.Dense(len(classes), activation="softmax")(tf.keras.layers.Dropout(0.3)(x))
@@ -57,7 +66,7 @@ for l in base.layers[:-a.unfreeze]: l.trainable = False
 for l in base.layers:
     if isinstance(l, tf.keras.layers.BatchNormalization): l.trainable = False
 steps = a.epochs_ft * int(tr.cardinality().numpy())
-model.compile(tf.keras.optimizers.Adam(tf.keras.optimizers.schedules.CosineDecay(2e-4, steps, alpha=0.05)), LOSS, metrics=["accuracy"])
+model.compile(tf.keras.optimizers.Adam(tf.keras.optimizers.schedules.CosineDecay(a.ft_lr, steps, alpha=0.05)), LOSS, metrics=["accuracy"])
 h = model.fit(tr, validation_data=va, epochs=a.epochs_ft, verbose=2,
               callbacks=[tf.keras.callbacks.EarlyStopping(monitor="val_accuracy", patience=2, restore_best_weights=True)])
 print("train seconds", time.time() - t0)
