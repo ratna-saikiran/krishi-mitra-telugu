@@ -8,6 +8,13 @@ on:
         default: "2"
       epochs_ft:
         default: "7"
+      cap_train:
+        default: "500"
+      cap_pest:
+        default: "250"
+      train:
+        description: "Train on the runner (false = only build + publish the dataset, e.g. for the Mac GPU)"
+        default: "true"
 # Two jobs so the dataset build (~1 h) doesn't eat the training job's 6 h limit.
 jobs:
   data:
@@ -33,6 +40,8 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
           COLLECTED_DIR: collected
+          CAP_TRAIN: ${{ inputs.cap_train }}
+          CAP_PEST: ${{ inputs.cap_pest }}
         run: python ml/prepare_unified.py pv/raw/color pd data/unified && rm -rf pv pd ~/.cache/huggingface && du -sh data/unified && df -h /
       - run: tar -cf unified.tar -C data unified
       - uses: actions/upload-artifact@v4
@@ -45,8 +54,20 @@ jobs:
         with:
           name: unified-stats
           path: data/unified/stats.json
+      - name: Publish dataset parts as a release (for off-runner training)
+        if: inputs.train != 'true'
+        run: split -b 1900m unified.tar unified.tar.part- && ls -la unified.tar.part-*
+      - if: inputs.train != 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: unified-data-${{ github.run_number }}
+          prerelease: true
+          make_latest: false
+          body: "Training dataset (cap_train ${{ inputs.cap_train }}, cap_pest ${{ inputs.cap_pest }}). cat unified.tar.part-* > unified.tar"
+          files: unified.tar.part-*
   train:
     needs: data
+    if: inputs.train == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 355
     steps:

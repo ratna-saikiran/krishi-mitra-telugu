@@ -118,6 +118,10 @@ HF = {
  "Project-AgML/plant_seedlings_aarhus": {k: "Other___healthy" for k in (
   "black_grass", "charlock", "cleavers", "common_chickweed", "fat_hen", "loose_silkybent", "scentless_mayweed",
   "shepherds_purse", "smallflowered_cranesbill")},
+ # Top-view seedlings in soil (greenhouse): our crops + weeds/other crops as Other
+ "Project-AgML/greenhouse_crop_weed_classification": {"Soybean": "Soybean___healthy", "Corn": "Corn_(maize)___healthy",
+  **{k: "Other___healthy" for k in ("Blackbean", "Canola", "Field Pea", "Flax", "Horseweed", "Kochia", "Lentil", "Palmer Amaranth",
+                                     "Ragweed", "Redroot Pigweed", "Sugar beet", "Waterhemp")}},
  # Field-condition healthy maize (East African MLN/MSV classes dropped)
  "Project-AgML/maize_disease_classification": {"Healthy": "Corn_(maize)___healthy", "MLN": None, "MSV": None},
 }

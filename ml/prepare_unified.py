@@ -11,7 +11,7 @@ from unified_sources import HF, IP102
 from plantdoc_map import PD2PV
 
 PV, PD, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
-CAP_TRAIN, CAP_PEST, CAP_TEST_PEST = 500, 250, 60
+CAP_TRAIN = int(os.environ.get("CAP_TRAIN", 500)); CAP_PEST = int(os.environ.get("CAP_PEST", 250)); CAP_TEST_PEST = 60
 rng = random.Random(0)
 stats = defaultdict(lambda: defaultdict(int))
 
@@ -88,6 +88,53 @@ for split, out, cap in (("train", "train", CAP_PEST), ("validation", "val", 40),
         if cnt[k] >= cap: continue
         cnt[k] += 1; save(ds[i]["image"], out, lab(k), f"ip{i}")
     print("ip102", split, sum(cnt.values()), flush=True)
+
+# 4b. DigiGreen: ~1,000 real Indian farmer photos (crop + diagnosis). Mapped to
+# our classes where the diagnosis matches; 15% test_field, 15% val, train x3.
+import csv
+from huggingface_hub import snapshot_download
+DG_CROP = {"Chilli": "Chilli", "Chili": "Chilli", "Potato": "Potato", "Brinjal": "Brinjal", "Maize": "Corn_(maize)", "Mango": "Mango",
+           "Tomato": "Tomato", "Papaya": "Papaya", "Groundnut": "Groundnut", "Cauliflower": "Cauliflower", "Banana": "Banana",
+           "Rice": "Rice", "Paddy": "Rice", "Pumpkin": "Gourd", "Bottle gourd": "Gourd", "Ridge gourd": "Gourd", "Sponge gourd": "Gourd",
+           "Bitter gourd": "Gourd", "Citrus": "Orange", "Lemon": "Orange", "Cabbage": "Cabbage", "Bhindi": "Okra", "Okra": "Okra",
+           "Cotton": "Cotton", "Cucumber": "Cucumber", "Watermelon": "Watermelon", "Soybean": "Soybean", "Turmeric": "Turmeric",
+           "Strawberry": "Strawberry", "Spinach": "Spinach", "Rose": "Other", "Moringa": "Other", "Curry leaf": "Other", "Medicinal plants": "Other"}
+DG_SYN = {"nitrogen deficiency": "nutrient", "potassium deficiency": "nutrient", "phosphorus deficiency": "nutrient", "thrips": "mites and thrips",
+          "mites": "mite", "mealybugs": "mealybug", "sigatoka leaf spot": "sigatoka", "papaya ring spot virus": "ring spot", "leaf curl virus": "leaf curl",
+          "tobacco mosaic virus": "mosaic", "mosaic virus": "mosaic", "fall armyworm": None}
+known = sorted({os.path.basename(d) for d in os.listdir(os.path.join(OUT, "train"))})
+def dg_label(crop, diag):
+    c = DG_CROP.get(crop.strip())
+    if not c: return None
+    if c == "Other": return "Other___healthy"
+    d = diag.split(";")[0].strip().lower()
+    if d == "healthy": return f"{c}___healthy" if f"{c}___healthy" in known else None
+    key = DG_SYN.get(d, d)
+    if not key: return None
+    for lab in known:
+        if lab.startswith(c + "___") and key in lab.split("___")[1].lower().replace("_", " "): return lab
+    return None
+try:
+    root = snapshot_download("DigiGreen/Crop_Disease_Images", repo_type="dataset")
+    by = defaultdict(list)
+    for r in csv.DictReader(open(os.path.join(root, "annotations.csv"))):
+        lab = dg_label(r["crop"], r["diagnosis"])
+        if lab: by[lab].append(os.path.join(root, r["image_file"] if "/" in r["image_file"] else os.path.join("images", r["image_file"])))
+    for lab, files in sorted(by.items()):
+        files.sort(); rng.shuffle(files); n = len(files)
+        nt = int(n * 0.15) if n >= 4 else 0; nv = int(n * 0.15) if n >= 4 else 0
+        for j, f in enumerate(files):
+            try: im = Image.open(f).convert("RGB")
+            except Exception: continue
+            key = f"dg{abs(hash(f)) % 10**10}"
+            if j < nt: save(im, "test_field", lab, key)
+            elif j < nt + nv: save(im, "val", lab, key)
+            else:
+                for r_ in "abc": save(im, "train", lab, key + r_)
+    print("digigreen", sum(map(len, by.values())), {k: len(v) for k, v in by.items()}, flush=True)
+    shutil.rmtree(os.path.expanduser("~/.cache/huggingface"), ignore_errors=True)
+except Exception as e:
+    print("digigreen skipped:", e, flush=True)
 
 # 5. Field photos from the Krishi Data collector app (zips in COLLECTED_DIR,
 # folders <Crop>___<Condition>/*.jpg). Split 70/15/15 per class; training
