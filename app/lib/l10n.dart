@@ -42,9 +42,8 @@ class L {
   String get pest => _t('పురుగు', 'Insect pest', 'कीट');
   String get otherCrop => _t('ఇతర పంట (జాబితాలో లేదు)', 'Other crop (not in list)', 'अन्य फसल (सूची में नहीं)');
   String get correctCrop => _t('పంట సరిచేయండి', 'Correct the crop', 'फसल सुधारें');
-  String unknownAdvice(String pct) => _t('ఈ పంటను / సమస్యను ఖచ్చితంగా గుర్తించలేకపోయాం. ఆకు దెబ్బతిన్న భాగం: $pct%.',
-      'We could not identify this crop / problem with confidence. Damaged leaf area: $pct%.',
-      'इस फसल / समस्या की पक्की पहचान नहीं हो सकी। पत्ती का क्षतिग्रस्त भाग: $pct%।');
+  String get unknownAdvice => _t('ఈ పంటను / సమస్యను ఖచ్చితంగా గుర్తించలేకపోయాం.',
+      'We could not identify this crop / problem with confidence.', 'इस फसल / समस्या की पक्की पहचान नहीं हो सकी।');
   String get showAtCentre => _t('దగ్గరలోని రైతు భరోసా కేంద్రంలో ఈ ఫోటో చూపించండి.',
       'Show this photo at your nearest agriculture centre.', 'यह फ़ोटो पास के कृषि सेवा केंद्र में दिखाएँ।');
   String get llamaLoading => _t('Llama 3.2 1B లోడ్ అవుతోంది…', 'Loading Llama 3.2 1B…', 'Llama 3.2 1B लोड हो रहा है…');
@@ -61,8 +60,9 @@ class L {
       'Not sure. Take a close photo of a single leaf again, without shadow. The result below is only an estimate.',
       'पक्का नहीं है। एक पत्ती की पास से, बिना छाया के फिर फ़ोटो लें। नीचे का परिणाम केवल अनुमान है।');
   String get cropNotRecognised => _t('పంట: గుర్తించలేదు', 'Crop: not recognised', 'फसल: पहचानी नहीं गई');
-  String get cropMaybeMissing => _t('ఈ పంట మా జాబితాలో లేకపోవచ్చు. దెబ్బతిన్న భాగం మాత్రమే కొలిచాం.',
-      'This crop may not be in our list. Only the damaged area was measured.', 'यह फसल हमारी सूची में नहीं हो सकती। केवल क्षतिग्रस्त भाग मापा गया।');
+  String get cropMaybeMissing => _t('ఈ పంట మా జాబితాలో లేకపోవచ్చు, కాబట్టి నష్టం కొలవలేదు. "పంట సరిచేయండి" నొక్కండి, లేదా ఒకే ఆకును దగ్గరగా ఫోటో తీయండి.',
+      'This crop may not be in our list, so damage was not measured. Tap "Correct the crop", or photograph one leaf up close.',
+      'यह फसल हमारी सूची में नहीं हो सकती, इसलिए क्षति नहीं मापी गई। "फसल सुधारें" दबाएँ, या एक पत्ती की पास से फ़ोटो लें।');
   String pestLine(String n) => _t('పురుగు: $n', 'Pest: $n', 'कीट: $n');
   String cropLine(String c, bool corrected) =>
       _t('పంట: $c${corrected ? ' (మీరు ఎంచుకున్నది)' : ''}', 'Crop: $c${corrected ? ' (your choice)' : ''}', 'फसल: $c${corrected ? ' (आपका चुनाव)' : ''}');

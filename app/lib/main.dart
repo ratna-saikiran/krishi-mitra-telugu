@@ -11,7 +11,6 @@ import 'advisory/llm_service.dart';
 import 'advisory/prompt.dart';
 import 'l10n.dart';
 import 'pipeline.dart';
-import 'vision/severity.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -194,8 +193,8 @@ class _HomePageState extends State<HomePage> {
     if (vr.unknownCrop) {
       setState(() {
         _advice = [
-          l.unknownAdvice((vr.severity.lesionRatio * 100).toStringAsFixed(0)),
-          ...db.genericSteps(severityLevel(vr.severity.lesionRatio)),
+          l.unknownAdvice,
+          ...db.genericSteps('mild'),
           l.showAtCentre,
         ].map((s) => '• $s').join('\n');
         _adviceSource = 'template';
@@ -325,11 +324,15 @@ class _HomePageState extends State<HomePage> {
       const SizedBox(height: 16),
       Row(children: [
         Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.memory(_photo!, height: 160, fit: BoxFit.cover))),
-        const SizedBox(width: 8),
-        Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.memory(sev.overlayPng, height: 160, fit: BoxFit.cover))),
+        // Damage is only measured once the crop is known: on an unknown
+        // crop the segmented object may be a flower, fruit or soil.
+        if (!vr.unknownCrop) ...[
+          const SizedBox(width: 8),
+          Expanded(child: ClipRRect(borderRadius: BorderRadius.circular(12), child: Image.memory(sev.overlayPng, height: 160, fit: BoxFit.cover))),
+        ],
       ]),
       const SizedBox(height: 4),
-      Text(vr.isPest ? l.rightAnalysed : l.rightRed, style: const TextStyle(fontSize: 12, color: Colors.black54)),
+      if (!vr.unknownCrop) Text(vr.isPest ? l.rightAnalysed : l.rightRed, style: const TextStyle(fontSize: 12, color: Colors.black54)),
       const SizedBox(height: 12),
       if (vr.unknownCrop || !vr.confident)
         Card(
@@ -356,14 +359,14 @@ class _HomePageState extends State<HomePage> {
             ],
             const SizedBox(height: 10),
             Wrap(spacing: 8, runSpacing: 8, children: [
-              Chip(
+              if (!vr.unknownCrop) Chip(
                 backgroundColor: color.withValues(alpha: 0.15),
                 side: BorderSide(color: color),
                 label: Text(l.severity(db.severityTe(sev.level)), style: TextStyle(color: color, fontWeight: FontWeight.bold)),
               ),
               if (!vr.unknownCrop && !vr.cropCorrected) Chip(label: Text(l.cropConfidence((vr.cropScore * 100).toStringAsFixed(0)))),
               if (!vr.unknownCrop) Chip(label: Text(l.confidence((vr.best.score * 100).toStringAsFixed(0)))),
-              if (!vr.isPest && (!e.healthy || vr.unknownCrop)) Chip(label: Text(l.damaged((sev.lesionRatio * 100).toStringAsFixed(0)))),
+              if (!vr.isPest && !vr.unknownCrop && !e.healthy) Chip(label: Text(l.damaged((sev.lesionRatio * 100).toStringAsFixed(0)))),
             ]),
             if (!vr.confident && !vr.unknownCrop && vr.top.length > 1)
               Text('${l.otherPossibilities}: ${vr.top.skip(1).map((p) => '${db.entry(p.label).diseaseTe} ${(p.score * 100).toStringAsFixed(0)}%').join(', ')}',

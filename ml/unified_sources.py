@@ -105,6 +105,9 @@ HF = {
  "InriaXagriscienceFM/spinach_classification": {
   "anthracnose": "Spinach___Anthracnose", "bacterial spot": "Spinach___Bacterial_spot", "downy mildew": "Spinach___Downy_mildew",
   "healthy": "Spinach___healthy", "pest damage": "Spinach___Pest_damage"},
+ # Okra pods (on the plant and harvested) so pods/plants, not only leaves, read as okra
+ "Project-AgML/okra_maturity_classification": {"Mature": "Okra___healthy", "Over-mature": "Okra___healthy", "Under-mature": "Okra___healthy"},
+ "Project-AgML/vegetable_classification_bangladesh": {"Ladies finger": "Okra___healthy"},
  # Field-condition healthy maize (East African MLN/MSV classes dropped)
  "Project-AgML/maize_disease_classification": {"Healthy": "Corn_(maize)___healthy", "MLN": None, "MSV": None},
 }
